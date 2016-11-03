@@ -13,7 +13,7 @@ public class Arista {
     
     private NodoGrafo origen;
     private NodoGrafo destino;
-    private int peso;
+    private int peso;///fsdfsds
 
     /**
      * @return the origen
