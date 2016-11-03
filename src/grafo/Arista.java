@@ -14,6 +14,8 @@ public class Arista {
     private NodoGrafo origen;
     private NodoGrafo destino;
     private int peso;///fsdfsds
+    
+    //HOLAAAAA :D
 
     /**
      * @return the origen
