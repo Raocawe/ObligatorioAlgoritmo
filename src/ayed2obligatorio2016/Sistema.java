@@ -5,6 +5,7 @@
 
 package ayed2obligatorio2016;
 
+import ayed1obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
 
 import clases.Servicio;
@@ -22,7 +23,7 @@ public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaSimpleGeneric<Servicio> ListaServicio;
-    private static ListaSimpleGeneric<Cliente> ListaCliente;
+    private static ListaDobleEnc<Cliente> ListaCliente;
 
     /**
      * @return the ListaViaje
@@ -55,14 +56,14 @@ public class Sistema implements IMetro {
     /**
      * @return the ListaCliente
      */
-    public static ListaSimpleGeneric<Cliente> getListaCliente() {
+    public static ListaDobleEnc<Cliente> getListaCliente() {
         return ListaCliente;
     }
 
     /**
      * @param aListaCliente the ListaCliente to set
      */
-    public static void setListaCliente(ListaSimpleGeneric<Cliente> aListaCliente) {
+    public static void setListaCliente(ListaDobleEnc<Cliente> aListaCliente) {
         ListaCliente = aListaCliente;
     }
     
@@ -120,9 +121,7 @@ public class Sistema implements IMetro {
          Cliente unCliente = new Cliente();
        unCliente.setCedula(cedula);
        unCliente.setNombre(nombre);
-       
-       ListaSimpleGeneric LSG = getListaCliente(); 
-       
+              
        if(unCliente.BuscarCliente(cedula))
        {
            return TipoRet.ERROR_1;
@@ -143,6 +142,16 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet bajaCliente(int cedula) {
-                return TipoRet.NO_IMPLEMENTADA;
+                
+        /* Cliente unCliente = new Cliente();
+        ListaSimpleGeneric ListaSG = getListaCliente();
+        
+        if(unCliente.BuscarCliente(cedula))
+        {
+                               
+        }
+        else
+        {} */
+     return TipoRet.ERROR_2;
     }
 }
