@@ -92,6 +92,7 @@ public class ListaDobleEnc <T> implements IListaDobleEnc <T> {
         while(this.inicio != null)
             this.borrarInicio();
     }
+    
     @Override
     public int LengthListaDoble(T n){
         NodoLista aux = null;
