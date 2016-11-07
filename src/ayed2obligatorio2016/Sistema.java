@@ -122,13 +122,13 @@ public class Sistema implements IMetro {
        unCliente.setCedula(cedula);
        unCliente.setNombre(nombre);
               
-       if(unCliente.BuscarCliente(cedula))
+       if(unCliente.CorrobarCanDigitos(cedula))
        {
            return TipoRet.ERROR_1;
        }
        else
        {
-           if(unCliente.CorrobarCanDigitos(cedula))
+           if(unCliente.BuscarCliente(cedula))
            {
                ListaCliente.insertarInicio(unCliente);
                return TipoRet.OK;
@@ -147,9 +147,9 @@ public class Sistema implements IMetro {
         unCliente.setCedula(cedula);
         ListaDobleEnc LD = new ListaDobleEnc();
         
-        if(unCliente.BuscarCliente(cedula))
+        if(unCliente.CorrobarCanDigitos(cedula))
         {
-            if(unCliente.CorrobarCanDigitos(cedula))
+            if(unCliente.BuscarCliente(cedula))
             {
                 LD.RemoveNodo(unCliente);
                 return TipoRet.OK;
