@@ -6,13 +6,12 @@
 package ayed2obligatorio2016;
 
 import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
-<<<<<<< HEAD
+
 import clases.Servicio;
-=======
 import clases.Cliente;
 import clases.Servicio;
 import clases.Viaje;
->>>>>>> 7d1d6549750c203951d6080c096968cfa3850f6d
+
 import java.time.LocalDateTime;
 
 /**
@@ -20,9 +19,6 @@ import java.time.LocalDateTime;
  * @author Daniel
  */
 public class Sistema implements IMetro {
-<<<<<<< HEAD
-        
-=======
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaSimpleGeneric<Servicio> ListaServicio;
@@ -71,7 +67,6 @@ public class Sistema implements IMetro {
     }
     
 
->>>>>>> 7d1d6549750c203951d6080c096968cfa3850f6d
     public enum TipoRet {
         OK, ERROR_1, ERROR_2, ERROR_3, ERROR_4, NO_IMPLEMENTADA
     };
