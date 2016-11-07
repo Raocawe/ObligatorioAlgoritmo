@@ -121,14 +121,25 @@ public class Sistema implements IMetro {
        unCliente.setCedula(cedula);
        unCliente.setNombre(nombre);
        
-       ListaSimpleGeneric LSG = getListaCliente();    
-       if(LSG.buscar(unCliente) != null)
+       ListaSimpleGeneric LSG = getListaCliente(); 
+       
+       if(unCliente.BuscarCliente(cedula))
        {
-           
+           return TipoRet.ERROR_1;
        }
-        
-        
-        return TipoRet.NO_IMPLEMENTADA;
+       else
+       {
+           if(unCliente.CorrobarCanDigitos(cedula))
+           {
+               ListaCliente.insertarInicio(unCliente);
+               return TipoRet.OK;
+           }
+           
+           else
+           {
+               return TipoRet.ERROR_2;
+           }
+       }
     }
 
     public TipoRet bajaCliente(int cedula) {

@@ -67,9 +67,7 @@ public class Cliente {
         Sistema Sis = new Sistema();
         ListaSimpleGeneric<Cliente> ListCli = Sis.getListaCliente();
         
-        if(CorrobarCanDigitos(pCedula) == true)
-            {
-                if(ListCli.esVacia())
+         if(ListCli.esVacia())
                     {
                     return false;
                      }
@@ -94,11 +92,7 @@ public class Cliente {
             return false;
         }
         }
-        else
-        {
-            return false;
-        }
-        
-    }}
+              
+    }
 
 
