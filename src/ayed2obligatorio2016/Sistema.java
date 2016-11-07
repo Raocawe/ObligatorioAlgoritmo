@@ -6,7 +6,13 @@
 package ayed2obligatorio2016;
 
 import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
+<<<<<<< HEAD
 import clases.Servicio;
+=======
+import clases.Cliente;
+import clases.Servicio;
+import clases.Viaje;
+>>>>>>> 7d1d6549750c203951d6080c096968cfa3850f6d
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +20,58 @@ import java.time.LocalDateTime;
  * @author Daniel
  */
 public class Sistema implements IMetro {
+<<<<<<< HEAD
         
+=======
+    
+    private static ListaSimpleGeneric<Viaje> ListaViaje;
+    private static ListaSimpleGeneric<Servicio> ListaServicio;
+    private static ListaSimpleGeneric<Cliente> ListaCliente;
+
+    /**
+     * @return the ListaViaje
+     */
+    public static ListaSimpleGeneric<Viaje> getListaViaje() {
+        return ListaViaje;
+    }
+
+    /**
+     * @param aListaViaje the ListaViaje to set
+     */
+    public static void setListaViaje(ListaSimpleGeneric<Viaje> aListaViaje) {
+        ListaViaje = aListaViaje;
+    }
+
+    /**
+     * @return the ListaServicio
+     */
+    public static ListaSimpleGeneric<Servicio> getListaServicio() {
+        return ListaServicio;
+    }
+
+    /**
+     * @param aListaServicio the ListaServicio to set
+     */
+    public static void setListaServicio(ListaSimpleGeneric<Servicio> aListaServicio) {
+        ListaServicio = aListaServicio;
+    }
+
+    /**
+     * @return the ListaCliente
+     */
+    public static ListaSimpleGeneric<Cliente> getListaCliente() {
+        return ListaCliente;
+    }
+
+    /**
+     * @param aListaCliente the ListaCliente to set
+     */
+    public static void setListaCliente(ListaSimpleGeneric<Cliente> aListaCliente) {
+        ListaCliente = aListaCliente;
+    }
+    
+
+>>>>>>> 7d1d6549750c203951d6080c096968cfa3850f6d
     public enum TipoRet {
         OK, ERROR_1, ERROR_2, ERROR_3, ERROR_4, NO_IMPLEMENTADA
     };
@@ -64,7 +121,19 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet altaCliente(int cedula, String nombre) {
-                return TipoRet.NO_IMPLEMENTADA;
+          
+         Cliente unCliente = new Cliente();
+       unCliente.setCedula(cedula);
+       unCliente.setNombre(nombre);
+       
+       ListaSimpleGeneric LSG = getListaCliente();    
+       if(LSG.buscar(unCliente) != null)
+       {
+           
+       }
+        
+        
+        return TipoRet.NO_IMPLEMENTADA;
     }
 
     public TipoRet bajaCliente(int cedula) {

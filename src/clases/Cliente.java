@@ -5,6 +5,10 @@
  */
 package clases;
 
+import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
+import ayed1obligatorio2016.ListaSimple.NodoListaSimple;
+import ayed2obligatorio2016.Sistema;
+
 /**
  *
  * @author Martin
@@ -13,6 +17,8 @@ public class Cliente {
     
     private int cedula;
     private String nombre;
+    
+    
 
     /**
      * @return the cedula
@@ -41,4 +47,58 @@ public class Cliente {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-}
+    
+    public boolean CorrobarCanDigitos(Integer pCedula)
+    {
+        if(pCedula.toString().toCharArray().length == 8)
+        {
+            return true;
+        }
+        else
+        {
+        return false;
+        }
+    }
+    
+    
+    
+    public boolean BuscarCliente(int pCedula)
+    {
+        Sistema Sis = new Sistema();
+        ListaSimpleGeneric<Cliente> ListCli = Sis.getListaCliente();
+        
+        if(CorrobarCanDigitos(pCedula) == true)
+            {
+                if(ListCli.esVacia())
+                    {
+                    return false;
+                     }
+            
+            else
+            {
+                NodoListaSimple Nl = ListCli.getInicio();
+                while(Nl.getSiguiente() != null)
+                {
+                    Cliente elCliente = new Cliente();
+                    elCliente = (Cliente) Nl.getDato();
+                
+                if(elCliente.getCedula() == pCedula)
+                    {
+                        return true;
+                    }
+                else
+                    {
+                        Nl = Nl.getSiguiente();
+                    }
+                }
+            return false;
+        }
+        }
+        else
+        {
+            return false;
+        }
+        
+    }}
+
+
