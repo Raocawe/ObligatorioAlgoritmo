@@ -5,6 +5,8 @@
  */
 package clases;
 
+import ayed1obligatorio2016.ListaDoble.ListaDobleEnc;
+import ayed1obligatorio2016.ListaDoble.NodoLista;
 import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed1obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Sistema;
@@ -65,7 +67,7 @@ public class Cliente {
     public boolean BuscarCliente(int pCedula)
     {
         Sistema Sis = new Sistema();
-        ListaSimpleGeneric<Cliente> ListCli = Sis.getListaCliente();
+        ListaDobleEnc<Cliente> ListCli = Sis.getListaCliente();
         
          if(ListCli.esVacia())
                     {
@@ -74,7 +76,7 @@ public class Cliente {
             
             else
             {
-                NodoListaSimple Nl = ListCli.getInicio();
+                NodoLista Nl = ListCli.getInicio();
                 while(Nl.getSiguiente() != null)
                 {
                     Cliente elCliente = new Cliente();
