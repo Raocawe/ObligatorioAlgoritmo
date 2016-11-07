@@ -118,7 +118,7 @@ public class Sistema implements IMetro {
 
     public TipoRet altaCliente(int cedula, String nombre) {
           
-         Cliente unCliente = new Cliente();
+        Cliente unCliente = new Cliente();
        unCliente.setCedula(cedula);
        unCliente.setNombre(nombre);
               
@@ -143,15 +143,25 @@ public class Sistema implements IMetro {
 
     public TipoRet bajaCliente(int cedula) {
                 
-        /* Cliente unCliente = new Cliente();
-        ListaSimpleGeneric ListaSG = getListaCliente();
+        Cliente unCliente = new Cliente();
+        unCliente.setCedula(cedula);
+        ListaDobleEnc LD = new ListaDobleEnc();
         
         if(unCliente.BuscarCliente(cedula))
         {
-                               
+            if(unCliente.CorrobarCanDigitos(cedula))
+            {
+                LD.RemoveNodo(unCliente);
+                return TipoRet.OK;
+            }
+            else
+            {
+                return TipoRet.ERROR_1;
+            }
         }
         else
-        {} */
-     return TipoRet.ERROR_2;
+        {
+            return TipoRet.ERROR_1;
+        }
     }
 }
