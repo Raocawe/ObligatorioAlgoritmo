@@ -14,6 +14,8 @@ public class NodoListaSimple <T> {
     private T dato;
     private NodoListaSimple <T> siguiente;
 
+    public NodoListaSimple(){}
+    
     public NodoListaSimple(T dato) {
         this.dato = dato;
         this.siguiente = null;

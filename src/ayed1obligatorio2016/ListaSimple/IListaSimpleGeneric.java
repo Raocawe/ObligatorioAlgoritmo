@@ -21,4 +21,6 @@ public interface IListaSimpleGeneric <T> {
     
     public void vaciarLista();
     
+    public T buscar(T n);
+    
 }

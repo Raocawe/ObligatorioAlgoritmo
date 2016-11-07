@@ -55,6 +55,29 @@ public class ListaSimpleGeneric <T> implements IListaSimpleGeneric <T>{
         while(this.inicio != null)
             this.borrarInicio();
     }
+
+    public T buscar(T n) {
+        if(esVacia())
+        {
+            return null;
+        }
+        else
+        {
+            NodoListaSimple Nl = getInicio();
+            while(Nl.getSiguiente() != null)
+            {
+                if(Nl == n)
+                {
+                    return n;
+                }
+                else
+                {
+                    Nl = Nl.getSiguiente();
+                }
+            }
+            return null;
+        }
+    }
     
     
     
