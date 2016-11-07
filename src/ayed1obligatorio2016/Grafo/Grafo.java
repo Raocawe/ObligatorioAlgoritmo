@@ -5,10 +5,14 @@
  */
 package ayed1obligatorio2016.Grafo;
 
+import ayed1obligatorio2016.ListaDoble.ListaDobleEnc;
+import clases.Estacion;
+
 /**
  *
  * @author cristian castro
  */
 public class Grafo {
     
+    public ListaDobleEnc<Estacion> ListaEstaciones();
 }
