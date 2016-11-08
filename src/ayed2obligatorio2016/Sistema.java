@@ -26,29 +26,38 @@ public class Sistema implements IMetro {
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaSimpleGeneric<Servicio> ListaServicio;
     private static ListaDobleEnc<Cliente> ListaCliente;
+    private static Grafo Metro;
 
-    public static ListaSimpleGeneric<Viaje> getListaViaje() {
+    public ListaSimpleGeneric<Viaje> getListaViaje() {
         return ListaViaje;
     }
 
-    public static void setListaViaje(ListaSimpleGeneric<Viaje> aListaViaje) {
+    public void setListaViaje(ListaSimpleGeneric<Viaje> aListaViaje) {
         ListaViaje = aListaViaje;
     }
 
-    public static ListaSimpleGeneric<Servicio> getListaServicio() {
+    public ListaSimpleGeneric<Servicio> getListaServicio() {
         return ListaServicio;
     }
 
-    public static void setListaServicio(ListaSimpleGeneric<Servicio> aListaServicio) {
+    public void setListaServicio(ListaSimpleGeneric<Servicio> aListaServicio) {
         ListaServicio = aListaServicio;
     }
 
-    public static ListaDobleEnc<Cliente> getListaCliente() {
+    public ListaDobleEnc<Cliente> getListaCliente() {
         return ListaCliente;
     }
 
-    public static void setListaCliente(ListaDobleEnc<Cliente> aListaCliente) {
+    public void setListaCliente(ListaDobleEnc<Cliente> aListaCliente) {
         ListaCliente = aListaCliente;
+    }
+
+    public Grafo getMetro() {
+        return Metro;
+    }
+
+    public void setMetro(Grafo aMetro) {
+        Metro = aMetro;
     }
     
 
@@ -109,7 +118,7 @@ public class Sistema implements IMetro {
        }
        else
        {
-           if(unCliente.BuscarCliente(cedula))
+           if(unCliente.BuscarCliente(cedula) == null)
            {
                ListaCliente.insertarInicio(unCliente);
                return TipoRet.OK;
@@ -130,7 +139,7 @@ public class Sistema implements IMetro {
         
         if(unCliente.CorrobarCanDigitos(cedula))
         {
-            if(unCliente.BuscarCliente(cedula))
+            if(unCliente.BuscarCliente(cedula) != null)
             {
                 LD.RemoveNodo(unCliente);
                 return TipoRet.OK;

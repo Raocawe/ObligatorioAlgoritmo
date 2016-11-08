@@ -64,14 +64,14 @@ public class Cliente {
     
     
     
-    public boolean BuscarCliente(int pCedula)
+    public Cliente BuscarCliente(int pCedula)
     {
         Sistema Sis = new Sistema();
         ListaDobleEnc<Cliente> ListCli = Sis.getListaCliente();
         
          if(ListCli.esVacia())
                     {
-                    return false;
+                    return null;
                      }
             
             else
@@ -84,17 +84,17 @@ public class Cliente {
                 
                 if(elCliente.getCedula() == pCedula)
                     {
-                        return true;
+                        return elCliente;
                     }
                 else
                     {
                         Nl = Nl.getSiguiente();
                     }
                 }
-            return false;
+            return null;
         }
-        }
-              
+    }
+       
     }
 
 
