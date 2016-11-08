@@ -23,10 +23,10 @@ import java.time.LocalDateTime;
  */
 public class Sistema implements IMetro {
     
-    private static ListaSimpleGeneric<Viaje> ListaViaje;
-    private static ListaSimpleGeneric<Servicio> ListaServicio;
-    private static ListaDobleEnc<Cliente> ListaCliente;
-    private static Grafo Metro;
+    private static ListaSimpleGeneric<Viaje> ListaViaje = new ListaSimpleGeneric<Viaje>();
+    private static ListaSimpleGeneric<Servicio> ListaServicio = new ListaSimpleGeneric<Servicio>();
+    private static ListaDobleEnc<Cliente> ListaCliente = new ListaDobleEnc<Cliente>();
+    private static Grafo Metro = new Grafo();
 
     public ListaSimpleGeneric<Viaje> getListaViaje() {
         return ListaViaje;
@@ -108,13 +108,13 @@ public class Sistema implements IMetro {
     //region Hechas
     public TipoRet altaCliente(int cedula, String nombre) {
           
-        Cliente unCliente = new Cliente();
+       Cliente unCliente = new Cliente();
        unCliente.setCedula(cedula);
        unCliente.setNombre(nombre);
               
-       if(unCliente.CorrobarCanDigitos(cedula))
+       if(!unCliente.CorrobarCanDigitos(cedula))
        {
-           return TipoRet.ERROR_1;
+           return TipoRet.ERROR_2;
        }
        else
        {
@@ -126,7 +126,7 @@ public class Sistema implements IMetro {
            
            else
            {
-               return TipoRet.ERROR_2;
+               return TipoRet.ERROR_1;
            }
        }
     }
@@ -161,7 +161,7 @@ public class Sistema implements IMetro {
         Es.setNombre(estacion);
         
         Grafo G = new Grafo();
-        if(G.Buscar(Es)==null)
+        if(G.Buscar(Es)!=null)
         {
             return TipoRet.ERROR_1;
         }

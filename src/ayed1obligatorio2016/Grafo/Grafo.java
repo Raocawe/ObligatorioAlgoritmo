@@ -7,8 +7,8 @@ import ayed2obligatorio2016.Sistema;
 
 public class Grafo {
     
-    private ListaDobleEnc<NodoGrafo> ListaEstaciones;
-    private ListaDobleEnc<Arista> ListaLineas;
+    private ListaDobleEnc<NodoGrafo> ListaEstaciones = new ListaDobleEnc<NodoGrafo>();
+    private ListaDobleEnc<Arista> ListaLineas = new ListaDobleEnc<Arista>();
 
     
     public ListaDobleEnc<NodoGrafo> getListaEstaciones() {

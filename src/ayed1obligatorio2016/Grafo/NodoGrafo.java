@@ -16,9 +16,9 @@ import clases.Servicio;
  */
 public class NodoGrafo {
 
-    private ListaSimpleGeneric<Servicio> Servicios;
+    private ListaSimpleGeneric<Servicio> Servicios = new ListaSimpleGeneric<Servicio>();
     private String nombre;
-    private ListaDobleEnc<Arista> Aristas;
+    private ListaDobleEnc<Arista> Aristas = new ListaDobleEnc<Arista>();
 
     /**
      * @return the Servicios

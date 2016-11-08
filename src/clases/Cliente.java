@@ -70,9 +70,9 @@ public class Cliente {
         ListaDobleEnc<Cliente> ListCli = Sis.getListaCliente();
         
          if(ListCli.esVacia())
-                    {
-                    return null;
-                     }
+         {
+            return null;
+         }
             
             else
             {
