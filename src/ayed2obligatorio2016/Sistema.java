@@ -85,10 +85,6 @@ public class Sistema implements IMetro {
         return TipoRet.NO_IMPLEMENTADA;
     }
 
-    public TipoRet listarViajesCliente(int ciCliente) {
-                return TipoRet.NO_IMPLEMENTADA;
-    }
-
     public TipoRet listarServiciosEstacion(String estacion) {
                 return TipoRet.NO_IMPLEMENTADA;
     }
@@ -173,6 +169,27 @@ public class Sistema implements IMetro {
             Es.getServicios().insertarInicio(Ser);
             return TipoRet.OK;
         }  
+    }
+    
+    public TipoRet listarViajesCliente(int ciCliente) {
+        Cliente Cli = new Cliente();
+        if(Cli.CorrobarCanDigitos(ciCliente))
+        {
+            if(Cli.BuscarCliente(ciCliente)!= null)
+            {
+                Viaje V = new Viaje();
+                V.ImprimirViajes(ciCliente);
+                return TipoRet.OK;
+            }
+            else
+            {
+                return TipoRet.ERROR_1;
+            }
+        }
+        else
+        {
+            return TipoRet.ERROR_2;
+        }
     }
     //endregion
     

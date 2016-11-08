@@ -19,12 +19,13 @@ public class Cliente {
     
     private int cedula;
     private String nombre;
+    private Viaje ultimoViaje;
     
     
-
-    /**
-     * @return the cedula
-     */
+    public Cliente(){
+    ultimoViaje = null;
+    }
+            
     public int getCedula() {
         return cedula;
     }
@@ -93,6 +94,25 @@ public class Cliente {
                 }
             return null;
         }
+    }
+    
+    public void ImprimirTodos()
+    {
+        
+    }
+
+    /**
+     * @return the ultimoViaje
+     */
+    public Viaje getUltimoViaje() {
+        return ultimoViaje;
+    }
+
+    /**
+     * @param ultimoViaje the ultimoViaje to set
+     */
+    public void setUltimoViaje(Viaje ultimoViaje) {
+        this.ultimoViaje = ultimoViaje;
     }
        
     }
