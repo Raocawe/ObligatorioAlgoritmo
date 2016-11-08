@@ -77,7 +77,7 @@ public class Cliente {
             else
             {
                 NodoLista Nl = ListCli.getInicio();
-                while(Nl.getSiguiente() != null)
+                while(Nl != null)
                 {
                     Cliente elCliente = new Cliente();
                     elCliente = (Cliente) Nl.getDato();

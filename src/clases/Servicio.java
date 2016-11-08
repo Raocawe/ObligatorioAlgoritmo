@@ -11,34 +11,21 @@ package clases;
  */
 public class Servicio {
     
-    private String estacion; 
-    private String servicio;
+    private String Nombre;
 
-    /**
-     * @return the estacion
-     */
-    public String getEstacion() {
-        return estacion;
-    }
-
-    /**
-     * @param estacion the estacion to set
-     */
-    public void setEstacion(String estacion) {
-        this.estacion = estacion;
-    }
 
     /**
      * @return the servicio
      */
-    public String getServicio() {
-        return servicio;
+    public String getNombre() {
+        return Nombre;
     }
 
     /**
-     * @param servicio the servicio to set
+     * @param Nombre the servicio to set
      */
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
     }
+    
 }

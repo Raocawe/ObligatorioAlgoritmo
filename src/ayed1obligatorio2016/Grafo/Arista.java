@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package clases;
+package ayed1obligatorio2016.Grafo;
+
+import ayed1obligatorio2016.Grafo.NodoGrafo;
 
 /**
  *
  * @author cristian castro
  */
-public class Linea {
+public class Arista {
     
-    private Estacion origen;
-    private Estacion destino;
+    private NodoGrafo origen;
+    private NodoGrafo destino;
     private char nombre;
     private float distancia;
     private float tarifa;

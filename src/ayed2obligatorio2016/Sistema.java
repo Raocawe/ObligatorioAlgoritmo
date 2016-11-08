@@ -5,6 +5,8 @@
 
 package ayed2obligatorio2016;
 
+import ayed1obligatorio2016.Grafo.Grafo;
+import ayed1obligatorio2016.Grafo.NodoGrafo;
 import ayed1obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
 
@@ -25,44 +27,26 @@ public class Sistema implements IMetro {
     private static ListaSimpleGeneric<Servicio> ListaServicio;
     private static ListaDobleEnc<Cliente> ListaCliente;
 
-    /**
-     * @return the ListaViaje
-     */
     public static ListaSimpleGeneric<Viaje> getListaViaje() {
         return ListaViaje;
     }
 
-    /**
-     * @param aListaViaje the ListaViaje to set
-     */
     public static void setListaViaje(ListaSimpleGeneric<Viaje> aListaViaje) {
         ListaViaje = aListaViaje;
     }
 
-    /**
-     * @return the ListaServicio
-     */
     public static ListaSimpleGeneric<Servicio> getListaServicio() {
         return ListaServicio;
     }
 
-    /**
-     * @param aListaServicio the ListaServicio to set
-     */
     public static void setListaServicio(ListaSimpleGeneric<Servicio> aListaServicio) {
         ListaServicio = aListaServicio;
     }
 
-    /**
-     * @return the ListaCliente
-     */
     public static ListaDobleEnc<Cliente> getListaCliente() {
         return ListaCliente;
     }
 
-    /**
-     * @param aListaCliente the ListaCliente to set
-     */
     public static void setListaCliente(ListaDobleEnc<Cliente> aListaCliente) {
         ListaCliente = aListaCliente;
     }
@@ -85,10 +69,6 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet agregarViaje(String origen, String destino, int ciCliente, LocalDateTime fechaHora) {
-                return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    public TipoRet agregarServicio(String estacion, String servicio) {
                 return TipoRet.NO_IMPLEMENTADA;
     }
 
@@ -116,6 +96,7 @@ public class Sistema implements IMetro {
                 return TipoRet.NO_IMPLEMENTADA;
     }
 
+    //region Hechas
     public TipoRet altaCliente(int cedula, String nombre) {
           
         Cliente unCliente = new Cliente();
@@ -164,4 +145,26 @@ public class Sistema implements IMetro {
             return TipoRet.ERROR_1;
         }
     }
+    
+    public TipoRet agregarServicio(String estacion, String servicio) {
+             
+        NodoGrafo Es = new NodoGrafo();
+        Es.setNombre(estacion);
+        
+        Grafo G = new Grafo();
+        if(G.Buscar(Es)==null)
+        {
+            return TipoRet.ERROR_1;
+        }
+        else
+        {
+            Servicio Ser = new Servicio();
+            Ser.setNombre(servicio);
+        
+            Es.getServicios().insertarInicio(Ser);
+            return TipoRet.OK;
+        }  
+    }
+    //endregion
+    
 }
