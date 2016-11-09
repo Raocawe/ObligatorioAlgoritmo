@@ -1,7 +1,7 @@
-package ayed1obligatorio2016.Grafo;
+package ayed2obligatorio2016.Grafo;
 
-import ayed1obligatorio2016.ListaDoble.ListaDobleEnc;
-import ayed1obligatorio2016.ListaDoble.NodoLista;
+import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
+import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.Sistema;
 
 

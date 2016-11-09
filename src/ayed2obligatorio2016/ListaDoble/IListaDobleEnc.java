@@ -3,24 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ayed1obligatorio2016.ListaSimple;
+package ayed2obligatorio2016.ListaDoble;
 
 /**
  *
- * @author Alen
+ * @author Maxi
  */
-public interface IListaSimpleGeneric <T> {
-    
+public interface IListaDobleEnc <T> {
     public void insertarInicio(T n);
-    
+    public void RemoveNodo(T n);
     public boolean esVacia();
-    
     public void imprimir(T n);
-    
     public void borrarInicio();
-    
     public void vaciarLista();
-    
-    public T buscar(T n);
-    
+    public int LengthListaDoble(T n);
 }

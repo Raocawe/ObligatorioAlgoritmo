@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ayed1obligatorio2016.Grafo;
+package ayed2obligatorio2016.Grafo;
 
-import ayed1obligatorio2016.Grafo.NodoGrafo;
+import ayed2obligatorio2016.Grafo.NodoGrafo;
 
 /**
  *

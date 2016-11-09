@@ -5,10 +5,10 @@
  */
 package clases;
 
-import ayed1obligatorio2016.ListaDoble.ListaDobleEnc;
-import ayed1obligatorio2016.ListaDoble.NodoLista;
-import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
-import ayed1obligatorio2016.ListaSimple.NodoListaSimple;
+import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
+import ayed2obligatorio2016.ListaDoble.NodoLista;
+import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
+import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Sistema;
 
 /**

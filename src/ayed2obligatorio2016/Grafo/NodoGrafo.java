@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ayed1obligatorio2016.Grafo;
+package ayed2obligatorio2016.Grafo;
 
-import ayed1obligatorio2016.ListaDoble.ListaDobleEnc;
-import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
+import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
+import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.Sistema;
 import clases.Servicio;
 

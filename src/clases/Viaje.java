@@ -5,8 +5,8 @@
  */
 package clases;
 
-import ayed1obligatorio2016.ListaSimple.ListaSimpleGeneric;
-import ayed1obligatorio2016.ListaSimple.NodoListaSimple;
+import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
+import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Sistema;
 import java.util.Date;
 
