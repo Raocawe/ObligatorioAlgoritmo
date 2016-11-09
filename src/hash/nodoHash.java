@@ -59,8 +59,4 @@ public class nodoHash {
     
 }
 
- enum EstadoNodo{
-    O,
-    V,
-    E,
-}
+

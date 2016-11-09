@@ -3,32 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hash;
 
-import java.util.Scanner;
+import ayed2obligatorio2016.Grafo.IHash;
+import ayed2obligatorio2016.Grafo.NodoGrafo;
 
 /**
  *
  * @author Ezequiel
  */
-public class CHash implements IHash{
-    private static nodoHash[] array;
-    @Override
-    public void insertarNum() {
-        System.out.println("Ingrese un numero a ingresar");
-         Scanner in = new Scanner(System.in);
-         int num = in.nextInt();
-         nodoHash n = new nodoHash();
-         n.setValor(num);
-         n.setEstado(EstadoNodo.O);
-         n.setNextNodo(null);
+public class CHash{
+    private static NodoGrafo[] array = new NodoGrafo[100];
+    
+    public void insertarEstacion(NodoGrafo pEstacion) {
+         
+        
+         NodoGrafo n = new NodoGrafo();
          if(array[hash(num)]==null || array[hash(num)].getEstado()==EstadoNodo.O ){
              n.setNextNodo(array[hash(num)]); 
          }
          array[hash(num)]=n;
     }
 
-    @Override
+    public int StringAInt(String pChar)
+    {
+        char[] Charr = pChar.toCharArray();
+        int retorno=0;
+        for(int i=0; i<Charr.length;i++)
+        {
+            retorno =+  (int)Charr[i];
+        }
+        return retorno;
+    }
+    
     public boolean buscarNum(int num) {
        
         if(array[hash(num)].getEstado()==EstadoNodo.O)
@@ -36,7 +42,7 @@ public class CHash implements IHash{
          if(array[hash(num)].getValor()==num)
          return true;
          else{
-             nodoHash n = array[hash(num)].getNextNodo();
+             NodoGrafo n = array[hash(num)].getNextNodo();
              while(n!=null)
              {
                  if(n.getValor()== num)
@@ -50,25 +56,22 @@ public class CHash implements IHash{
          }
          }
          else{
-             System.out.println("No se encuentra el Elemento");
              return false;
          }
     }
     
 
     @Override
-    public void eliminarNum() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("Ingrese el numero que desea eliminar");
+    public void eliminarNum(int pEntero) {
        
-        int num = in.nextInt();
+        int num = pEntero;
         if(buscarNum(num)){
             if(array[hash(num)].getValor()==num){
                 array[hash(num)]=array[hash(num)].getNextNodo();
             }
          else{
-             nodoHash n = array[hash(num)];
-             nodoHash n2 = array[hash(num)].getNextNodo();
+             NodoGrafo n = array[hash(num)];
+             NodoGrafo n2 = array[hash(num)].getNextNodo();
              while(n2!=null)
              {
                  if(n2.getValor()== num){
@@ -95,11 +98,11 @@ public class CHash implements IHash{
     }
     public CHash(int i)
     {
-        array = new nodoHash[i];
+        array = new NodoGrafo[i];
     }
     @Override
     public void imprimir(){
-        for(nodoHash n : array)
+        for(NodoGrafo n : array)
         {
             if(n!=null && n.getEstado()==EstadoNodo.O)
             {
@@ -115,6 +118,10 @@ public class CHash implements IHash{
             }
                 
         }
+    }
+
+    public void insertarNum(int pEntero) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -9,6 +9,7 @@ public class Grafo {
     
     private ListaDobleEnc<NodoGrafo> ListaEstaciones = new ListaDobleEnc<NodoGrafo>();
     private ListaDobleEnc<Arista> ListaLineas = new ListaDobleEnc<Arista>();
+    private CHash TablaEstaciones = new CHash(); 
 
     
     public ListaDobleEnc<NodoGrafo> getListaEstaciones() {
