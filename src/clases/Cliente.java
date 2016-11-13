@@ -9,6 +9,7 @@ import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
+import ayed2obligatorio2016.Pila.Pila;
 import ayed2obligatorio2016.Sistema;
 
 /**
@@ -19,11 +20,11 @@ public class Cliente {
     
     private int cedula;
     private String nombre;
-    private Viaje ultimoViaje;
+    private Pila<Viaje> Viajes;
     
     
     public Cliente(){
-    ultimoViaje = null;
+    Viajes = new Pila<Viaje>();
     }
             
     public int getCedula() {
@@ -99,22 +100,21 @@ public class Cliente {
     public void ImprimirTodos()
     {
         
+    }       
+
+    /**
+     * @return the Viajes
+     */
+    public Pila<Viaje> getViajes() {
+        return Viajes;
     }
 
     /**
-     * @return the ultimoViaje
+     * @param Viajes the Viajes to set
      */
-    public Viaje getUltimoViaje() {
-        return ultimoViaje;
+    public void setViajes(Pila<Viaje> Viajes) {
+        this.Viajes = Viajes;
     }
-
-    /**
-     * @param ultimoViaje the ultimoViaje to set
-     */
-    public void setUltimoViaje(Viaje ultimoViaje) {
-        this.ultimoViaje = ultimoViaje;
-    }
-       
     }
 
 

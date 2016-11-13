@@ -20,7 +20,7 @@ public class NodoGrafo {
     private String nombre;
     private ListaDobleEnc<Arista> Aristas = new ListaDobleEnc<Arista>();
     private NodoGrafo NextGrafo;
-    private EstadoNodo estado;
+    private Enumerado estado;
     
 
     /**
@@ -65,9 +65,32 @@ public class NodoGrafo {
         this.Aristas = Aristas;
     }
 
-}
- enum EstadoNodo{
-    O,
-    V,
-    E,
+    /**
+     * @return the NextGrafo
+     */
+    public NodoGrafo getNextGrafo() {
+        return NextGrafo;
+    }
+
+    /**
+     * @param NextGrafo the NextGrafo to set
+     */
+    public void setNextGrafo(NodoGrafo NextGrafo) {
+        this.NextGrafo = NextGrafo;
+    }
+
+    /**
+     * @return the estado
+     */
+    public Enumerado getEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(Enumerado estado) {
+        this.estado = estado;
+    }
+
 }

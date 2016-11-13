@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package ayed2obligatorio2016.Grafo;
 
-import ayed2obligatorio2016.Grafo.IHash;
+
+import ayed2obligatorio2016.Grafo.Enumerado;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 
 /**
@@ -16,9 +13,10 @@ public class CHash{
     
     public void insertarEstacion(NodoGrafo pEstacion) {
          
-        
          NodoGrafo n = new NodoGrafo();
-         if(array[hash(num)]==null || array[hash(num)].getEstado()==EstadoNodo.O ){
+         
+         
+         if(array[hash(num)]==null || array[hash(num)].getEstado()==Enumerado.O ){
              n.setNextNodo(array[hash(num)]); 
          }
          array[hash(num)]=n;
@@ -37,19 +35,19 @@ public class CHash{
     
     public boolean buscarNum(int num) {
        
-        if(array[hash(num)].getEstado()==EstadoNodo.O)
+        if(array[hash(num)].getEstado()==Enumerado.O)
          {
-         if(array[hash(num)].getValor()==num)
+         if(StringAInt(array[hash(num)].getNombre())==num)
          return true;
          else{
-             NodoGrafo n = array[hash(num)].getNextNodo();
+             NodoGrafo n = array[hash(num)].getNextGrafo();
              while(n!=null)
              {
-                 if(n.getValor()== num)
+                 if(StringAInt(n.getNombre())== num)
                      return true;
                  else 
                  {
-                     n=n.getNextNodo();
+                     n=n.getNextGrafo();
                  }
              }
              return false;
@@ -61,55 +59,42 @@ public class CHash{
     }
     
 
-    @Override
     public void eliminarNum(int pEntero) {
        
         int num = pEntero;
         if(buscarNum(num)){
-            if(array[hash(num)].getValor()==num){
-                array[hash(num)]=array[hash(num)].getNextNodo();
+            if(StringAInt(array[hash(num)].getNombre())==num){
+                array[hash(num)]=array[hash(num)].getNextGrafo();
             }
          else{
              NodoGrafo n = array[hash(num)];
-             NodoGrafo n2 = array[hash(num)].getNextNodo();
+             NodoGrafo n2 = array[hash(num)].getNextGrafo();
              while(n2!=null)
              {
-                 if(n2.getValor()== num){
-                     n.setNextNodo(n2.getNextNodo());
-                    
-                     
+                 if(StringAInt(n2.getNombre())== num){
+                     n.setNextGrafo(n2.getNextGrafo());
                  }
-                     
-                
-                     n2=n2.getNextNodo();
-                     n=n.getNextNodo();
-                 
+                     n2=n2.getNextGrafo();
+                     n=n.getNextGrafo();
              }
-            
          }
-           
-            System.out.println("Se elimino correctamente");
         }
         }
 
-    @Override
     public int hash(int i){
-        return i%array.length;
+        return i%101;
     }
-    public CHash(int i)
-    {
-        array = new NodoGrafo[i];
-    }
-    @Override
+    public CHash(){}
+    
     public void imprimir(){
         for(NodoGrafo n : array)
         {
-            if(n!=null && n.getEstado()==EstadoNodo.O)
+            if(n!=null && n.getEstado()==Enumerado.O)
             {
                 while(n!=null)
                 {
-                System.out.print("--> "+n.getValor());
-                n=n.getNextNodo();
+                System.out.print("--> "+n.getNombre());
+                n=n.getNextGrafo();
                 }
              System.out.println();
             }
@@ -118,10 +103,5 @@ public class CHash{
             }
                 
         }
-    }
-
-    public void insertarNum(int pEntero) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    }    
 }

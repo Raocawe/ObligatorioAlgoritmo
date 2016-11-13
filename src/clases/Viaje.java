@@ -7,6 +7,8 @@ package clases;
 
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
+import ayed2obligatorio2016.Pila.NodoPila;
+import ayed2obligatorio2016.Pila.Pila;
 import ayed2obligatorio2016.Sistema;
 import java.util.Date;
 
@@ -80,6 +82,30 @@ public class Viaje {
     public void ImprimirViajes(int pCliente)
     {
         Cliente Cli = new Cliente();
+        Cli = Cli.BuscarCliente(pCliente);
+        
+        System.out.println("Cliente: "+ Integer.toString(pCliente) + " - " + Cli.getNombre());
+        Pila pila = Cli.getViajes();
+        
+            if(pila.IsEmpty())
+            {
+                System.out.println("Sin Viajes Registrados");
+            }
+            else
+            {
+                NodoPila Np = pila.getTop();
+                while(Np != null)
+                {
+                    Viaje aux = (Viaje) Np.getElem();
+                    System.out.println(aux.fecha.toString()+" - "+aux.origen+" - "+aux.destino);
+                    Np = Np.getSiguiente();
+                }
+            }
+    }
+    
+/*   public void ImprimirViajes(int pCliente)
+    {
+        Cliente Cli = new Cliente();
         Sistema Sis = new Sistema();
         ListaSimpleGeneric<Viaje> ListaViajes = Sis.getListaViaje(); ;
         Cli = Cli.BuscarCliente(pCliente);
@@ -136,4 +162,5 @@ public class Viaje {
         }
         return retorno;
     }
+*/
 }
