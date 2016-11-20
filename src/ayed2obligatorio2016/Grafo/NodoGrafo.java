@@ -19,7 +19,6 @@ public class NodoGrafo {
     private ListaSimpleGeneric<Servicio> Servicios = new ListaSimpleGeneric<Servicio>();
     private String nombre;
     private ListaDobleEnc<Arista> Aristas = new ListaDobleEnc<Arista>();
-    private NodoGrafo NextGrafo;
     private Enumerado estado;
     
 
