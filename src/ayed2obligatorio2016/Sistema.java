@@ -24,15 +24,14 @@ import java.time.LocalDateTime;
  */
 public class Sistema implements IMetro {
     
-    private static ListaSimpleGeneric<Viaje> ListaViaje = new ListaSimpleGeneric<Viaje>();
-    private static ListaDobleEnc<Cliente> ListaCliente = new ListaDobleEnc<Cliente>();
-    private static CHash Metro = new CHash();
+    private static ListaSimpleGeneric<Viaje> ListaViaje;
+    private static ListaDobleEnc<Cliente> ListaCliente;
+    private static CHash Metro;
 
+    // <editor-fold defaultstate="collapsed" desc=" GetSet ">
     public static CHash getMetro() {
         return Metro;
     }
-    
-    
 
     public static void setMetro(CHash aMetro) {
         Metro = aMetro;
@@ -49,22 +48,15 @@ public class Sistema implements IMetro {
     public ListaDobleEnc<Cliente> getListaCliente() {
         return ListaCliente;
     }
-
+    
     public void setListaCliente(ListaDobleEnc<Cliente> aListaCliente) {
         ListaCliente = aListaCliente;
     }
+     // </editor-fold>
 
     public enum TipoRet {
         OK, ERROR_1, ERROR_2, ERROR_3, ERROR_4, NO_IMPLEMENTADA
     };
-
-    public TipoRet crearMetro() {
-        return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    public TipoRet destruirMetro() {
-                return TipoRet.NO_IMPLEMENTADA;
-    }
 
     public TipoRet altaTramo(char linea, String origen, String destino, float distancia, float tarifa) {
                 return TipoRet.NO_IMPLEMENTADA;
@@ -94,7 +86,7 @@ public class Sistema implements IMetro {
                 return TipoRet.NO_IMPLEMENTADA;
     }
 
-    //region Hechas
+    // <editor-fold defaultstate="collapsed" desc=" Prontas ">
     public TipoRet altaCliente(int cedula, String nombre) {
           
        Cliente unCliente = new Cliente();
@@ -140,17 +132,18 @@ public class Sistema implements IMetro {
         }
         else
         {
-            return TipoRet.ERROR_1;
+            return TipoRet.ERROR_2;
         }
     }
     
     public TipoRet agregarServicio(String estacion, String servicio) {
-             
+        
+        Grafo G = new Grafo();    
         NodoGrafo Es = new NodoGrafo();
         Es.setNombre(estacion);
+        Es = G.Buscar(Es);
         
-        Grafo G = new Grafo();
-        if(G.Buscar(Es)!=null)
+        if(Es == null)
         {
             return TipoRet.ERROR_1;
         }
@@ -184,6 +177,20 @@ public class Sistema implements IMetro {
             return TipoRet.ERROR_2;
         }
     }
-    //endregion
+    
+    public TipoRet crearMetro() {
+        ListaViaje = new ListaSimpleGeneric<Viaje>();
+        ListaCliente = new ListaDobleEnc<Cliente>();
+        Metro = new CHash();
+        return TipoRet.OK;
+    }
+
+    public TipoRet destruirMetro() {
+        Metro = new CHash();
+        ListaViaje = new ListaSimpleGeneric<Viaje>();
+        ListaCliente = new ListaDobleEnc<Cliente>();
+        return TipoRet.OK;
+    }
+    // </editor-fold >
     
 }
