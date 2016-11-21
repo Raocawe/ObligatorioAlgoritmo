@@ -5,6 +5,7 @@
 
 package ayed2obligatorio2016;
 
+import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.Grafo;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
@@ -24,9 +25,18 @@ import java.time.LocalDateTime;
 public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje = new ListaSimpleGeneric<Viaje>();
-    private static ListaSimpleGeneric<Servicio> ListaServicio = new ListaSimpleGeneric<Servicio>();
     private static ListaDobleEnc<Cliente> ListaCliente = new ListaDobleEnc<Cliente>();
-    private static Grafo Metro = new Grafo();
+    private static CHash Metro = new CHash();
+
+    public static CHash getMetro() {
+        return Metro;
+    }
+    
+    
+
+    public static void setMetro(CHash aMetro) {
+        Metro = aMetro;
+    }
 
     public ListaSimpleGeneric<Viaje> getListaViaje() {
         return ListaViaje;
@@ -34,14 +44,6 @@ public class Sistema implements IMetro {
 
     public void setListaViaje(ListaSimpleGeneric<Viaje> aListaViaje) {
         ListaViaje = aListaViaje;
-    }
-
-    public ListaSimpleGeneric<Servicio> getListaServicio() {
-        return ListaServicio;
-    }
-
-    public void setListaServicio(ListaSimpleGeneric<Servicio> aListaServicio) {
-        ListaServicio = aListaServicio;
     }
 
     public ListaDobleEnc<Cliente> getListaCliente() {
@@ -52,13 +54,6 @@ public class Sistema implements IMetro {
         ListaCliente = aListaCliente;
     }
 
-    public Grafo getMetro() {
-        return Metro;
-    }
-
-    public void setMetro(Grafo aMetro) {
-        Metro = aMetro;
-    }
     public enum TipoRet {
         OK, ERROR_1, ERROR_2, ERROR_3, ERROR_4, NO_IMPLEMENTADA
     };

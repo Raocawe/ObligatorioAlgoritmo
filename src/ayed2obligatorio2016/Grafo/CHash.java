@@ -9,7 +9,8 @@ import ayed2obligatorio2016.Grafo.NodoGrafo;
  * @author Ezequiel
  */
 public class CHash{
-    private static NodoGrafo[] array = new NodoGrafo[100];
+
+    /*  private static NodoGrafo[] array = new NodoGrafo[100];
     
     public void insertarEstacion(NodoGrafo pEstacion) {
          
@@ -33,29 +34,32 @@ public class CHash{
         return retorno;
     }
     
-    public boolean buscarNum(int num) {
+    public NodoGrafo BuscarHash(String pNombre) {
        
-        if(array[hash(num)].getEstado()==Enumerado.O)
+        int num = StringAInt(pNombre);
+        if(array[hash(num)].getEstado() == Enumerado.O)
          {
-         if(StringAInt(array[hash(num)].getNombre())==num)
-         return true;
-         else{
-             NodoGrafo n = array[hash(num)].getNextGrafo();
-             while(n!=null)
-             {
-                 if(StringAInt(n.getNombre())== num)
-                     return true;
-                 else 
-                 {
-                     n=n.getNextGrafo();
-                 }
-             }
-             return false;
+         if(array[hash(num)].getNombre().equals(pNombre))
+         return array[hash(num)];
+            else
+            {
+                NodoGrafo n = array[hash(num)+1];
+                while(n!=null)
+                {
+                    if(n.getNombre() == pNombre)
+                        return n;
+                    else 
+                    {
+                        n= array[StringAInt(n.getNombre())+1];
+                    }
+                }
+                return null;
+            }
          }
-         }
-         else{
-             return false;
-         }
+            else
+            {
+                return null;
+            }
     }
     
 
@@ -84,6 +88,7 @@ public class CHash{
     public int hash(int i){
         return i%101;
     }
+    
     public CHash(){}
     
     public void imprimir(){
@@ -103,5 +108,38 @@ public class CHash{
             }
                 
         }
-    }    
+    }
+    
+    public int menorDist(String Principio, String Destino){
+    NodoGrafo actual = this.BuscarHash(Principio, 0);
+    NodoGrafo destino = this.BuscarHash(Destino, 0);
+    int indice = indiceHash(Destino, 0);
+    int indiceP = indiceHash(Principio, 0);
+    ObjetoTabla[] t = new ObjetoTabla[100];
+    for(int i = 0; i<100; i++){
+        ObjetoTabla o = new ObjetoTabla();
+        if(i==indiceP){
+        o.setVisitado(Visitado.FUE_VISITADOOO);
+        o.setDist(0);
+        o.setAnterior(null);  }
+        else
+        {
+            o.setVisitado(Visitado.no_Visitado);
+            o.setDist(Integer.MAX_VALUE);
+            o.setAnterior(null);
+        }
+        t[i]=o;
+    }
+   t=menorDist(destino, actual, null, 0,t);
+   for(int j = 0; j<100; j++){
+       if(t[j].getVisitado()==Visitado.FUE_VISITADOOO) {
+    System.out.println("INDICE:"+j);
+    System.out.println("Visitado:"+t[j].getVisitado().toString());
+    System.out.println("dist:"+t[j].getDist());
+    System.out.println(lstVertices[j].getEstacion());
+    System.out.println("********");}}
+   
+    return t[indice].getDist();
+
+}*/    
 }

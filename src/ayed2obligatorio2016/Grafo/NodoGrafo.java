@@ -65,20 +65,6 @@ public class NodoGrafo {
     }
 
     /**
-     * @return the NextGrafo
-     */
-    public NodoGrafo getNextGrafo() {
-        return NextGrafo;
-    }
-
-    /**
-     * @param NextGrafo the NextGrafo to set
-     */
-    public void setNextGrafo(NodoGrafo NextGrafo) {
-        this.NextGrafo = NextGrafo;
-    }
-
-    /**
      * @return the estado
      */
     public Enumerado getEstado() {
