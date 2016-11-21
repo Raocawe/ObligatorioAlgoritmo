@@ -10,7 +10,7 @@ import ayed2obligatorio2016.Grafo.NodoGrafo;
  */
 public class CHash{
 
-    /*  private static NodoGrafo[] array = new NodoGrafo[100];
+     private static NodoGrafo[] array = new NodoGrafo[100];
     
     public void insertarEstacion(NodoGrafo pEstacion) {
          
@@ -62,29 +62,6 @@ public class CHash{
             }
     }
     
-
-    public void eliminarNum(int pEntero) {
-       
-        int num = pEntero;
-        if(buscarNum(num)){
-            if(StringAInt(array[hash(num)].getNombre())==num){
-                array[hash(num)]=array[hash(num)].getNextGrafo();
-            }
-         else{
-             NodoGrafo n = array[hash(num)];
-             NodoGrafo n2 = array[hash(num)].getNextGrafo();
-             while(n2!=null)
-             {
-                 if(StringAInt(n2.getNombre())== num){
-                     n.setNextGrafo(n2.getNextGrafo());
-                 }
-                     n2=n2.getNextGrafo();
-                     n=n.getNextGrafo();
-             }
-         }
-        }
-        }
-
     public int hash(int i){
         return i%101;
     }
@@ -99,7 +76,8 @@ public class CHash{
                 while(n!=null)
                 {
                 System.out.print("--> "+n.getNombre());
-                n=n.getNextGrafo();
+                StringAInt(n.getNombre());
+                n=array[StringAInt(n.getNombre())+1];
                 }
              System.out.println();
             }
@@ -141,5 +119,5 @@ public class CHash{
    
     return t[indice].getDist();
 
-}*/    
+}    
 }
