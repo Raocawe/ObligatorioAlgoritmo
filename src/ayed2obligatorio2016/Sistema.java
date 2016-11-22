@@ -26,14 +26,14 @@ public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaDobleEnc<Cliente> ListaCliente;
-    private static CHash Metro;
+    private static Grafo Metro;
 
     // <editor-fold defaultstate="collapsed" desc=" GetSet ">
-    public static CHash getMetro() {
+    public static Grafo getMetro() {
         return Metro;
     }
 
-    public static void setMetro(CHash aMetro) {
+    public static void setMetro(Grafo aMetro) {
         Metro = aMetro;
     }
 
@@ -63,7 +63,27 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet agregarViaje(String origen, String destino, int ciCliente, LocalDateTime fechaHora) {
-                return TipoRet.NO_IMPLEMENTADA;
+       /*Viaje v = new Viaje();
+       Cliente c = new Cliente();
+       
+       if(c.CorrobarCanDigitos(ciCliente)){
+       c = c.BuscarCliente(ciCliente);
+           if(c!=null)
+           {
+               //combrobarsi origen-destino
+               
+               v.setDestino(destino);
+           }
+           else
+           {
+               return TipoRet.ERROR_2;
+           }
+       }
+       else
+       {
+           return TipoRet.ERROR_3;
+       }
+       */return TipoRet.OK;
     }
 
     public TipoRet listarClientes() {
@@ -181,12 +201,12 @@ public class Sistema implements IMetro {
     public TipoRet crearMetro() {
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
-        Metro = new CHash();
+        Metro = new Grafo();
         return TipoRet.OK;
     }
 
     public TipoRet destruirMetro() {
-        Metro = new CHash();
+        Metro = new Grafo();
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
         return TipoRet.OK;
