@@ -7,18 +7,8 @@ import ayed2obligatorio2016.Sistema;
 
 public class Grafo {
     
-    private ListaDobleEnc<NodoGrafo> ListaEstaciones = new ListaDobleEnc<NodoGrafo>();
     private ListaDobleEnc<Arista> ListaLineas = new ListaDobleEnc<Arista>();
     private CHash TablaEstaciones = new CHash(); 
-
-    
-    public ListaDobleEnc<NodoGrafo> getListaEstaciones() {
-        return ListaEstaciones;
-    }
-
-    public void setListaEstaciones(ListaDobleEnc<NodoGrafo> ListaEstaciones) {
-        this.ListaEstaciones = ListaEstaciones;
-    }
 
     public ListaDobleEnc<Arista> getListaLineas() {
         return ListaLineas;
@@ -27,33 +17,19 @@ public class Grafo {
     public void setListaLineas(ListaDobleEnc<Arista> ListaLineas) {
         this.ListaLineas = ListaLineas;
     }
-    
-    public boolean esVacio(){
-        return ListaEstaciones.esVacia();
+
+    /**
+     * @return the TablaEstaciones
+     */
+    public CHash getTablaEstaciones() {
+        return TablaEstaciones;
+    }
+
+    /**
+     * @param TablaEstaciones the TablaEstaciones to set
+     */
+    public void setTablaEstaciones(CHash TablaEstaciones) {
+        this.TablaEstaciones = TablaEstaciones;
     }
     
-    public NodoGrafo Buscar(NodoGrafo pNodo){
-        if(esVacio())
-        {
-            return null;
-        }
-        else
-        {
-            NodoLista Nl = this.ListaEstaciones.getInicio();
-            while(Nl != null)
-            {
-                NodoGrafo Ng = new NodoGrafo();
-                Ng = (NodoGrafo) Nl.getDato();
-
-            if(Ng.getNombre()== pNodo.getNombre())
-                {
-                    return Ng;
-                }
-            else
-                {
-                    Nl = Nl.getSiguiente();
-                }
-            }
-            return null;
-        }
-}}
+    }

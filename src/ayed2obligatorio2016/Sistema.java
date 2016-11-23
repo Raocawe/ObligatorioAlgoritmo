@@ -5,6 +5,7 @@
 
 package ayed2obligatorio2016;
 
+import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.Grafo;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
@@ -26,6 +27,7 @@ public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaDobleEnc<Cliente> ListaCliente;
+    private static ListaSimpleGeneric<Arista> ListaArista;
     private static Grafo Metro;
 
     // <editor-fold defaultstate="collapsed" desc=" GetSet ">
@@ -35,6 +37,20 @@ public class Sistema implements IMetro {
 
     public static void setMetro(Grafo aMetro) {
         Metro = aMetro;
+    }
+
+    /**
+     * @return the ListaArista
+     */
+    public static ListaSimpleGeneric<Arista> getListaArista() {
+        return ListaArista;
+    }
+
+    /**
+     * @param aListaArista the ListaArista to set
+     */
+    public static void setListaArista(ListaSimpleGeneric<Arista> aListaArista) {
+        ListaArista = aListaArista;
     }
 
     public ListaSimpleGeneric<Viaje> getListaViaje() {
@@ -59,20 +75,73 @@ public class Sistema implements IMetro {
     };
 
     public TipoRet altaTramo(char linea, String origen, String destino, float distancia, float tarifa) {
-                return TipoRet.NO_IMPLEMENTADA;
+        Viaje v = new Viaje();
+        Arista a = new Arista();
+        
+        CHash ha = Metro.getTablaEstaciones();
+        NodoGrafo dest = ha.BuscarHash(origen);
+        NodoGrafo orig = ha.BuscarHash(destino);
+        // <editor-fold defaultstate="collapsed" desc=" Agregar Estaciones">
+         if(orig==null)
+         {
+             orig = new NodoGrafo();
+             orig.setNombre(origen);
+             ha.insertarEstacion(orig);
+         }
+         if(dest==null)
+         {
+            dest = new NodoGrafo();
+            dest.setNombre(origen);
+            ha.insertarEstacion(dest);
+         }
+         // </editor-fold>
+
+         if(distancia >0)
+         {
+             if(tarifa >0)
+             {
+                 dest.setNombre(destino);
+                 orig.setNombre(origen);
+                 a.setDestino(dest);
+                 a.setOrigen(orig);
+                    if(a.buscarArista(a)==null)
+                    {
+                        a.setDestino(dest);
+                        a.setOrigen(orig);
+                        a.setDistancia(distancia);
+                        a.setNombre(linea);
+                        a.setTarifa(tarifa);
+                        
+                        dest.getAristas().insertarInicio(a);
+                        orig.getAristas().insertarInicio(a);
+                        ListaArista.insertarInicio(a);
+                        return TipoRet.OK;
+                    }
+                    else
+                    {
+                        return TipoRet.ERROR_1;
+                    }
+             }
+             else
+             {
+                 return TipoRet.ERROR_3;
+             }
+         }
+         else
+         {
+             return TipoRet.ERROR_2;
+         }
     }
 
     public TipoRet agregarViaje(String origen, String destino, int ciCliente, LocalDateTime fechaHora) {
-       /*Viaje v = new Viaje();
+       Viaje v = new Viaje();
        Cliente c = new Cliente();
        
        if(c.CorrobarCanDigitos(ciCliente)){
        c = c.BuscarCliente(ciCliente);
            if(c!=null)
            {
-               //combrobarsi origen-destino
-               
-               v.setDestino(destino);
+                    //dfgfdfg
            }
            else
            {
@@ -83,7 +152,7 @@ public class Sistema implements IMetro {
        {
            return TipoRet.ERROR_3;
        }
-       */return TipoRet.OK;
+       return TipoRet.OK;
     }
 
     public TipoRet listarClientes() {
@@ -160,8 +229,7 @@ public class Sistema implements IMetro {
         
         Grafo G = new Grafo();    
         NodoGrafo Es = new NodoGrafo();
-        Es.setNombre(estacion);
-        Es = G.Buscar(Es);
+        Es = G.getTablaEstaciones().BuscarHash(estacion);
         
         if(Es == null)
         {

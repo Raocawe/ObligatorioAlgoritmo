@@ -15,12 +15,28 @@ public class CHash{
     public void insertarEstacion(NodoGrafo pEstacion) {
          
          NodoGrafo n = new NodoGrafo();
-         
-         
-         if(array[hash(num)]==null || array[hash(num)].getEstado()==Enumerado.O ){
-             n.setNextNodo(array[hash(num)]); 
+         int Indice = hash(StringAInt(pEstacion.getNombre()));
+         if(array[Indice] ==null)
+         {
+             pEstacion.setEstado(Enumerado.O);
+             array[Indice] = pEstacion;
          }
-         array[hash(num)]=n;
+         else
+         {
+             boolean ver = false;
+             int contador = 1;
+             while(!ver)
+             {
+                 if(array[Indice+contador]==null)
+                 {
+                     pEstacion.setEstado(Enumerado.O);
+                     array[Indice+contador] = pEstacion;
+                     ver = true;
+                 }
+                 contador++;
+             }
+         }
+                  
     }
 
     public int StringAInt(String pChar)
@@ -36,34 +52,42 @@ public class CHash{
     
     public NodoGrafo BuscarHash(String pNombre) {
        
-        int num = StringAInt(pNombre);
-        if(array[hash(num)].getEstado() == Enumerado.O)
-         {
-         if(array[hash(num)].getNombre().equals(pNombre))
-         return array[hash(num)];
+        int num = hash(StringAInt(pNombre));
+        if(array[num]!=null)
+        {
+            if(array[num].getEstado().equals(Enumerado.O))
+            {
+        if(array[num].getNombre().equals(pNombre))
+        return array[num];
+           else
+           {
+               int i = num+1;
+               NodoGrafo n = array[i];
+               while(n!=null)
+               {
+                   if(n.getNombre().equals(pNombre))
+                       return n;
+                   else 
+                   {
+                       n = array[i+1];
+                   }
+               }
+               return null;
+           }
+        }
             else
             {
-                NodoGrafo n = array[hash(num)+1];
-                while(n!=null)
-                {
-                    if(n.getNombre() == pNombre)
-                        return n;
-                    else 
-                    {
-                        n= array[StringAInt(n.getNombre())+1];
-                    }
-                }
                 return null;
             }
-         }
-            else
-            {
-                return null;
-            }
-    }
+        }
+        else
+        {
+            return null;
+        }
+        }
     
     public int hash(int i){
-        return i%101;
+        return i%97;
     }
     
     public CHash(){}
@@ -76,8 +100,6 @@ public class CHash{
                 while(n!=null)
                 {
                 System.out.print("--> "+n.getNombre());
-                StringAInt(n.getNombre());
-                n=array[StringAInt(n.getNombre())+1];
                 }
              System.out.println();
             }
