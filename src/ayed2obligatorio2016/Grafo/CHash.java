@@ -88,7 +88,7 @@ public class CHash{
         }
     }
     
-    public int menorDist(String Principio, String Destino){
+    /*public int menorDist(String Principio, String Destino){
     NodoGrafo actual = this.BuscarHash(Principio, 0);
     NodoGrafo destino = this.BuscarHash(Destino, 0);
     int indice = indiceHash(Destino, 0);
@@ -119,5 +119,5 @@ public class CHash{
    
     return t[indice].getDist();
 
-}    
+}    */
 }
