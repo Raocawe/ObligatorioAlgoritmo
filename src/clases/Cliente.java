@@ -9,6 +9,7 @@ import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
+import ayed2obligatorio2016.Pila.NodoPila;
 import ayed2obligatorio2016.Pila.Pila;
 import ayed2obligatorio2016.Sistema;
 
@@ -63,9 +64,7 @@ public class Cliente {
         return false;
         }
     }
-    
-    
-    
+        
     public Cliente BuscarCliente(int pCedula)
     {
         Sistema Sis = new Sistema();
@@ -99,19 +98,31 @@ public class Cliente {
     
     public void ImprimirTodos()
     {
+        Viaje v;
         
+        System.out.println("Cliente: "+ this.cedula +" - "+ this.nombre);
+        if(Viajes.IsEmpty())
+        {
+            System.out.println("\n Sin Viajes Registrados");
+        }
+        else
+        {
+            NodoPila top = Viajes.getTop();
+            while(top!=null)
+            {
+                v = (Viaje)top.getElem();
+                
+                System.out.println(v.getFecha().toString()+" - "+v.getOrigen()+" - "+v.getDestino());
+                
+                top = top.getSiguiente();
+            }
+        }
     }       
 
-    /**
-     * @return the Viajes
-     */
     public Pila<Viaje> getViajes() {
         return Viajes;
     }
 
-    /**
-     * @param Viajes the Viajes to set
-     */
     public void setViajes(Pila<Viaje> Viajes) {
         this.Viajes = Viajes;
     }
