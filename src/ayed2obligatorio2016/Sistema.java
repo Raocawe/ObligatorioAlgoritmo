@@ -5,6 +5,7 @@
 
 package ayed2obligatorio2016;
 
+import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.Grafo;
@@ -27,7 +28,7 @@ public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaDobleEnc<Cliente> ListaCliente;
-    private static ListaSimpleGeneric<Arista> ListaArista;
+    private static ArbolBinario<Arista> ListaArista;
     private static Grafo Metro;
 
     // <editor-fold defaultstate="collapsed" desc=" GetSet ">
@@ -42,14 +43,14 @@ public class Sistema implements IMetro {
     /**
      * @return the ListaArista
      */
-    public static ListaSimpleGeneric<Arista> getListaArista() {
+    public static ArbolBinario<Arista> getListaArista() {
         return ListaArista;
     }
 
     /**
      * @param aListaArista the ListaArista to set
      */
-    public static void setListaArista(ListaSimpleGeneric<Arista> aListaArista) {
+    public static void setListaArista(ArbolBinario<Arista> aListaArista) {
         ListaArista = aListaArista;
     }
 
@@ -114,7 +115,7 @@ public class Sistema implements IMetro {
                         
                         dest.getAristas().insertarInicio(a);
                         orig.getAristas().insertarInicio(a);
-                        ListaArista.insertarInicio(a);
+                        ListaArista.insertar(a);
                         return TipoRet.OK;
                     }
                     else
@@ -240,7 +241,7 @@ public class Sistema implements IMetro {
             Servicio Ser = new Servicio();
             Ser.setNombre(servicio);
         
-            Es.getServicios().insertarInicio(Ser);
+            Es.getServicios().insertar(Ser);
             return TipoRet.OK;
         }  
     }

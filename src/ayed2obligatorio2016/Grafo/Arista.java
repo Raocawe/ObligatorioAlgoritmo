@@ -5,6 +5,7 @@
  */
 package ayed2obligatorio2016.Grafo;
 
+import ayed2obligatorio2016.ArbolBinario.NodoBinario;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Sistema;
@@ -96,18 +97,20 @@ public class Arista {
     
     public Arista buscarArista(Arista pA)
     {
-        NodoListaSimple nls = Sistema.getListaArista().getInicio();
+        NodoBinario e = new NodoBinario();
+        e.setElemento(pA);
+        NodoBinario nls = (NodoBinario)Sistema.getListaArista().Buscar(e);
 
         if(nls!=null)
         {
-            Arista a = (Arista)nls.getDato();
+            Arista a = (Arista)nls.getElemento();
             if(a.destino.equals(pA.destino)&&a.origen.equals(pA.origen))
             {
                 return a;
             }
             else
             {
-                while(nls.getSiguiente()!=null)
+                while(nls.!=null)
                 {
                    a =  (Arista)nls.getSiguiente().getDato();
                    if(a.destino.equals(pA.destino)&&a.origen.equals(pA.origen))

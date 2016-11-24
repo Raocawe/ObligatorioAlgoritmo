@@ -5,6 +5,7 @@
  */
 package ayed2obligatorio2016.Grafo;
 
+import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.Sistema;
@@ -16,23 +17,30 @@ import clases.Servicio;
  */
 public class NodoGrafo {
 
-    private ListaSimpleGeneric<Servicio> Servicios = new ListaSimpleGeneric<Servicio>();
-    private String nombre = "";
-    private ListaDobleEnc<Arista> Aristas = new ListaDobleEnc<Arista>();
-    private Enumerado estado = Enumerado.V;
+    private ArbolBinario<Servicio> Servicios;
+    private String nombre;
+    private ListaDobleEnc<Arista> Aristas;
+    private Enumerado estado;
     
 
+    public NodoGrafo()
+    {
+        Servicios = new ArbolBinario<Servicio>();
+        nombre = "";
+        Aristas = new ListaDobleEnc<Arista>();
+        estado = Enumerado.V;
+    }
     /**
      * @return the Servicios
      */
-    public ListaSimpleGeneric<Servicio> getServicios() {
+    public ArbolBinario<Servicio> getServicios() {
         return Servicios;
     }
 
     /**
      * @param Servicios the Servicios to set
      */
-    public void setServicios(ListaSimpleGeneric<Servicio> Servicios) {
+    public void setServicios(ArbolBinario<Servicio> Servicios) {
         this.Servicios = Servicios;
     }
 
