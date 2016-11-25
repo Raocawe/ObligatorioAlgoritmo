@@ -95,11 +95,11 @@ public class Arista {
     
     // </editor-fold>
     
-    public Arista buscarArista(Arista pA)
+   /* public Arista buscarArista(Arista pA)
     {
         NodoBinario e = new NodoBinario();
         e.setElemento(pA);
-        NodoBinario nls = (NodoBinario)Sistema.getListaArista().Buscar(e);
+        NodoBinario nls = (NodoBinario)Sistema.getListaAristaOrdenadasNombre().Buscar(e);
 
         if(nls!=null)
         {
@@ -126,6 +126,6 @@ public class Arista {
         {
             return null;
         }
-    }
+    }*/
     
 }

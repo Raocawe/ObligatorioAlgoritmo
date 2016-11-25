@@ -84,7 +84,7 @@ public class CHash{
         {
             return null;
         }
-        }
+    }
     
     public int hash(int i){
         return i%97;
@@ -109,6 +109,8 @@ public class CHash{
                 
         }
     }
+    
+    
     
     /*public int menorDist(String Principio, String Destino){
     NodoGrafo actual = this.BuscarHash(Principio, 0);

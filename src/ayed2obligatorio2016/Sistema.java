@@ -11,6 +11,7 @@ import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.Grafo;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
+import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 
 import clases.Servicio;
@@ -28,7 +29,7 @@ public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaDobleEnc<Cliente> ListaCliente;
-    private static ArbolBinario<Arista> ListaArista;
+    private static ArbolBinario<Arista> ListaAristaOrdenadasNombre;
     private static Grafo Metro;
 
     // <editor-fold defaultstate="collapsed" desc=" GetSet ">
@@ -43,15 +44,15 @@ public class Sistema implements IMetro {
     /**
      * @return the ListaArista
      */
-    public static ArbolBinario<Arista> getListaArista() {
-        return ListaArista;
+    public static ArbolBinario<Arista> getListaAristaOrdenadasNombre() {
+        return ListaAristaOrdenadasNombre;
     }
 
     /**
      * @param aListaArista the ListaArista to set
      */
-    public static void setListaArista(ArbolBinario<Arista> aListaArista) {
-        ListaArista = aListaArista;
+    public static void setListaAristaOrdenadasNombre(ArbolBinario<Arista> aListaArista) {
+        ListaAristaOrdenadasNombre = aListaArista;
     }
 
     public ListaSimpleGeneric<Viaje> getListaViaje() {
@@ -75,9 +76,32 @@ public class Sistema implements IMetro {
         OK, ERROR_1, ERROR_2, ERROR_3, ERROR_4, NO_IMPLEMENTADA
     };
 
+
+    public TipoRet listarClientes() {
+        return TipoRet.NO_IMPLEMENTADA;
+    }
+
+    public TipoRet listarServiciosEstacion(String estacion) {
+                return TipoRet.NO_IMPLEMENTADA;
+    }
+
+    public TipoRet listarLineas() {
+                return TipoRet.NO_IMPLEMENTADA;
+    }
+
+    public TipoRet caminoMasCorto(String origen, String destino) {
+                return TipoRet.NO_IMPLEMENTADA;
+    }
+
+    public TipoRet precioBoleto(String origen, String destino) {
+                return TipoRet.NO_IMPLEMENTADA;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc=" Prontas ">
     public TipoRet altaTramo(char linea, String origen, String destino, float distancia, float tarifa) {
         Viaje v = new Viaje();
         Arista a = new Arista();
+        Grafo g = new Grafo();
         
         CHash ha = Metro.getTablaEstaciones();
         NodoGrafo dest = ha.BuscarHash(origen);
@@ -105,7 +129,7 @@ public class Sistema implements IMetro {
                  orig.setNombre(origen);
                  a.setDestino(dest);
                  a.setOrigen(orig);
-                    if(a.buscarArista(a)==null)
+                    if(!g.BuscarAristaOrigenDestino(a))
                     {
                         a.setDestino(dest);
                         a.setOrigen(orig);
@@ -115,7 +139,8 @@ public class Sistema implements IMetro {
                         
                         dest.getAristas().insertarInicio(a);
                         orig.getAristas().insertarInicio(a);
-                        ListaArista.insertar(a);
+                        Metro.getListaLineas().insertarInicio(a);
+                        ListaAristaOrdenadasNombre.insertar(a);
                         return TipoRet.OK;
                     }
                     else
@@ -133,50 +158,7 @@ public class Sistema implements IMetro {
              return TipoRet.ERROR_2;
          }
     }
-
-    public TipoRet agregarViaje(String origen, String destino, int ciCliente, LocalDateTime fechaHora) {
-       Viaje v = new Viaje();
-       Cliente c = new Cliente();
-       
-       if(c.CorrobarCanDigitos(ciCliente)){
-       c = c.BuscarCliente(ciCliente);
-           if(c!=null)
-           {
-                    //dfgfdfg
-           }
-           else
-           {
-               return TipoRet.ERROR_2;
-           }
-       }
-       else
-       {
-           return TipoRet.ERROR_3;
-       }
-       return TipoRet.OK;
-    }
-
-    public TipoRet listarClientes() {
-        return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    public TipoRet listarServiciosEstacion(String estacion) {
-                return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    public TipoRet listarLineas() {
-                return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    public TipoRet caminoMasCorto(String origen, String destino) {
-                return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    public TipoRet precioBoleto(String origen, String destino) {
-                return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" Prontas ">
+    
     public TipoRet altaCliente(int cedula, String nombre) {
           
        Cliente unCliente = new Cliente();
@@ -279,6 +261,40 @@ public class Sistema implements IMetro {
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
         return TipoRet.OK;
+    }
+    
+    public TipoRet agregarViaje(String origen, String destino, int ciCliente, LocalDateTime fechaHora) {
+       Viaje v = new Viaje();
+       Cliente c = new Cliente();
+       Grafo g = new Grafo();
+       
+       if(c.CorrobarCanDigitos(ciCliente)){
+       c = c.BuscarCliente(ciCliente);
+           if(c!=null)
+           {
+                Arista a = new Arista();
+                NodoGrafo ng = new NodoGrafo();
+                CHash ch = new CHash();
+                
+                ng = ch.BuscarHash(origen);
+                a.setOrigen(ng);
+                ng = ch.BuscarHash(destino);
+                a.setDestino(ng);
+                if(g.BuscarAristaOrigenDestino(a))
+                {
+                    
+                }
+                return TipoRet.ERROR_1;
+           }
+           else
+           {
+               return TipoRet.ERROR_2;
+           }
+       }
+       else
+       {
+           return TipoRet.ERROR_3;
+       }
     }
     // </editor-fold >
     

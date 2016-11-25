@@ -229,12 +229,12 @@ public class ArbolBinario<E>
         elementos.add(raiz);
     }
 
-    public Elemento<E> Buscar(Elemento<E> e)
+   /* public Elemento<E> Buscar(Elemento<E> e)
     {
         if(validar(e)!=null)
         {
             NodoBinario r = (NodoBinario)e.getElemento();
-            ArbolBinario l = Sistema.getListaArista();
+            ArbolBinario l = Sistema.getListaAristaOrdenadasNombre();
             return BuscarRe(r);  
         }
         return null;
@@ -243,5 +243,5 @@ public class ArbolBinario<E>
     private Elemento<E> BuscarRe(NodoBinario a)
     {
         
-    }
+    }*/
 }
