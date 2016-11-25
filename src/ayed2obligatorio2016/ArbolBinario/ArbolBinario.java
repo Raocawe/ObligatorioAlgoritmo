@@ -225,8 +225,14 @@ public class ArbolBinario<E>
         {
             recorridoPosOrden(elemento,elementos);
         }
-
         elementos.add(raiz);
+                                            for(int i=0;i<elementos.size();i++)
+                                            {
+                                            Elemento<E> s = elementos.get(i);
+                                            NodoBinario s1 = (NodoBinario)s;
+                                            Arista s2 = (Arista)s1.getElemento();
+                                            System.out.println(s2.getNombre());
+                                            }
     }
 
     public Elemento<E> Buscar(Elemento<E> e)
