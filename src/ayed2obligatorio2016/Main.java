@@ -5,7 +5,9 @@
 
 package ayed2obligatorio2016;
 
+import ayed2obligatorio2016.Grafo.Arista;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  *
@@ -17,6 +19,47 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+    
+        
+    //Elemento<E> raiz, ArrayList<Elemento<E>> elementos
+    Arista a = new Arista();
+    Arista b = new Arista();
+    Arista c = new Arista();
+    Arista d = new Arista();
+    a.setNombre('a');
+    b.setNombre('b');
+    c.setNombre('c');
+    d.setNombre('d');
+    ArrayList<Arista> s = new ArrayList<Arista>();
+    s.add(a);
+     s.add(b);
+      s.add(c);
+       s.add(d);
+    recorridoPosOrden(a,s);
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //=======================================
         Sistema s = new Sistema();
         Prueba p = new Prueba();
 
