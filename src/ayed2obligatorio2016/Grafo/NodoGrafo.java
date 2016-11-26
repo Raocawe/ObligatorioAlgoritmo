@@ -15,7 +15,7 @@ import clases.Servicio;
  *
  * @author cristian castro
  */
-public class NodoGrafo {
+public class NodoGrafo <E extends Comparable<E>>{
 
     private ArbolBinario<Servicio> Servicios;
     private String nombre;
