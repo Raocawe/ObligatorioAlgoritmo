@@ -132,7 +132,7 @@ public class ArbolBinario<E>
             }
         }
     }
-
+    
     private int CharAInt(char pChar)
     {
         return (int)pChar;
@@ -250,4 +250,39 @@ public class ArbolBinario<E>
     {
         
     }*/
+    
+    public Elemento<E> Buscar(E dato)
+    {
+        if(dato !=null)
+        {
+            if(this.getRaiz().equals(dato))
+            {
+                return getRaiz();
+            }
+            else{
+                NodoBinario n = new NodoBinario(dato);
+                NodoBinario r = (NodoBinario)getRaiz();
+                return Buscar(n, r);
+            }
+        }
+        else
+        {return null;}
+    }
+    private Elemento<E> Buscar(NodoBinario buscado, NodoBinario recorrido)
+    {
+        if(recorrido == null){
+            return null;
+        }  
+        else if(buscado.equals(recorrido)){
+            return recorrido.getElemento();
+        }
+        else
+        {
+            if(buscado.compareTo(recorrido.getDato())>0)
+            {
+                return Buscar(buscado, recorrido.getDer());
+            }
+            else return Buscar(buscado, recorrido.getIzq());
+        }
+    }
 }

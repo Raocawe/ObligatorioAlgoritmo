@@ -18,6 +18,14 @@ public class NodoBinario<E> implements Elemento<E>
         this.hijoDerecho = hijoDerecho;
     }
     
+    public NodoBinario(E pDato)
+    {
+       this.elemento = pDato;
+       this.padre = null;
+       this.hijoIzquierdo = null;
+       this.hijoDerecho = null; 
+    }
+    
     public NodoBinario(){}
 
     public E getElemento()

@@ -22,7 +22,7 @@ public class Main {
     
         
     //Elemento<E> raiz, ArrayList<Elemento<E>> elementos
-    Arista a = new Arista();
+    /*Arista a = new Arista();
     Arista b = new Arista();
     Arista c = new Arista();
     Arista d = new Arista();
@@ -35,29 +35,8 @@ public class Main {
      s.add(b);
       s.add(c);
        s.add(d);
-    recorridoPosOrden(a,s);
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    recorridoPosOrden(a,s);*/
+
         
         //=======================================
         Sistema s = new Sistema();
