@@ -1,15 +1,17 @@
 package ayed2obligatorio2016.ArbolBinario;
 
+import ayed2obligatorio2016.Grafo.Arista;
+
 /**
  * Creado por hadexexplade el 21/01/16.9:47
  */
-public class NodoBinario<E> implements Elemento<E>
+public class NodoBinario<E extends Comparable<E>> implements Elemento<E>
 {
     E elemento;
     NodoBinario<E>padre;
     NodoBinario<E>hijoIzquierdo;
     NodoBinario<E>hijoDerecho;
-
+    
     public NodoBinario(E elemento, NodoBinario<E> padre, NodoBinario<E> hijoIzquierdo, NodoBinario<E> hijoDerecho)
     {
         this.elemento = elemento;
@@ -73,4 +75,6 @@ public class NodoBinario<E> implements Elemento<E>
     {
         return getElemento().toString();
     }
+
+
 }

@@ -252,6 +252,7 @@ public class Sistema implements IMetro {
     public TipoRet crearMetro() {
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
+        ListaAristaOrdenadasNombre = new ArbolBinario();
         Metro = new Grafo();
         return TipoRet.OK;
     }
@@ -260,6 +261,7 @@ public class Sistema implements IMetro {
         Metro = new Grafo();
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
+        ListaAristaOrdenadasNombre = new ArbolBinario();
         return TipoRet.OK;
     }
     
