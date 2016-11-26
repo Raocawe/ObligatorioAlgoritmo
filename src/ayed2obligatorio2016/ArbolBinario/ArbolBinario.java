@@ -3,11 +3,9 @@ package ayed2obligatorio2016.ArbolBinario;
 import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Sistema;
 import java.util.ArrayList;
+import java.lang.Comparable;
 
-/**
- * Creado por hadexexplade el 21/01/16.9:49
- */
-public class ArbolBinario<E>
+public class ArbolBinario<E extends Comparable<E>> 
 {
     private NodoBinario<E> raiz;
     private int cantidad;
@@ -107,29 +105,20 @@ public class ArbolBinario<E>
         {
             return insertarRaiz(dato);
         }
-        else
+        else if(((Comparable<E>)dato).compareTo(nodo.getElemento())<0)
         {
-            Arista r = (Arista)nodo.getElemento();
-            int r1 = CharAInt(r.getNombre());
-            Arista ra = (Arista)dato;
-            int r2 = CharAInt(ra.getNombre());
-            
-            if(r1>r2)
+            if(obtenerHijoIzquierdo(nodo)==null)
             {
-                if(obtenerHijoIzquierdo(nodo)==null)
-                {
-                    return insertarHijoIzquierdo(validar(nodo),dato);
-                }
-                return insertar(dato,obtenerHijoIzquierdo(nodo));
-            }  
-            else 
-            {
-                if(obtenerHijoDerecho(nodo)==null)
-                {
-                    return insertarHijoDerecho(validar(nodo),dato);
-                }
-                return insertar(dato, obtenerHijoDerecho(nodo));
+                return insertarHijoIzquierdo(validar(nodo),dato);
             }
+            return insertar(dato,obtenerHijoIzquierdo(nodo));
+        }
+        else {
+            if(obtenerHijoDerecho(nodo)==null)
+            {
+                return insertarHijoDerecho(validar(nodo),dato);
+            }
+            return insertar(dato, obtenerHijoDerecho(nodo));
         }
     }
     
@@ -268,21 +257,24 @@ public class ArbolBinario<E>
         else
         {return null;}
     }
-    private Elemento<E> Buscar(NodoBinario buscado, NodoBinario recorrido)
+    private Elemento<E> Buscar(NodoBinario<E> buscado, NodoBinario<E> recorrido)
     {
+        Arista s = new Arista();
         if(recorrido == null){
             return null;
         }  
         else if(buscado.equals(recorrido)){
-            return recorrido.getElemento();
+            return recorrido;
         }
         else
         {
-            if(buscado.compareTo(recorrido.getDato())>0)
+            if(((Comparable<E>)buscado).compareTo(recorrido.getElemento())<0) 
             {
-                return Buscar(buscado, recorrido.getDer());
+                return Buscar(buscado, recorrido.getHijoDerecho());
             }
-            else return Buscar(buscado, recorrido.getIzq());
+            else 
+                return Buscar(buscado, recorrido.getHijoIzquierdo());
         }
     }
+    
 }
