@@ -103,8 +103,8 @@ public class Sistema implements IMetro {
         Arista a = new Arista();
         
         CHash ha = Metro.getTablaEstaciones();
-        NodoGrafo dest = ha.BuscarHash(origen);
-        NodoGrafo orig = ha.BuscarHash(destino);
+        NodoGrafo dest = ha.BuscarHash(destino);
+        NodoGrafo orig = ha.BuscarHash(origen);
         // <editor-fold defaultstate="collapsed" desc=" Agregar Estaciones">
          if(orig==null)
          {
@@ -115,7 +115,7 @@ public class Sistema implements IMetro {
          if(dest==null)
          {
             dest = new NodoGrafo();
-            dest.setNombre(origen);
+            dest.setNombre(destino);
             ha.insertarEstacion(dest);
          }
          // </editor-fold>
@@ -208,10 +208,9 @@ public class Sistema implements IMetro {
     }
     
     public TipoRet agregarServicio(String estacion, String servicio) {
-        
-        Grafo G = new Grafo();    
+            
         NodoGrafo Es = new NodoGrafo();
-        Es = G.getTablaEstaciones().BuscarHash(estacion);
+        Es = Metro.getTablaEstaciones().BuscarHash(estacion);
         
         if(Es == null)
         {
@@ -273,16 +272,21 @@ public class Sistema implements IMetro {
            if(c!=null)
            {
                 Arista a = new Arista();
-                NodoGrafo ng = new NodoGrafo();
                 CHash ch = new CHash();
                 
-                ng = ch.BuscarHash(origen);
+                NodoGrafo ng = ch.BuscarHash(origen);
                 a.setOrigen(ng);
                 ng = ch.BuscarHash(destino);
                 a.setDestino(ng);
                 if(Metro.BuscarAristaOrigenDestino(a))
                 {
-                    
+                    v.setCiCliente(ciCliente);
+                    v.setDestino(destino);
+                    v.setOrigen(origen);
+                    v.setFecha(fechaHora);
+                    this.getListaViaje().insertarInicio(v);
+                    c.getViajes().push(v);
+                    return TipoRet.OK;
                 }
                 return TipoRet.ERROR_1;
            }

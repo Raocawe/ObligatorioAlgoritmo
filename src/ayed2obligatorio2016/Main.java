@@ -73,6 +73,7 @@ public class Main {
         crearTramosLineaA(p, s);
         crearTramosLineaB(p, s);
         crearTramosLineaC(p, s);
+        crearClientes(p, s);//Agregado
         LocalDateTime hoy = LocalDateTime.now();
         p.ver(s.agregarViaje("Constitucion", "Avenida de Mayo", 11111111, hoy), Sistema.TipoRet.OK, "Se agrega el viaje Constitucion-Avenida de Mayo para el Cliente Lucas Hussey");
         s.listarViajesCliente(11111111);
@@ -88,7 +89,8 @@ public class Main {
         crearTramosLineaC(p, s);
         p.ver(s.agregarServicio("Constitucion", "Servicios Higienicos"), Sistema.TipoRet.OK, "Se agrega el servicio Servicios Higienicos en la estacion Constitucion");
         p.ver(s.agregarServicio("Constitucion", "Wifi"), Sistema.TipoRet.OK, "Se agrega el servicio Wifi en la estacion Constitucion");
-        p.ver(s.agregarServicio("Retiro", "Telefono Publico"), Sistema.TipoRet.OK, "Se agrega el servicio Telefono Publico en la estacion Retiro");
+        p.ver(s.agregarServicio("Retiro", "Telefono Publico"), Sistema.TipoRet.ERROR_1, "Se intenta agregar el servicio Telefono Publico en la estacion Retiro");
+        //Modificado                                                             ^^^
         p.ver(s.agregarServicio("Avenida de Mayo", "Wifi"), Sistema.TipoRet.OK, "Se agrega el servicio Wifi en la estacion Avenida de Mayo");
         p.ver(s.agregarServicio("Medrano", "Comida Rapida"), Sistema.TipoRet.OK, "Se agrega el servicio Comida Rapida en la estacion Medrano");
         s.listarServiciosEstacion("Constitucion");

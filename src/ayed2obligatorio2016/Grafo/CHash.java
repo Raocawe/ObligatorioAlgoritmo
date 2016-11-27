@@ -10,7 +10,12 @@ import ayed2obligatorio2016.Grafo.NodoGrafo;
  */
 public class CHash{
 
-     private static NodoGrafo[] array = new NodoGrafo[100];
+    private static NodoGrafo[] array;
+    
+    public CHash()
+    {
+        array = new NodoGrafo[100];
+    }
     
     public void insertarEstacion(NodoGrafo pEstacion) {
          
@@ -23,17 +28,20 @@ public class CHash{
          }
          else
          {
-             boolean ver = false;
-             int contador = 1;
-             while(!ver)
+             if(array[Indice].getEstado().equals(Enumerado.O) || !pEstacion.getNombre().equals(array[Indice].getNombre()))
              {
-                 if(array[Indice+contador]==null)
-                 {
-                     pEstacion.setEstado(Enumerado.O);
-                     array[Indice+contador] = pEstacion;
-                     ver = true;
-                 }
-                 contador++;
+                 boolean ver = false;
+                int contador = 1;
+                while(!ver)
+                {
+                    if(array[Indice+contador]==null)
+                    {
+                        pEstacion.setEstado(Enumerado.O);
+                        array[Indice+contador] = pEstacion;
+                        ver = true;
+                    }
+                    contador++;
+                }
              }
          }
                   
@@ -45,7 +53,7 @@ public class CHash{
         int retorno=0;
         for(int i=0; i<Charr.length;i++)
         {
-            retorno =+  (int)Charr[i];
+            retorno = retorno + (int)Charr[i];
         }
         return retorno;
     }
@@ -90,8 +98,6 @@ public class CHash{
     public int hash(int i){
         return i%97;
     }
-    
-    public CHash(){}
     
     public void imprimir(){
         for(NodoGrafo n : array)

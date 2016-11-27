@@ -7,9 +7,17 @@ import ayed2obligatorio2016.Sistema;
 
 public class Grafo {
     
-    private ListaDobleEnc<Arista> ListaLineas = new ListaDobleEnc<Arista>();
-    private CHash TablaEstaciones = new CHash(); 
+    private ListaDobleEnc<Arista> ListaLineas;
+    private CHash TablaEstaciones; 
 
+    
+    public Grafo()
+    {
+    TablaEstaciones = new CHash(); 
+    ListaLineas = new ListaDobleEnc<Arista>();
+    }
+        
+    
     public ListaDobleEnc<Arista> getListaLineas() {
         return ListaLineas;
     }

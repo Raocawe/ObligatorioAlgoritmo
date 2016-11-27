@@ -11,6 +11,7 @@ package ayed2obligatorio2016.Pila;
  */
 public class Pila<T> implements IPila<T> {
     private NodoPila<T> top;
+    
     public void push (T elem){ // ingresa un nuevo elemento
         NodoPila<T> nuevo = new NodoPila<T>(elem);
         if(getTop() == null){
@@ -48,38 +49,11 @@ public class Pila<T> implements IPila<T> {
         setTop(null);
         
     }
-    
-    private String DevolverStars(int pRanking){
-        String estrellas = "";
-        switch(pRanking){
-            case 1:
-                estrellas = "☆";
-                break;
-            case 2:
-                estrellas = "☆☆";
-                break;
-            case 3:
-                estrellas = "☆☆☆";
-                break;
-            case 4:
-                estrellas = "☆☆☆☆";
-                break;
-            default:
-                estrellas = "☆☆☆☆☆";
-                break;
-        }
-        return estrellas;
-    }
-    /**
-     * @return the top
-     */
+
     public NodoPila<T> getTop() {
         return top;
     }
 
-    /**
-     * @param top the top to set
-     */
     public void setTop(NodoPila<T> top) {
         this.top = top;
     }

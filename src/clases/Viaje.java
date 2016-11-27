@@ -10,6 +10,7 @@ import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Pila.NodoPila;
 import ayed2obligatorio2016.Pila.Pila;
 import ayed2obligatorio2016.Sistema;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -21,7 +22,7 @@ public class Viaje {
     private String origen;
     private String destino;
     private int ciCliente;
-    private Date fecha;
+    private LocalDateTime fecha;
 
     /**
      * @return the origen
@@ -68,14 +69,14 @@ public class Viaje {
     /**
      * @return the fechaHora
      */
-    public Date getFecha() {
+    public LocalDateTime getFecha() {
         return fecha;
     }
 
     /**
      * @param fecha the fechaHora to set
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
     
