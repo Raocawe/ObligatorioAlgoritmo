@@ -101,7 +101,6 @@ public class Sistema implements IMetro {
     public TipoRet altaTramo(char linea, String origen, String destino, float distancia, float tarifa) {
         Viaje v = new Viaje();
         Arista a = new Arista();
-        Grafo g = new Grafo();
         
         CHash ha = Metro.getTablaEstaciones();
         NodoGrafo dest = ha.BuscarHash(origen);
@@ -129,7 +128,7 @@ public class Sistema implements IMetro {
                  orig.setNombre(origen);
                  a.setDestino(dest);
                  a.setOrigen(orig);
-                    if(!g.BuscarAristaOrigenDestino(a))
+                    if(!Metro.BuscarAristaOrigenDestino(a))
                     {
                         a.setDestino(dest);
                         a.setOrigen(orig);
@@ -268,7 +267,6 @@ public class Sistema implements IMetro {
     public TipoRet agregarViaje(String origen, String destino, int ciCliente, LocalDateTime fechaHora) {
        Viaje v = new Viaje();
        Cliente c = new Cliente();
-       Grafo g = new Grafo();
        
        if(c.CorrobarCanDigitos(ciCliente)){
        c = c.BuscarCliente(ciCliente);
@@ -282,7 +280,7 @@ public class Sistema implements IMetro {
                 a.setOrigen(ng);
                 ng = ch.BuscarHash(destino);
                 a.setDestino(ng);
-                if(g.BuscarAristaOrigenDestino(a))
+                if(Metro.BuscarAristaOrigenDestino(a))
                 {
                     
                 }

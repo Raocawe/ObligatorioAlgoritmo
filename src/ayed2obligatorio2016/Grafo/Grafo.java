@@ -63,6 +63,7 @@ public class Grafo {
                         return true;      
                         }
                     }
+            nl = nl.getSiguiente();
         }
         return false;
      }

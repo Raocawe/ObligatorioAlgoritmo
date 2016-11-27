@@ -69,7 +69,8 @@ public class CHash{
                        return n;
                    else 
                    {
-                       n = array[i+1];
+                       i++;
+                       n = array[i];
                    }
                }
                return null;
