@@ -18,13 +18,12 @@ public class CHash{
     }
     
     public void insertarEstacion(NodoGrafo pEstacion) {
-         
          NodoGrafo n = new NodoGrafo();
          int Indice = hash(StringAInt(pEstacion.getNombre()));
          if(array[Indice] ==null)
          {
              pEstacion.setEstado(Enumerado.O);
-             array[Indice] = pEstacion;
+             array[Indice] = pEstacion;    
          }
          else
          {

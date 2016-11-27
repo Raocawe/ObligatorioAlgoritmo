@@ -73,9 +73,9 @@ public class Main {
         crearTramosLineaA(p, s);
         crearTramosLineaB(p, s);
         crearTramosLineaC(p, s);
-        crearClientes(p, s);//Agregado
         LocalDateTime hoy = LocalDateTime.now();
-        p.ver(s.agregarViaje("Constitucion", "Avenida de Mayo", 11111111, hoy), Sistema.TipoRet.OK, "Se agrega el viaje Constitucion-Avenida de Mayo para el Cliente Lucas Hussey");
+        p.ver(s.agregarViaje("Constitucion", "Avenida de Mayo", 11111111, hoy), Sistema.TipoRet.ERROR_2, "Se agrega el viaje Constitucion-Avenida de Mayo para el Cliente Lucas Hussey");
+        //Modificado                                                                            ^^^^^
         s.listarViajesCliente(11111111);
         s.destruirMetro();
         finPrueba(" Fin PRUEBA 3");

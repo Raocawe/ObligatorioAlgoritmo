@@ -2,28 +2,30 @@ package ayed2obligatorio2016.Grafo;
 
 import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed2obligatorio2016.ListaDoble.NodoLista;
+import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.Sistema;
 
 
 public class Grafo {
     
-    private ListaDobleEnc<Arista> ListaLineas;
+    private ListaDobleEnc<Arista> ListaAristas;
+    private ListaSimpleGeneric<NodoGrafo> ListaEstaciones;
     private CHash TablaEstaciones; 
 
     
     public Grafo()
     {
     TablaEstaciones = new CHash(); 
-    ListaLineas = new ListaDobleEnc<Arista>();
+    ListaAristas = new ListaDobleEnc<Arista>();
     }
         
     
-    public ListaDobleEnc<Arista> getListaLineas() {
-        return ListaLineas;
+    public ListaDobleEnc<Arista> getListaAristas() {
+        return ListaAristas;
     }
 
-    public void setListaLineas(ListaDobleEnc<Arista> ListaLineas) {
-        this.ListaLineas = ListaLineas;
+    public void setListaAristas(ListaDobleEnc<Arista> ListaAristas) {
+        this.ListaAristas = ListaAristas;
     }
 
     /**
@@ -42,7 +44,7 @@ public class Grafo {
     
      public boolean BuscarAristaOrigenDestino(Arista pArista) {
        
-        NodoLista nl = ListaLineas.getInicio();
+        NodoLista nl = ListaAristas.getInicio();
         if(nl!=null){
         Arista a = (Arista)nl.getDato();
         if(a.getOrigen().equals(pArista.getOrigen())&&a.getDestino().equals(pArista.getDestino()))
@@ -79,6 +81,13 @@ public class Grafo {
         {     
             return false;
         }
+    }
+
+    /**
+     * @return the ListaEstaciones
+     */
+    public ListaSimpleGeneric<NodoGrafo> getListaEstaciones() {
+        return ListaEstaciones;
     }
         
     }

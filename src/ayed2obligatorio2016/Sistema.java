@@ -31,7 +31,7 @@ public class Sistema implements IMetro {
     private static ListaDobleEnc<Cliente> ListaCliente;
     private static ArbolBinario<Arista> ListaAristaOrdenadasNombre;
     private static Grafo Metro;
-
+    
     // <editor-fold defaultstate="collapsed" desc=" GetSet ">
     public static Grafo getMetro() {
         return Metro;
@@ -76,7 +76,6 @@ public class Sistema implements IMetro {
         OK, ERROR_1, ERROR_2, ERROR_3, ERROR_4, NO_IMPLEMENTADA
     };
 
-
     public TipoRet listarClientes() {
         return TipoRet.NO_IMPLEMENTADA;
     }
@@ -111,12 +110,14 @@ public class Sistema implements IMetro {
              orig = new NodoGrafo();
              orig.setNombre(origen);
              ha.insertarEstacion(orig);
+             Metro.getListaEstaciones().insertarInicio(orig);
          }
          if(dest==null)
          {
             dest = new NodoGrafo();
             dest.setNombre(destino);
             ha.insertarEstacion(dest);
+            Metro.getListaEstaciones().insertarInicio(dest);
          }
          // </editor-fold>
 
@@ -138,7 +139,7 @@ public class Sistema implements IMetro {
                         
                         dest.getAristas().insertarInicio(a);
                         orig.getAristas().insertarInicio(a);
-                        Metro.getListaLineas().insertarInicio(a);
+                        Metro.getListaAristas().insertarInicio(a);
                         ListaAristaOrdenadasNombre.insertar(a);
                         return TipoRet.OK;
                     }
@@ -272,11 +273,10 @@ public class Sistema implements IMetro {
            if(c!=null)
            {
                 Arista a = new Arista();
-                CHash ch = new CHash();
                 
-                NodoGrafo ng = ch.BuscarHash(origen);
+                NodoGrafo ng = Metro.getTablaEstaciones().BuscarHash(origen);
                 a.setOrigen(ng);
-                ng = ch.BuscarHash(destino);
+                ng = Metro.getTablaEstaciones().BuscarHash(destino);
                 a.setDestino(ng);
                 if(Metro.BuscarAristaOrigenDestino(a))
                 {
