@@ -223,7 +223,7 @@ public class Sistema implements IMetro {
             Servicio Ser = new Servicio();
             Ser.setNombre(servicio);
         
-            Es.getServicios().insertar(Ser);
+            Es.getServicios().insertar((Comparable) Ser);
             return TipoRet.OK;
         }  
     }

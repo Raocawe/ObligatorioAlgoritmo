@@ -14,7 +14,7 @@ import ayed2obligatorio2016.Sistema;
  *
  * @author cristian castro
  */
-public class Arista {
+public class Arista implements Comparable<Arista>{
     
     private NodoGrafo origen;
     private NodoGrafo destino;
@@ -127,5 +127,22 @@ public class Arista {
             return null;
         }
     }*/
+
+    public int CharAInt(char pC)
+    {
+        return (int)pC;
+    }
+    
+    public int compareTo(Arista o) {
+        int a = CharAInt(this.nombre);
+        int b = CharAInt(o.nombre);
+        
+        if(a>b)
+            return 1;
+        else if(a < b)
+            return -1;
+        else
+            return 0; 
+    }
     
 }

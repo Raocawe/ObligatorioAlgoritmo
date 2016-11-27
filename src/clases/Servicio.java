@@ -9,7 +9,7 @@ package clases;
  *
  * @author Martin
  */
-public class Servicio {
+public class Servicio implements Comparable<Servicio>{
     
     private String Nombre;
 
@@ -26,6 +26,30 @@ public class Servicio {
      */
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
+    }
+
+    public int StringAint(String pC)
+    {
+        int retorno = 0;
+        char[] a = pC.toCharArray();
+        for(int i=0 ; i<a.length ; i++)
+        {
+            retorno+=(int)a[i];
+        }
+        return retorno;
+    }
+    
+    public int compareTo(Servicio o) {
+        
+        int a = StringAint(this.Nombre);
+        int b = StringAint(o.Nombre);
+        
+        if(a>b)
+            return 1;
+        else if(a < b)
+            return -1;
+        else
+            return 0; 
     }
     
 }

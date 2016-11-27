@@ -17,7 +17,7 @@ import ayed2obligatorio2016.Sistema;
  *
  * @author Martin
  */
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
     
     private int cedula;
     private String nombre;
@@ -125,6 +125,29 @@ public class Cliente {
 
     public void setViajes(Pila<Viaje> Viajes) {
         this.Viajes = Viajes;
+    }
+
+    public int StringAint(String pC)
+    {
+        int retorno = 0;
+        char[] a = pC.toCharArray();
+        for(int i=0 ; i<a.length ; i++)
+        {
+            retorno+=(int)a[i];
+        }
+        return retorno;
+    }
+    public int compareTo(Cliente o) {
+        
+        int a = StringAint(this.nombre);
+        int b = StringAint(o.nombre);
+        
+        if(a>b)
+            return 1;
+        else if(a < b)
+            return -1;
+        else
+            return 0; 
     }
     }
 
