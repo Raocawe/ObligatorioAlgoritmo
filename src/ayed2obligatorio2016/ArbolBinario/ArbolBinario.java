@@ -105,7 +105,7 @@ public class ArbolBinario<E extends Comparable<E>>
         {
             return insertarRaiz(dato);
         }
-        else if(((Comparable<E>)dato).compareTo(nodo.getElemento())<0)
+        else if(dato.compareTo(nodo.getElemento())<0)
         {
             if(obtenerHijoIzquierdo(nodo)==null)
             {
@@ -268,7 +268,7 @@ public class ArbolBinario<E extends Comparable<E>>
         }
         else
         {
-            if(((Comparable<E>)buscado).compareTo(recorrido.getElemento())<0) 
+            if(buscado.elemento.compareTo(recorrido.getElemento())<0) 
             {
                 return Buscar(buscado, recorrido.getHijoDerecho());
             }
