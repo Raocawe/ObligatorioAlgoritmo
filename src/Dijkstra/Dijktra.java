@@ -16,7 +16,7 @@ import static ayed2obligatorio2016.Sistema.getMetro;
  */
 public class Dijktra {
     
-    public static Grafo m = getMetro();
+    /*public static Grafo m = getMetro();
     
     public static String Dijktra(NodoGrafo pN)
     {
@@ -37,4 +37,5 @@ public class Dijktra {
         }
         return t;
     }
+*/
 }

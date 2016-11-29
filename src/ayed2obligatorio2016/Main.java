@@ -70,12 +70,12 @@ public class Main {
         s.crearMetro();
         System.out.println("Se crea el Metro Vacio");
         tituloPrueba("PRUEBA 3: AGREGAR VIAJE DE CLIENTE");
+        crearClientes(p, s);
         crearTramosLineaA(p, s);
         crearTramosLineaB(p, s);
         crearTramosLineaC(p, s);
         LocalDateTime hoy = LocalDateTime.now();
-        p.ver(s.agregarViaje("Constitucion", "Avenida de Mayo", 11111111, hoy), Sistema.TipoRet.ERROR_2, "Se agrega el viaje Constitucion-Avenida de Mayo para el Cliente Lucas Hussey");
-        //Modificado                                                                            ^^^^^
+        p.ver(s.agregarViaje("Constitucion", "San Juan", 11111111, hoy), Sistema.TipoRet.OK, "Se agrega el viaje Constitucion-San Juan de Mayo para el Cliente Lucas Hussey");
         s.listarViajesCliente(11111111);
         s.destruirMetro();
         finPrueba(" Fin PRUEBA 3");
@@ -89,8 +89,7 @@ public class Main {
         crearTramosLineaC(p, s);
         p.ver(s.agregarServicio("Constitucion", "Servicios Higienicos"), Sistema.TipoRet.OK, "Se agrega el servicio Servicios Higienicos en la estacion Constitucion");
         p.ver(s.agregarServicio("Constitucion", "Wifi"), Sistema.TipoRet.OK, "Se agrega el servicio Wifi en la estacion Constitucion");
-        p.ver(s.agregarServicio("Retiro", "Telefono Publico"), Sistema.TipoRet.ERROR_1, "Se intenta agregar el servicio Telefono Publico en la estacion Retiro");
-        //Modificado                                                             ^^^
+        p.ver(s.agregarServicio("San Juan", "Telefono Publico"), Sistema.TipoRet.OK, "Se intenta agregar el servicio Telefono Publico en la estacion San Juan");
         p.ver(s.agregarServicio("Avenida de Mayo", "Wifi"), Sistema.TipoRet.OK, "Se agrega el servicio Wifi en la estacion Avenida de Mayo");
         p.ver(s.agregarServicio("Medrano", "Comida Rapida"), Sistema.TipoRet.OK, "Se agrega el servicio Comida Rapida en la estacion Medrano");
         s.listarServiciosEstacion("Constitucion");

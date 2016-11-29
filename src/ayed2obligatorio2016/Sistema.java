@@ -210,8 +210,7 @@ public class Sistema implements IMetro {
     
     public TipoRet agregarServicio(String estacion, String servicio) {
             
-        NodoGrafo Es = new NodoGrafo();
-        Es = Metro.getTablaEstaciones().BuscarHash(estacion);
+        NodoGrafo Es = Metro.getTablaEstaciones().BuscarHash(estacion);
         
         if(Es == null)
         {

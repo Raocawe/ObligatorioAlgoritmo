@@ -17,6 +17,7 @@ public class Grafo {
     {
     TablaEstaciones = new CHash(); 
     ListaAristas = new ListaDobleEnc<Arista>();
+    ListaEstaciones = new ListaSimpleGeneric<NodoGrafo>();
     }
         
     
