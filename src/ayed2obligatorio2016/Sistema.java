@@ -11,8 +11,8 @@ import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.Grafo;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
-import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
+import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 
 import clases.Servicio;
 import clases.Cliente;
@@ -188,13 +188,12 @@ public class Sistema implements IMetro {
                 
         Cliente unCliente = new Cliente();
         unCliente.setCedula(cedula);
-        ListaDobleEnc LD = new ListaDobleEnc();
         
         if(unCliente.CorrobarCanDigitos(cedula))
         {
             if(unCliente.BuscarCliente(cedula) != null)
             {
-                LD.RemoveNodo(unCliente);
+                ListaCliente.RemoveNodo(unCliente);
                 return TipoRet.OK;
             }
             else

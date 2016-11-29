@@ -7,7 +7,6 @@ package clases;
 
 import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed2obligatorio2016.ListaDoble.NodoLista;
-import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Pila.NodoPila;
 import ayed2obligatorio2016.Pila.Pila;

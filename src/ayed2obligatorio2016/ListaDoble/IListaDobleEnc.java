@@ -16,5 +16,4 @@ public interface IListaDobleEnc <T> {
     public void imprimir(T n);
     public void borrarInicio();
     public void vaciarLista();
-    public int LengthListaDoble(T n);
 }

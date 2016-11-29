@@ -5,30 +5,32 @@
  */
 package Dijkstra;
 
+import ayed2obligatorio2016.Grafo.NodoGrafo;
+
 /**
  *
  * @author cristian castro
  */
 public class NodoTablaCaminoCorto {
     private String Estacion;
-    private byte Conocido;
+    private boolean Conocido;
     private float Distancia;
-    private String EstacionA;
+    private NodoGrafo EstacionA;
     
     public NodoTablaCaminoCorto(String pEstacion)
     {
         Estacion = pEstacion;
-        Conocido = 0;
+        Conocido = false;
         Distancia = -1;
-        EstacionA = "0";
+        EstacionA = null;
     }
     
     public NodoTablaCaminoCorto()
     {
         Estacion = "0";
-        Conocido = 0;
+        Conocido = false;
         Distancia = -1;
-        EstacionA = "0";
+        EstacionA = null;
     }
     
     /**
@@ -48,14 +50,14 @@ public class NodoTablaCaminoCorto {
     /**
      * @return the Conocido
      */
-    public byte getConocido() {
+    public boolean getConocido() {
         return Conocido;
     }
 
     /**
      * @param Conocido the Conocido to set
      */
-    public void setConocido(byte Conocido) {
+    public void setConocido(boolean Conocido) {
         this.Conocido = Conocido;
     }
 
@@ -76,14 +78,14 @@ public class NodoTablaCaminoCorto {
     /**
      * @return the EstacionA
      */
-    public String getEstacionA() {
+    public NodoGrafo getEstacionA() {
         return EstacionA;
     }
 
     /**
      * @param EstacionA the EstacionA to set
      */
-    public void setEstacionA(String EstacionA) {
+    public void setEstacionA(NodoGrafo EstacionA) {
         this.EstacionA = EstacionA;
     }
 }

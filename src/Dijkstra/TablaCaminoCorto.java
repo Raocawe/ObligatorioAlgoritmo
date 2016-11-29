@@ -5,46 +5,131 @@
  */
 package Dijkstra;
 
+import ayed2obligatorio2016.Grafo.Arista;
+import ayed2obligatorio2016.Grafo.CHash;
+import ayed2obligatorio2016.Grafo.Grafo;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
+import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
+import static ayed2obligatorio2016.Sistema.getMetro;
 
 public class TablaCaminoCorto {
     
-    private ListaSimpleGeneric<NodoTablaCaminoCorto> Tabla;
+    private NodoTablaCaminoCorto[] Tabla;
     private NodoTablaCaminoCorto a;
+    private CHash ch;
     
     public TablaCaminoCorto()
     {
-        Tabla = new ListaSimpleGeneric<NodoTablaCaminoCorto>();
+        Tabla = new NodoTablaCaminoCorto[100];
+        ch = getMetro().getTablaEstaciones();
     }
     
-    public void AgregarNodoInicio(String pN)
+    public void AgregarNodoInicio(NodoGrafo pN)
     {
-        a = AgregarInicio(pN);
-        getTabla().insertarInicio(a);
+        int i = ch.ObtenerIndice(pN.getNombre());
+        a = AgregarInicio(pN.getNombre());
+        getTabla()[i]=a;
     }
     
     private NodoTablaCaminoCorto AgregarInicio(String pN)
     {
         a = new NodoTablaCaminoCorto();
-        a.setConocido((byte)0);
+        a.setConocido(false);
         a.setDistancia(0);
         a.setEstacion(pN);
-        a.setEstacionA("0");
+        a.setEstacionA(null);
         return a;
     }
     
-    public void Agregar(NodoGrafo pN)
+    public void Agregar(NodoGrafo pN,int pIndice)
     {
-        a.setConocido((byte)0);
-        a.setDistancia(0);
+        a.setConocido(false);
+        a.setDistancia(Integer.MAX_VALUE);
         a.setEstacion(pN.getNombre());
-        a.setEstacionA("0");
-        Tabla.insertarInicio(a);
+        a.setEstacionA(null);
+        Tabla[pIndice]=a;
     }
 
-    public ListaSimpleGeneric<NodoTablaCaminoCorto> getTabla() {
+    public NodoTablaCaminoCorto[] getTabla() {
         return Tabla;
     }
     
+    public Grafo m = getMetro();
+    
+    public void Dijktra(NodoGrafo pN)
+    {
+        CargarTabla(pN);
+        ImplementandoDijktra(Tabla);
+    }
+
+    private void ImplementandoDijktra(NodoTablaCaminoCorto[] r)
+    {
+        int IndiceActual;
+        NodoGrafo v, w;
+        for (NodoTablaCaminoCorto Nodo : Tabla) {
+            if(Nodo!=null)
+                {
+                v = NodoTablaConDistanciaMasCortaDesconocido();
+                IndiceActual = ch.ObtenerIndice(v.getNombre());
+                Nodo.setConocido(true);
+                
+                NodoListaSimple nls = v.getAristas().getInicio();//Capturamos La Primera Arista
+                Arista a = (Arista)nls.getDato();
+                NodoGrafo aux = a.getDestino();//siquiente Estacion
+                
+                while(aux!=null){
+                    int indi = ch.ObtenerIndice(aux.getNombre());
+                    if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
+                    {
+                        float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
+                        Tabla[indi].setDistancia(floataux);
+                        Tabla[indi].setEstacionA(v);
+                    }
+                    nls = nls.getSiguiente();
+                    a = (Arista)nls.getDato();
+                    aux = a.getDestino();
+                }
+            }
+        }
+    }
+
+    
+    private NodoGrafo NodoTablaConDistanciaMasCortaDesconocido()
+    {
+        float MenorDistancia = Integer.MAX_VALUE;
+        NodoTablaCaminoCorto aux = null;
+        
+        for (NodoTablaCaminoCorto Tabla1 : Tabla) {
+            if (Tabla1 != null) {
+                if(!Tabla1.getConocido()&&Tabla1.getDistancia()<MenorDistancia)
+                {
+                    MenorDistancia = Tabla1.getDistancia();
+                    aux = Tabla1;
+                }
+            }       
+        }
+        if(aux!=null)
+        {
+            return ch.BuscarHash(aux.getEstacion());
+        }
+        return null;
+    }
+    
+    private  void CargarTabla(NodoGrafo pN)
+    {
+        NodoGrafo[] nga = ch.getArray();
+        for(int i=0; i<Tabla.length ;i++)
+        {
+            if(nga[i]!=null)
+            {
+                Agregar(nga[i],i);
+            }
+            else
+            {
+                Tabla[i]=null;
+            }
+        }
+        this.AgregarNodoInicio(pN);
+    }
 }

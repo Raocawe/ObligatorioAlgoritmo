@@ -11,6 +11,13 @@ import ayed2obligatorio2016.Grafo.NodoGrafo;
 public class CHash{
 
     private static NodoGrafo[] array;
+
+    /**
+     * @return the array
+     */
+    public static NodoGrafo[] getArray() {
+        return array;
+    }
     
     public CHash()
     {
@@ -20,20 +27,20 @@ public class CHash{
     public void insertarEstacion(NodoGrafo pEstacion) {
          NodoGrafo n = new NodoGrafo();
          int Indice = hash(StringAInt(pEstacion.getNombre()));
-         if(array[Indice] ==null)
+         if(getArray()[Indice] ==null)
          {
              pEstacion.setEstado(Enumerado.O);
              array[Indice] = pEstacion;    
          }
          else
          {
-             if(array[Indice].getEstado().equals(Enumerado.O) || !pEstacion.getNombre().equals(array[Indice].getNombre()))
+             if(getArray()[Indice].getEstado().equals(Enumerado.O) || !pEstacion.getNombre().equals(array[Indice].getNombre()))
              {
                  boolean ver = false;
                 int contador = 1;
                 while(!ver)
                 {
-                    if(array[Indice+contador]==null)
+                    if(getArray()[Indice+contador]==null)
                     {
                         pEstacion.setEstado(Enumerado.O);
                         array[Indice+contador] = pEstacion;
@@ -60,16 +67,16 @@ public class CHash{
     public NodoGrafo BuscarHash(String pNombre) {
        
         int num = hash(StringAInt(pNombre));
-        if(array[num]!=null)
+        if(getArray()[num]!=null)
         {
-            if(array[num].getEstado().equals(Enumerado.O))
+            if(getArray()[num].getEstado().equals(Enumerado.O))
             {
-        if(array[num].getNombre().equals(pNombre))
-        return array[num];
+        if(     getArray()[num].getNombre().equals(pNombre))
+        return  getArray()[num];
            else
            {
                int i = num+1;
-               NodoGrafo n = array[i];
+               NodoGrafo n = getArray()[i];
                while(n!=null)
                {
                    if(n.getNombre().equals(pNombre))
@@ -77,7 +84,7 @@ public class CHash{
                    else 
                    {
                        i++;
-                       n = array[i];
+                       n =  getArray()[i];
                    }
                }
                return null;
@@ -99,7 +106,7 @@ public class CHash{
     }
     
     public void imprimir(){
-        for(NodoGrafo n : array)
+        for(NodoGrafo n : getArray())
         {
             if(n!=null && n.getEstado()==Enumerado.O)
             {
@@ -113,6 +120,43 @@ public class CHash{
                 System.out.println("__");
             }
                 
+        }
+    }
+    
+    public int ObtenerIndice(String pNombre)
+    {
+        int num = hash(StringAInt(pNombre));
+        if(getArray()[num]!=null)
+        {
+            if(getArray()[num].getEstado().equals(Enumerado.O))
+            {
+                if(getArray()[num].getNombre().equals(pNombre))
+                return  num;
+                   else
+                   {
+                       int i = num+1;
+                       NodoGrafo n = getArray()[i];
+                       while(n!=null)
+                       {
+                           if(n.getNombre().equals(pNombre))
+                               return i;
+                           else 
+                           {
+                               i++;
+                               n =  getArray()[i];
+                           }
+                       }
+                       return -1;
+                   }
+            }
+            else
+            {
+                return -1;
+            }
+        }
+        else
+        {
+            return -1;
         }
     }
     
