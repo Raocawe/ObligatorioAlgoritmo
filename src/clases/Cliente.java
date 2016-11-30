@@ -5,12 +5,15 @@
  */
 package clases;
 
+import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
+import ayed2obligatorio2016.ArbolBinario.NodoBinario;
 import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Pila.NodoPila;
 import ayed2obligatorio2016.Pila.Pila;
 import ayed2obligatorio2016.Sistema;
+import static ayed2obligatorio2016.Sistema.getListaClienteOrdenadosNombre;
 
 /**
  *
@@ -25,6 +28,7 @@ public class Cliente implements Comparable<Cliente>{
     
     public Cliente(){
     Viajes = new Pila<Viaje>();
+    
     }
             
     public int getCedula() {
@@ -148,6 +152,32 @@ public class Cliente implements Comparable<Cliente>{
         else
             return 0; 
     }
+    
+    private void ListadoCliente(Cliente pC)
+    {
+        System.out.println(pC.getNombre()+" - "+pC.getViajes().Top().getOrigen()+" - "+pC.getViajes().Top().getDestino());
+    }
+    
+    public void ListadoClientes()
+    {
+        ArbolBinario<Cliente> s = getListaClienteOrdenadosNombre();
+        NodoBinario s1 = (NodoBinario)s.getRaiz();
+        Recorrido_En_Orden(s1);
+        
+    }
+    
+    private void Recorrido_En_Orden(NodoBinario raiz)
+    {
+        if(raiz != null)
+        {
+            Cliente c = (Cliente)raiz.getElemento();
+            Recorrido_En_Orden(raiz.getHijoIzquierdo());
+            ListadoCliente(c);
+            Recorrido_En_Orden(raiz.getHijoDerecho());
+        }
+    }
+    
+    
     }
 
 

@@ -140,13 +140,19 @@ public class TablaPrecioMenor {
         this.AgregarNodoInicio(pN);
     }
     
-    public void imprimir_Camino(NodoGrafo pN)
+    public void imprimir_Camino(NodoGrafo pNinicio,NodoGrafo pNfin)
     {
-        int indice = getCh().ObtenerIndice(pN.getNombre());
-        if(getTabla()[indice].getEstacionA()!=null)
+        int indice = getCh().ObtenerIndice(pNinicio.getNombre());
+        if(Tabla[indice].getEstacionA()!=null&&Tabla[indice].getEstacionA().equals(pNfin))
         {
-            imprimir_Camino(getTabla()[indice].getEstacionA());
-            System.out.print(pN.getNombre());
+               //Fin
+        }
+        else{
+            if(Tabla[indice].getEstacionA()!=null)
+            {
+                imprimir_Camino(Tabla[indice].getEstacionA(),pNfin);
+                System.out.print(pNinicio.getNombre());
+            }
         }
     }
 

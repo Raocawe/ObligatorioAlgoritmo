@@ -32,6 +32,7 @@ public class Sistema implements IMetro {
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaDobleEnc<Cliente> ListaCliente;
     private static ArbolBinario<Arista> ListaAristaOrdenadasNombre;
+    private static ArbolBinario<Cliente> ListaClienteOrdenadosNombre;
     private static Grafo Metro;
     
     // <editor-fold defaultstate="collapsed" desc=" GetSet ">
@@ -57,6 +58,13 @@ public class Sistema implements IMetro {
         ListaAristaOrdenadasNombre = aListaArista;
     }
 
+    /**
+     * @return the ListaClienteOrdenadosNombre
+     */
+    public static ArbolBinario<Cliente> getListaClienteOrdenadosNombre() {
+        return ListaClienteOrdenadosNombre;
+    }
+
     public ListaSimpleGeneric<Viaje> getListaViaje() {
         return ListaViaje;
     }
@@ -78,10 +86,6 @@ public class Sistema implements IMetro {
         OK, ERROR_1, ERROR_2, ERROR_3, ERROR_4, NO_IMPLEMENTADA
     };
 
-    public TipoRet listarClientes() {
-        return TipoRet.NO_IMPLEMENTADA;
-    }
-
     public TipoRet listarServiciosEstacion(String estacion) {
                 return TipoRet.NO_IMPLEMENTADA;
     }
@@ -99,7 +103,7 @@ public class Sistema implements IMetro {
             if(ori!=null)
             {
                 t.Dijktra(ori);
-                t.imprimir_Camino(ori);
+                t.imprimir_Camino(ori,des);
                 return TipoRet.OK;
             }
             else
@@ -114,6 +118,12 @@ public class Sistema implements IMetro {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" Prontas ">
+    public TipoRet listarClientes() {
+        Cliente c = new Cliente();
+        c.ListadoClientes();
+        return TipoRet.OK;
+    }
+    
     public TipoRet caminoMasCorto(String origen, String destino) {
         NodoGrafo ori = Metro.getTablaEstaciones().BuscarHash(origen);
         NodoGrafo des = Metro.getTablaEstaciones().BuscarHash(destino);
@@ -211,6 +221,7 @@ public class Sistema implements IMetro {
            if(unCliente.BuscarCliente(cedula) == null)
            {
                ListaCliente.insertarInicio(unCliente);
+               ListaClienteOrdenadosNombre.insertar(unCliente);
                return TipoRet.OK;
            }
            
