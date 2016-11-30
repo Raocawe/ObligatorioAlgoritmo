@@ -5,6 +5,7 @@
 
 package ayed2obligatorio2016;
 
+import Dijkstra.TablaCaminoCorto;
 import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Grafo.CHash;
@@ -89,11 +90,25 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet caminoMasCorto(String origen, String destino) {
-                return TipoRet.NO_IMPLEMENTADA;
+        NodoGrafo ori = Metro.getTablaEstaciones().BuscarHash(origen);
+        NodoGrafo des = Metro.getTablaEstaciones().BuscarHash(destino);
+        if(ori!=null)
+        {
+            if(des!=null)
+            {
+                TablaCaminoCorto t = new TablaCaminoCorto();
+                t.Dijktra(ori);
+            }
+            else
+            {
+                return TipoRet.ERROR_2;
+            }
+        }
+        return TipoRet.ERROR_1;
     }
 
     public TipoRet precioBoleto(String origen, String destino) {
-                return TipoRet.NO_IMPLEMENTADA;
+        return TipoRet.NO_IMPLEMENTADA;
     }
 
     // <editor-fold defaultstate="collapsed" desc=" Prontas ">

@@ -23,6 +23,7 @@ public class TablaCaminoCorto {
     {
         Tabla = new NodoTablaCaminoCorto[100];
         ch = getMetro().getTablaEstaciones();
+        a = new NodoTablaCaminoCorto();
     }
     
     public void AgregarNodoInicio(NodoGrafo pN)
@@ -70,25 +71,34 @@ public class TablaCaminoCorto {
         for (NodoTablaCaminoCorto Nodo : Tabla) {
             if(Nodo!=null)
                 {
-                v = NodoTablaConDistanciaMasCortaDesconocido();
-                IndiceActual = ch.ObtenerIndice(v.getNombre());
-                Nodo.setConocido(true);
-                
-                NodoListaSimple nls = v.getAristas().getInicio();//Capturamos La Primera Arista
-                Arista a = (Arista)nls.getDato();
-                NodoGrafo aux = a.getDestino();//siquiente Estacion
-                
-                while(aux!=null){
-                    int indi = ch.ObtenerIndice(aux.getNombre());
-                    if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
-                    {
-                        float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
-                        Tabla[indi].setDistancia(floataux);
-                        Tabla[indi].setEstacionA(v);
+                    v = NodoTablaConDistanciaMasCortaDesconocido();
+                    if(v!=null){
+                    IndiceActual = ch.ObtenerIndice(v.getNombre());
+                    Nodo.setConocido(true);
+
+                    NodoListaSimple nls = v.getAristas().getInicio();//Capturamos La Primera Arista
+                    Arista a = (Arista)nls.getDato();
+                    NodoGrafo aux = a.getDestino();//siquiente Estacion
+
+                    while(aux!=null){
+                        int indi = ch.ObtenerIndice(aux.getNombre());
+                        if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
+                        {
+                            float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
+                            Tabla[indi].setDistancia(floataux);
+                            Tabla[indi].setEstacionA(v);
+                        }
+                        nls = nls.getSiguiente();
+                        if(nls!=null)
+                        {
+                            a = (Arista)nls.getDato();
+                            aux = a.getDestino();
+                        }
+                        else
+                        {
+                            aux = null;
+                        }
                     }
-                    nls = nls.getSiguiente();
-                    a = (Arista)nls.getDato();
-                    aux = a.getDestino();
                 }
             }
         }
