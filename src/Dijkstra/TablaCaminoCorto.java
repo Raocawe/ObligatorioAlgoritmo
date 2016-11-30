@@ -103,7 +103,6 @@ public class TablaCaminoCorto {
             }
         }
     }
-
     
     private NodoGrafo NodoTablaConDistanciaMasCortaDesconocido()
     {
@@ -141,5 +140,15 @@ public class TablaCaminoCorto {
             }
         }
         this.AgregarNodoInicio(pN);
+    }
+    
+    public void imprimir_Camino(NodoGrafo pN)
+    {
+        int indice = ch.ObtenerIndice(pN.getNombre());
+        if(Tabla[indice].getEstacionA()!=null)
+        {
+            imprimir_Camino(Tabla[indice].getEstacionA());
+            System.out.print(pN.getNombre());
+        }
     }
 }

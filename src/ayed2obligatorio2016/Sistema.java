@@ -6,6 +6,7 @@
 package ayed2obligatorio2016;
 
 import Dijkstra.TablaCaminoCorto;
+import Dijkstra.TablaPrecioMenor;
 import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Grafo.CHash;
@@ -89,6 +90,30 @@ public class Sistema implements IMetro {
                 return TipoRet.NO_IMPLEMENTADA;
     }
 
+    public TipoRet precioBoleto(String origen, String destino) {
+        TablaPrecioMenor t = new TablaPrecioMenor();
+        NodoGrafo ori = Metro.getTablaEstaciones().BuscarHash(origen);
+        NodoGrafo des = Metro.getTablaEstaciones().BuscarHash(destino);
+        if(des!=null)
+        {
+            if(ori!=null)
+            {
+                t.Dijktra(ori);
+                t.imprimir_Camino(ori);
+                return TipoRet.OK;
+            }
+            else
+            {
+                return TipoRet.ERROR_1;
+            }
+        }
+        else
+        {
+            return TipoRet.ERROR_2;
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc=" Prontas ">
     public TipoRet caminoMasCorto(String origen, String destino) {
         NodoGrafo ori = Metro.getTablaEstaciones().BuscarHash(origen);
         NodoGrafo des = Metro.getTablaEstaciones().BuscarHash(destino);
@@ -98,6 +123,8 @@ public class Sistema implements IMetro {
             {
                 TablaCaminoCorto t = new TablaCaminoCorto();
                 t.Dijktra(ori);
+                t.imprimir_Camino(ori);
+                return TipoRet.OK;
             }
             else
             {
@@ -106,12 +133,7 @@ public class Sistema implements IMetro {
         }
         return TipoRet.ERROR_1;
     }
-
-    public TipoRet precioBoleto(String origen, String destino) {
-        return TipoRet.NO_IMPLEMENTADA;
-    }
-
-    // <editor-fold defaultstate="collapsed" desc=" Prontas ">
+    
     public TipoRet altaTramo(char linea, String origen, String destino, float distancia, float tarifa) {
         Viaje v = new Viaje();
         Arista a = new Arista();

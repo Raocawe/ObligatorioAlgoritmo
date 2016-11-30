@@ -9,30 +9,30 @@ import ayed2obligatorio2016.Grafo.NodoGrafo;
 
 /**
  *
- * @author cristian castro
+ * @author Kingdel
  */
-public class NodoTablaCaminoCorto {
+public class NodoTablaPrecioMenor {
     private String Estacion;
     private boolean Conocido;
-    private float Distancia;
+    private float Precio;
     private NodoGrafo EstacionA;
     
-    public NodoTablaCaminoCorto(String pEstacion)
+    public NodoTablaPrecioMenor(String pEstacion)
     {
         Estacion = pEstacion;
         Conocido = false;
-        Distancia = Integer.MAX_VALUE;
+        Precio = Integer.MAX_VALUE;
         EstacionA = null;
     }
     
-    public NodoTablaCaminoCorto()
+    public NodoTablaPrecioMenor()
     {
         Estacion = "0";
         Conocido = false;
-        Distancia = Integer.MAX_VALUE;
+        Precio = Integer.MAX_VALUE;
         EstacionA = null;
     }
-    
+
     /**
      * @return the Estacion
      */
@@ -50,7 +50,7 @@ public class NodoTablaCaminoCorto {
     /**
      * @return the Conocido
      */
-    public boolean getConocido() {
+    public boolean isConocido() {
         return Conocido;
     }
 
@@ -62,17 +62,17 @@ public class NodoTablaCaminoCorto {
     }
 
     /**
-     * @return the Distancia
+     * @return the Precio
      */
-    public float getDistancia() {
-        return Distancia;
+    public float getPrecio() {
+        return Precio;
     }
 
     /**
-     * @param Distancia the Distancia to set
+     * @param Precio the Precio to set
      */
-    public void setDistancia(float Distancia) {
-        this.Distancia = Distancia;
+    public void setPrecio(float Precio) {
+        this.Precio = Precio;
     }
 
     /**
@@ -88,4 +88,5 @@ public class NodoTablaCaminoCorto {
     public void setEstacionA(NodoGrafo EstacionA) {
         this.EstacionA = EstacionA;
     }
+    
 }
