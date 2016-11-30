@@ -123,7 +123,7 @@ public class Sistema implements IMetro {
             {
                 TablaCaminoCorto t = new TablaCaminoCorto();
                 t.Dijktra(ori);
-                t.imprimir_Camino(ori);
+                t.imprimir_Camino(ori,des);
                 return TipoRet.OK;
             }
             else
