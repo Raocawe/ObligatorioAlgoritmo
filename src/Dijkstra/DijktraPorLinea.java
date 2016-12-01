@@ -6,6 +6,7 @@
 package Dijkstra;
 
 import ayed2obligatorio2016.Grafo.Arista;
+import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 
@@ -16,39 +17,35 @@ import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 public class DijktraPorLinea {
     
     private NodoGrafo[] Nodos;
+    private NodoTablaCaminoCorto[] Tabla;
+    private CHash ch;
     
-    public DijktraPorLinea(){}
+    public DijktraPorLinea(){
+    ch = new CHash();
+    }
     
     public void DijktraPorLineas(NodoGrafo[] pN)
     {
         Nodos = pN;
-        CargarTabla(pN);
-        ImplementandoDijktra(Tabla);
-        int i = 0;
+        Tabla = new NodoTablaCaminoCorto[pN.length];
+        CargarTabla(pN[0]);
+        ImplementandoDijktra(getTabla());
     }
     
     private  void CargarTabla(NodoGrafo pN)
     {
-        NodoGrafo[] nga = ch.getArray();
-        for(int i=0; i<Tabla.length ;i++)
+        AgregarNodoInicio(pN);
+        for(int i=1; i<getTabla().length ;i++)
         {
-            if(nga[i]!=null)
-            {
-                Agregar(nga[i],i);
-            }
-            else
-            {
-                Tabla[i]=null;
-            }
+            Agregar(Nodos[i],i);
         }
-        this.AgregarNodoInicio(pN);
     }
     
     private void ImplementandoDijktra(NodoTablaCaminoCorto[] r)
     {
         int IndiceActual;
         NodoGrafo v, w;
-        for (NodoTablaCaminoCorto Nodo : Tabla) {
+        for (NodoTablaCaminoCorto Nodo : getTabla()) {
             if(Nodo!=null)
                 {
                     v = NodoTablaConDistanciaMasCortaDesconocido();
@@ -62,11 +59,11 @@ public class DijktraPorLinea {
 
                     while(aux!=null){
                         int indi = ch.ObtenerIndice(aux.getNombre());
-                        if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
+                        if(!Tabla[indi].getConocido()&&((getTabla()[IndiceActual].getDistancia()+a.getDistancia())<getTabla()[indi].getDistancia()))
                         {
-                            float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
-                            Tabla[indi].setDistancia(floataux);
-                            Tabla[indi].setEstacionA(v);
+                            float floataux = getTabla()[IndiceActual].getDistancia()+a.getDistancia();
+                            getTabla()[indi].setDistancia(floataux);
+                            getTabla()[indi].setEstacionA(v);
                         }
                         nls = nls.getSiguiente();
                         if(nls!=null)
@@ -82,5 +79,53 @@ public class DijktraPorLinea {
                 }
             }
         }
+    }
+    
+    private NodoGrafo NodoTablaConDistanciaMasCortaDesconocido()
+    {
+        float MenorDistancia = Integer.MAX_VALUE;
+        NodoTablaCaminoCorto aux = null;
+        
+        for (NodoTablaCaminoCorto Tabla1 : getTabla()) {
+            if (Tabla1 != null) {
+                if(!Tabla1.getConocido()&&Tabla1.getDistancia()<MenorDistancia)
+                {
+                    MenorDistancia = Tabla1.getDistancia();
+                    aux = Tabla1;
+                }
+            }       
+        }
+        if(aux!=null)
+        {
+            return ch.BuscarHash(aux.getEstacion());
+        }
+        return null;
+    }
+    
+    public void AgregarNodoInicio(NodoGrafo pN)
+    {
+        NodoTablaCaminoCorto a = new NodoTablaCaminoCorto();
+        a.setConocido(false);
+        a.setDistancia(0);
+        a.setEstacion(pN.getNombre());
+        a.setEstacionA(null);
+        Tabla[0]=a;
+    }
+        
+    public void Agregar(NodoGrafo pN,int pIndice)
+    {
+        NodoTablaCaminoCorto a = new NodoTablaCaminoCorto();
+        a.setConocido(false);
+        a.setDistancia(Integer.MAX_VALUE);
+        a.setEstacion(pN.getNombre());
+        a.setEstacionA(null);
+        Tabla[pIndice]=a;
+    }
+
+    /**
+     * @return the Tabla
+     */
+    public NodoTablaCaminoCorto[] getTabla() {
+        return Tabla;
     }
 }

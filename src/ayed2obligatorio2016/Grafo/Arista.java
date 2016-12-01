@@ -101,10 +101,26 @@ public class Arista implements Comparable<Arista>{
     
     // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc=" Metodos ">
     public int CharAInt(char pC)
     {
         return (int)pC;
     }
+    
+    private boolean buscarString(String[] array,String pNombre)
+    {
+        for (String o : array) {
+            if (o == null) {
+                return false;
+            }
+            if (o.equals(pNombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    // </editor-fold>
+    
     
     public int compareTo(Arista o) {
         int a = CharAInt(this.nombre);
@@ -187,21 +203,9 @@ public class Arista implements Comparable<Arista>{
         
         DijktraPorLinea d = new DijktraPorLinea();
         d.DijktraPorLineas(array);
-        /////////////////////////////// <<<<<<<<<
+        
+        ////////////////////// <<<<<<<<<
     }
     
-    private boolean buscarString(String[] array,String pNombre)
-    {
-        for(int i = 0; i <array.length;i++){
-            if(array[i]==null)
-            {
-                return false;
-            }
-            if(array[i].equals(pNombre))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 }
