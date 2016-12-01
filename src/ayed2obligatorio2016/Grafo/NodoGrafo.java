@@ -95,7 +95,7 @@ public class NodoGrafo <E extends Comparable<E>>{
             Servicio c = (Servicio)raiz.getElemento();
             
             Recorrido_En_Orden(raiz.getHijoIzquierdo());
-            ListadoCliente(c);
+            System.out.println(c.getNombre());
             Recorrido_En_Orden(raiz.getHijoDerecho());
         }
     }
@@ -111,14 +111,6 @@ public class NodoGrafo <E extends Comparable<E>>{
             return;
         }
         Recorrido_En_Orden(s1); 
+    }   
     }
     
-    private void ListadoServicio(Servicio pC)
-    {
-        if(pC!=null)
-        System.out.println(pC.getNombre()+" - "+pC.getViajes().Top().getOrigen()+" - "+pC.getViajes().Top().getDestino());
-        else
-        System.out.println(pC.getNombre()+" Sin Viajes Registrados");    
-    }
-    
-}
