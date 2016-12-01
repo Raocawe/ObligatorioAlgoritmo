@@ -5,10 +5,16 @@
  */
 package ayed2obligatorio2016.Grafo;
 
+import Dijkstra.DijktraPorLinea;
+import Dijkstra.TablaCaminoCorto;
+import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.ArbolBinario.NodoBinario;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Sistema;
+import static ayed2obligatorio2016.Sistema.getListaAristaOrdenadasNombre;
+import clases.NodoListaConNombre;
+import clases.Servicio;
 
 /**
  *
@@ -95,39 +101,6 @@ public class Arista implements Comparable<Arista>{
     
     // </editor-fold>
     
-   /* public Arista buscarArista(Arista pA)
-    {
-        NodoBinario e = new NodoBinario();
-        e.setElemento(pA);
-        NodoBinario nls = (NodoBinario)Sistema.getListaAristaOrdenadasNombre().Buscar(e);
-
-        if(nls!=null)
-        {
-            Arista a = (Arista)nls.getElemento();
-            if(a.destino.equals(pA.destino)&&a.origen.equals(pA.origen))
-            {
-                return a;
-            }
-            else
-            {
-                while(nls.!=null)
-                {
-                   a =  (Arista)nls.getSiguiente().getDato();
-                   if(a.destino.equals(pA.destino)&&a.origen.equals(pA.origen))
-                   {
-                       return a;
-                   }
-                   nls =  nls.getSiguiente(); 
-                }
-                return null;
-            }
-        }
-        else
-        {
-            return null;
-        }
-    }*/
-
     public int CharAInt(char pC)
     {
         return (int)pC;
@@ -145,4 +118,27 @@ public class Arista implements Comparable<Arista>{
             return 0; 
     }
     
+    private void Recorrido_En_Orden(NodoBinario raiz)
+    {
+        if(raiz != null)
+        {
+            NodoListaConNombre a = (NodoListaConNombre)raiz.getElemento();
+
+            Recorrido_En_Orden(raiz.getHijoIzquierdo());
+            a.getNombre()
+            Recorrido_En_Orden(raiz.getHijoDerecho());
+        }
+    }
+    
+    public void ListadoAristas()
+    {      
+        ArbolBinario<NodoListaConNombre> a = getListaAristaOrdenadasNombre();
+        NodoBinario s1 = (NodoBinario)a.getRaiz();
+        if(s1==null)
+        {
+            System.out.println("No hay Líneas en el Metro");
+            return;
+        }
+        Recorrido_En_Orden(s1); 
+    } 
 }

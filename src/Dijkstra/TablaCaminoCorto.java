@@ -62,7 +62,6 @@ public class TablaCaminoCorto {
     {
         CargarTabla(pN);
         ImplementandoDijktra(Tabla);
-        int i = 0;
     }
 
     private void ImplementandoDijktra(NodoTablaCaminoCorto[] r)

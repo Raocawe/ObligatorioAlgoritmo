@@ -18,6 +18,7 @@ import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 
 import clases.Servicio;
 import clases.Cliente;
+import clases.NodoListaConNombre;
 import clases.Servicio;
 import clases.Viaje;
 
@@ -31,7 +32,7 @@ public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
     private static ListaDobleEnc<Cliente> ListaCliente;
-    private static ArbolBinario<Arista> ListaAristaOrdenadasNombre;
+    private static ArbolBinario<NodoListaConNombre> ListaAristaOrdenadasNombre;
     private static ArbolBinario<Cliente> ListaClienteOrdenadosNombre;
     private static Grafo Metro;
     
@@ -47,14 +48,14 @@ public class Sistema implements IMetro {
     /**
      * @return the ListaArista
      */
-    public static ArbolBinario<Arista> getListaAristaOrdenadasNombre() {
+    public static ArbolBinario<NodoListaConNombre> getListaAristaOrdenadasNombre() {
         return ListaAristaOrdenadasNombre;
     }
 
     /**
      * @param aListaArista the ListaArista to set
      */
-    public static void setListaAristaOrdenadasNombre(ArbolBinario<Arista> aListaArista) {
+    public static void setListaAristaOrdenadasNombre(ArbolBinario<NodoListaConNombre> aListaArista) {
         ListaAristaOrdenadasNombre = aListaArista;
     }
 
@@ -97,7 +98,11 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet listarLineas() {
-                return TipoRet.NO_IMPLEMENTADA;
+        Arista a = (Arista)getListaAristaOrdenadasNombre().getRaiz();
+        
+        
+        a.getNombre();
+        return TipoRet.OK;
     }
 
     public TipoRet precioBoleto(String origen, String destino) {
@@ -193,7 +198,20 @@ public class Sistema implements IMetro {
                         dest.getAristas().insertarInicio(a);
                         orig.getAristas().insertarInicio(a);
                         Metro.getListaAristas().insertarInicio(a);
-                        ListaAristaOrdenadasNombre.insertar(a);
+                        
+                        // <editor-fold defaultstate="collapsed" desc="Checkea Para Agregar Arista Al Arbol">
+                        NodoListaConNombre nlcn = new NodoListaConNombre();
+                        nlcn.setNombre(a.getNombre());
+                        nlcn = ListaAristaOrdenadasNombre.Buscar(nlcn).getElemento();
+                        if(ListaAristaOrdenadasNombre.Buscar(nlcn)!=null){
+                            nlcn.getListaArista().insertarInicio(a);
+                        }
+                        else
+                        {
+                            ListaAristaOrdenadasNombre.insertar(nlcn);
+                        }
+                        // </editor-fold>
+                        
                         return TipoRet.OK;
                     }
                     else
