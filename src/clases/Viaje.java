@@ -102,6 +102,7 @@ public class Viaje {
                     Np = Np.getSiguiente();
                 }
             }
+            System.out.println("");
     }
     
 /*   public void ImprimirViajes(int pCliente)

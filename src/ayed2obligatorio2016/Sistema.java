@@ -129,8 +129,7 @@ public class Sistema implements IMetro {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" Prontas ">
-    public TipoRet listarClientes() {
-        Cliente c = new Cliente();
+    public TipoRet listarClientes() {        Cliente c = new Cliente();
         c.ListadoClientes();
         return TipoRet.OK;
     }
@@ -266,6 +265,7 @@ public class Sistema implements IMetro {
             if(unCliente.BuscarCliente(cedula) != null)
             {
                 ListaCliente.RemoveNodo(unCliente);
+                
                 return TipoRet.OK;
             }
             else
@@ -301,7 +301,7 @@ public class Sistema implements IMetro {
         Cliente Cli = new Cliente();
         if(Cli.CorrobarCanDigitos(ciCliente))
         {
-            if(Cli.BuscarCliente(ciCliente)!= null)
+          if(Cli.BuscarCliente(ciCliente)!= null)
             {
                 Viaje V = new Viaje();
                 V.ImprimirViajes(ciCliente);

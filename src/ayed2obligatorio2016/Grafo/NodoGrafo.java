@@ -97,20 +97,24 @@ public class NodoGrafo <E extends Comparable<E>>{
             Recorrido_En_Orden(raiz.getHijoIzquierdo());
             System.out.println(c.getNombre());
             Recorrido_En_Orden(raiz.getHijoDerecho());
+            
         }
     }
     
        public void ListadoServicioDeEstacion(NodoGrafo ng)
     {
+        System.out.println("");
         ArbolBinario<Servicio> s = ng.getServicios();
         NodoBinario s1 = (NodoBinario)s.getRaiz();
         System.out.println("Estacion: "+ng.getNombre());
+        
         if(s1==null)
         {
             System.out.println("Sin Servicios Registrados");
             return;
         }
-        Recorrido_En_Orden(s1); 
+        Recorrido_En_Orden(s1);
+        System.out.println("");
     }   
     }
     

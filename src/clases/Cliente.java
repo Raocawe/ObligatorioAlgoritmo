@@ -155,10 +155,14 @@ public class Cliente implements Comparable<Cliente>{
     
     private void ListadoCliente(Cliente pC)
     {
+        
         if(!pC.getViajes().IsEmpty())
         System.out.println(pC.getNombre()+" - "+pC.getViajes().Top().getOrigen()+" - "+pC.getViajes().Top().getDestino());
-        else
+        else{
         System.out.println(pC.getNombre()+" Sin Viajes Registrados");    
+        
+    }
+    System.out.println("");
     }
     
     public void ListadoClientes()
