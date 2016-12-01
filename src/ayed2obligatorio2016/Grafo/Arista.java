@@ -125,7 +125,9 @@ public class Arista implements Comparable<Arista>{
             NodoListaConNombre a = (NodoListaConNombre)raiz.getElemento();
 
             Recorrido_En_Orden(raiz.getHijoIzquierdo());
-            a.getNombre()
+            
+            ImprimirLineas(a);
+                    
             Recorrido_En_Orden(raiz.getHijoDerecho());
         }
     }
@@ -141,4 +143,65 @@ public class Arista implements Comparable<Arista>{
         }
         Recorrido_En_Orden(s1); 
     } 
+    
+    public void ImprimirLineas(NodoListaConNombre pN)
+    {
+        int contador = 0;
+        // <editor-fold defaultstate="collapsed" desc=" CargarContador ">
+        String[] Estaciones = new String[20];
+        NodoListaSimple s = pN.getListaArista().getInicio();
+        while(s!=null)
+        {
+            Arista a = (Arista)s.getDato();
+            if(!buscarString(Estaciones,a.getOrigen().getNombre()))
+            {
+                contador++;
+            }
+            if(!buscarString(Estaciones,a.getDestino().getNombre()))
+            {
+                contador++;
+            }
+            s = s.getSiguiente();
+        }
+        // </editor-fold >
+        NodoGrafo[] array = new NodoGrafo[contador];
+        // <editor-fold defaultstate="collapsed" desc=" CargarArray ">
+        contador = 0;
+        Estaciones = new String[20];
+        s = pN.getListaArista().getInicio();
+        while(s!=null)
+        {
+            Arista a = (Arista)s.getDato();
+            if(!buscarString(Estaciones,a.getOrigen().getNombre()))
+            {
+                array[contador] = a.getOrigen();
+            }
+            if(!buscarString(Estaciones,a.getDestino().getNombre()))
+            {
+                array[contador] = a.getDestino();;
+            }
+            s = s.getSiguiente();
+        }
+        
+        // </editor-fold>
+        
+        DijktraPorLinea d = new DijktraPorLinea();
+        d.DijktraPorLineas(array);
+        /////////////////////////////// <<<<<<<<<
+    }
+    
+    private boolean buscarString(String[] array,String pNombre)
+    {
+        for(int i = 0; i <array.length;i++){
+            if(array[i]==null)
+            {
+                return false;
+            }
+            if(array[i].equals(pNombre))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
