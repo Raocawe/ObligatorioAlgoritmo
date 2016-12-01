@@ -165,8 +165,7 @@ public class Cliente implements Comparable<Cliente>{
     {
         ArbolBinario<Cliente> s = getListaClienteOrdenadosNombre();
         NodoBinario s1 = (NodoBinario)s.getRaiz();
-        Recorrido_En_Orden(s1);
-        
+        Recorrido_En_Orden(s1); 
     }
     
     private void Recorrido_En_Orden(NodoBinario raiz)

@@ -90,7 +90,7 @@ public class Sistema implements IMetro {
         NodoGrafo ng = Metro.getTablaEstaciones().BuscarHash(estacion);
         if(ng!=null)
         {
-            
+            Servicio s = (Servicio)ng.getServicios().getRaiz();
         }
         return TipoRet.ERROR_1;
     }

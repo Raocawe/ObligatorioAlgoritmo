@@ -6,8 +6,11 @@
 package ayed2obligatorio2016.Grafo;
 
 import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
+import ayed2obligatorio2016.ArbolBinario.NodoBinario;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.Sistema;
+import static ayed2obligatorio2016.Sistema.getListaClienteOrdenadosNombre;
+import clases.Cliente;
 import clases.Servicio;
 
 /**
@@ -85,5 +88,37 @@ public class NodoGrafo <E extends Comparable<E>>{
         this.estado = estado;
     }
 
+    private void Recorrido_En_Orden(NodoBinario raiz)
+    {
+        if(raiz != null)
+        {
+            Servicio c = (Servicio)raiz.getElemento();
+            
+            Recorrido_En_Orden(raiz.getHijoIzquierdo());
+            ListadoCliente(c);
+            Recorrido_En_Orden(raiz.getHijoDerecho());
+        }
+    }
+    
+       public void ListadoServicioDeEstacion(NodoGrafo ng)
+    {
+        ArbolBinario<Servicio> s = ng.getServicios();
+        NodoBinario s1 = (NodoBinario)s.getRaiz();
+        System.out.println("Estacion: "+ng.getNombre());
+        if(s1==null)
+        {
+            System.out.println("Sin Servicios Registrados");
+            return;
+        }
+        Recorrido_En_Orden(s1); 
+    }
+    
+    private void ListadoServicio(Servicio pC)
+    {
+        if(pC!=null)
+        System.out.println(pC.getNombre()+" - "+pC.getViajes().Top().getOrigen()+" - "+pC.getViajes().Top().getDestino());
+        else
+        System.out.println(pC.getNombre()+" Sin Viajes Registrados");    
+    }
     
 }
