@@ -85,4 +85,5 @@ public class NodoGrafo <E extends Comparable<E>>{
         this.estado = estado;
     }
 
+    
 }

@@ -155,7 +155,10 @@ public class Cliente implements Comparable<Cliente>{
     
     private void ListadoCliente(Cliente pC)
     {
+        if(!pC.getViajes().IsEmpty())
         System.out.println(pC.getNombre()+" - "+pC.getViajes().Top().getOrigen()+" - "+pC.getViajes().Top().getDestino());
+        else
+        System.out.println(pC.getNombre()+" Sin Viajes Registrados");    
     }
     
     public void ListadoClientes()
@@ -171,6 +174,7 @@ public class Cliente implements Comparable<Cliente>{
         if(raiz != null)
         {
             Cliente c = (Cliente)raiz.getElemento();
+            
             Recorrido_En_Orden(raiz.getHijoIzquierdo());
             ListadoCliente(c);
             Recorrido_En_Orden(raiz.getHijoDerecho());

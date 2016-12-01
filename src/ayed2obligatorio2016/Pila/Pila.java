@@ -24,7 +24,7 @@ public class Pila<T> implements IPila<T> {
     }
     @Override
     public boolean IsEmpty() { // retorna si esta vacia
-        return this.getTop() == null;
+        return top == null;
     }
     @Override
     public T Pop(){ // Quita el elemento Superior
@@ -41,8 +41,10 @@ public class Pila<T> implements IPila<T> {
     }
     @Override
     public T Top(){ // Retorna el elemento superior
-        return getTop().getElem();
-        
+        if(getTop()==null)
+        {return null;}
+        else
+           return getTop().getElem();        
     }
     @Override // Vacia la lista
     public void Empty(){

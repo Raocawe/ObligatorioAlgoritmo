@@ -87,7 +87,12 @@ public class Sistema implements IMetro {
     };
 
     public TipoRet listarServiciosEstacion(String estacion) {
-                return TipoRet.NO_IMPLEMENTADA;
+        NodoGrafo ng = Metro.getTablaEstaciones().BuscarHash(estacion);
+        if(ng!=null)
+        {
+            
+        }
+        return TipoRet.ERROR_1;
     }
 
     public TipoRet listarLineas() {
@@ -298,6 +303,7 @@ public class Sistema implements IMetro {
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
         ListaAristaOrdenadasNombre = new ArbolBinario();
+        ListaClienteOrdenadosNombre = new ArbolBinario();
         Metro = new Grafo();
         return TipoRet.OK;
     }
@@ -307,6 +313,7 @@ public class Sistema implements IMetro {
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
         ListaAristaOrdenadasNombre = new ArbolBinario();
+        ListaClienteOrdenadosNombre = new ArbolBinario();
         return TipoRet.OK;
     }
     
