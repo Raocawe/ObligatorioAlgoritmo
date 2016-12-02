@@ -145,7 +145,7 @@ public class TablaPrecioMenor {
         int indice = getCh().ObtenerIndice(pNinicio.getNombre());
         if(Tabla[indice].getEstacionA()!=null&&Tabla[indice].getEstacionA().equals(pNfin))
         {
-               //Fin
+            return;
         }
         else{
             if(Tabla[indice].getEstacionA()!=null)

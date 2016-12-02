@@ -8,6 +8,7 @@ package ayed2obligatorio2016;
 import Dijkstra.TablaCaminoCorto;
 import Dijkstra.TablaPrecioMenor;
 import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
+import ayed2obligatorio2016.ArbolBinario.NodoBinario;
 import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.Grafo;
@@ -98,10 +99,8 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet listarLineas() {
-        Arista a = (Arista)getListaAristaOrdenadasNombre().getRaiz();
-        
-        
-        a.getNombre();
+        Arista a = new Arista();
+        a.ListadoAristas();
         return TipoRet.OK;
     }
 
@@ -201,13 +200,19 @@ public class Sistema implements IMetro {
                         // <editor-fold defaultstate="collapsed" desc="Checkea Para Agregar Arista Al Arbol">
                         NodoListaConNombre nlcn = new NodoListaConNombre();
                         nlcn.setNombre(a.getNombre());
-                        nlcn = ListaAristaOrdenadasNombre.Buscar(nlcn).getElemento();
-                        if(ListaAristaOrdenadasNombre.Buscar(nlcn)!=null){
+                        NodoBinario s = (NodoBinario) ListaAristaOrdenadasNombre.Buscar(nlcn);
+                        if(s!=null){
+                            nlcn = (NodoListaConNombre)s.getElemento();
                             nlcn.getListaArista().insertarInicio(a);
+                            nlcn.setCantidadEnLista(nlcn.getCantidadEnLista()+1);
                         }
                         else
                         {
-                            ListaAristaOrdenadasNombre.insertar(nlcn);
+                            NodoListaConNombre newAux = new NodoListaConNombre();
+                            newAux.setNombre(a.getNombre());
+                            newAux.setCantidadEnLista(1);
+                            newAux.getListaArista().insertarInicio(a);
+                            ListaAristaOrdenadasNombre.insertar(newAux);
                         }
                         // </editor-fold>
                         
@@ -321,8 +326,8 @@ public class Sistema implements IMetro {
     public TipoRet crearMetro() {
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
-        ListaAristaOrdenadasNombre = new ArbolBinario();
-        ListaClienteOrdenadosNombre = new ArbolBinario();
+        ListaAristaOrdenadasNombre = new ArbolBinario<NodoListaConNombre>();
+        ListaClienteOrdenadosNombre = new ArbolBinario<Cliente>();
         Metro = new Grafo();
         return TipoRet.OK;
     }
@@ -331,8 +336,8 @@ public class Sistema implements IMetro {
         Metro = new Grafo();
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
-        ListaAristaOrdenadasNombre = new ArbolBinario();
-        ListaClienteOrdenadosNombre = new ArbolBinario();
+                ListaAristaOrdenadasNombre = new ArbolBinario<NodoListaConNombre>();
+        ListaClienteOrdenadosNombre = new ArbolBinario<Cliente>();
         return TipoRet.OK;
     }
     

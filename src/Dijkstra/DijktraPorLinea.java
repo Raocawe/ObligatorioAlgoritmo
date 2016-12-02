@@ -41,6 +41,17 @@ public class DijktraPorLinea {
         }
     }
     
+    private int ObtenerIndice(String pN)
+    {
+        for(int i = 0; i< Tabla.length ;i++)
+        {
+            if(Tabla[i].getEstacion().equals(pN)){
+                return i;
+            }
+        }
+        return 0;
+    }
+    
     private void ImplementandoDijktra(NodoTablaCaminoCorto[] r)
     {
         int IndiceActual;
@@ -50,7 +61,7 @@ public class DijktraPorLinea {
                 {
                     v = NodoTablaConDistanciaMasCortaDesconocido();
                     if(v!=null){
-                    IndiceActual = ch.ObtenerIndice(v.getNombre());
+                    IndiceActual = ObtenerIndice(v.getNombre());
                     Nodo.setConocido(true);
 
                     NodoListaSimple nls = v.getAristas().getInicio();//Capturamos La Primera Arista
@@ -58,7 +69,7 @@ public class DijktraPorLinea {
                     NodoGrafo aux = a.getDestino();//siquiente Estacion
 
                     while(aux!=null){
-                        int indi = ch.ObtenerIndice(aux.getNombre());
+                        int indi = ObtenerIndice(aux.getNombre());
                         if(!Tabla[indi].getConocido()&&((getTabla()[IndiceActual].getDistancia()+a.getDistancia())<getTabla()[indi].getDistancia()))
                         {
                             float floataux = getTabla()[IndiceActual].getDistancia()+a.getDistancia();
@@ -122,10 +133,29 @@ public class DijktraPorLinea {
         Tabla[pIndice]=a;
     }
 
-    /**
-     * @return the Tabla
-     */
     public NodoTablaCaminoCorto[] getTabla() {
         return Tabla;
+    }
+    
+    public void imprimir_Camino()
+    {
+        NodoGrafo i = ch.BuscarHash(Tabla[0].getEstacion());
+        System.out.println(i.getNombre());
+        System.out.println("");
+        imprimir_Camino(i,0);
+    }
+    
+    private void imprimir_Camino(NodoGrafo pNinicio,int indice)
+    {
+        if(Tabla[indice].getEstacionA()==null)
+        {
+        }
+        else{
+            if(Tabla[indice].getEstacionA()!=null)
+            {
+                imprimir_Camino(Tabla[indice].getEstacionA(),indice++);
+                System.out.print(pNinicio.getNombre());
+            }
+        }
     }
 }

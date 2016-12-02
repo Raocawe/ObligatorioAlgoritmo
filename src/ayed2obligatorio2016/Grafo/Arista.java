@@ -107,20 +107,26 @@ public class Arista implements Comparable<Arista>{
         return (int)pC;
     }
     
-    private boolean buscarString(String[] array,String pNombre)
+    private boolean buscarString(String pNombre)
     {
-        for (String o : array) {
-            if (o == null) {
+        for (int i = 0;i<Estaciones.length;i++) {
+            if (Estaciones[i] == null) {
+                Estaciones[i] = pNombre;
                 return false;
             }
-            if (o.equals(pNombre)) {
+            if(Estaciones[i].equals(pNombre))
                 return true;
-            }
         }
         return false;
     }
-    // </editor-fold>
     
+    private NodoGrafo[] DescartarNull(NodoGrafo[] pNG , NodoGrafo[] retorno)
+    {
+        for(int i=0;i<retorno.length;i++){
+            retorno[i]=pNG[i];
+        }      
+        return retorno;
+    }
     
     public int compareTo(Arista o) {
         int a = CharAInt(this.nombre);
@@ -133,6 +139,7 @@ public class Arista implements Comparable<Arista>{
         else
             return 0; 
     }
+    // </editor-fold>
     
     private void Recorrido_En_Orden(NodoBinario raiz)
     {
@@ -160,51 +167,38 @@ public class Arista implements Comparable<Arista>{
         Recorrido_En_Orden(s1); 
     } 
     
+    public String[] Estaciones = new String[100];
+    
     public void ImprimirLineas(NodoListaConNombre pN)
     {
+        
+        NodoGrafo[] array = new NodoGrafo[20];
+        // <editor-fold defaultstate="collapsed" desc=" CargarArray ">
         int contador = 0;
-        // <editor-fold defaultstate="collapsed" desc=" CargarContador ">
-        String[] Estaciones = new String[20];
         NodoListaSimple s = pN.getListaArista().getInicio();
         while(s!=null)
         {
             Arista a = (Arista)s.getDato();
-            if(!buscarString(Estaciones,a.getOrigen().getNombre()))
-            {
-                contador++;
-            }
-            if(!buscarString(Estaciones,a.getDestino().getNombre()))
-            {
-                contador++;
-            }
-            s = s.getSiguiente();
-        }
-        // </editor-fold >
-        NodoGrafo[] array = new NodoGrafo[contador];
-        // <editor-fold defaultstate="collapsed" desc=" CargarArray ">
-        contador = 0;
-        Estaciones = new String[20];
-        s = pN.getListaArista().getInicio();
-        while(s!=null)
-        {
-            Arista a = (Arista)s.getDato();
-            if(!buscarString(Estaciones,a.getOrigen().getNombre()))
+            if(!buscarString(a.getOrigen().getNombre()))
             {
                 array[contador] = a.getOrigen();
+                contador++;
             }
-            if(!buscarString(Estaciones,a.getDestino().getNombre()))
+            if(!buscarString(a.getDestino().getNombre()))
             {
-                array[contador] = a.getDestino();;
+                array[contador] = a.getDestino();
+                contador++;
             }
             s = s.getSiguiente();
         }
-        
+        NodoGrafo[] arraySoloEstaciones = new NodoGrafo[contador];
         // </editor-fold>
+        arraySoloEstaciones = DescartarNull(array, arraySoloEstaciones);
         
         DijktraPorLinea d = new DijktraPorLinea();
-        d.DijktraPorLineas(array);
+        d.DijktraPorLineas(arraySoloEstaciones);
         
-        ////////////////////// <<<<<<<<<
+        d.imprimir_Camino();
     }
     
     

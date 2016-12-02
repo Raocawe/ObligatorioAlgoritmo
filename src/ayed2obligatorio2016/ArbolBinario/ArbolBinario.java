@@ -244,15 +244,19 @@ public class ArbolBinario<E extends Comparable<E>>
     {
         if(dato !=null)
         {
-            if(this.getRaiz().equals(dato))
-            {
-                return getRaiz();
+            if(raiz!=null){
+                if(this.getRaiz().equals(dato))
+                {
+                    return getRaiz();
+                }
+                else{
+                    NodoBinario n = new NodoBinario(dato);
+                    NodoBinario r = (NodoBinario)getRaiz();
+                    return Buscar(n, r);
+                }
             }
-            else{
-                NodoBinario n = new NodoBinario(dato);
-                NodoBinario r = (NodoBinario)getRaiz();
-                return Buscar(n, r);
-            }
+            else
+            {return null;}
         }
         else
         {return null;}
@@ -268,12 +272,15 @@ public class ArbolBinario<E extends Comparable<E>>
         }
         else
         {
-            if(buscado.elemento.compareTo(recorrido.getElemento())<0) 
+            int i = buscado.elemento.compareTo(recorrido.getElemento());
+            if(i<0) 
             {
                 return Buscar(buscado, recorrido.getHijoDerecho());
             }
-            else 
+            else if(i>0)
                 return Buscar(buscado, recorrido.getHijoIzquierdo());
+            else
+                return recorrido;
         }
     }
     

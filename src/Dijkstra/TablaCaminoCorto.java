@@ -147,7 +147,7 @@ public class TablaCaminoCorto {
         int indice = ch.ObtenerIndice(pNinicio.getNombre());
         if(Tabla[indice].getEstacionA()!=null&&Tabla[indice].getEstacionA().equals(pNfin))
         {
-               //Fin
+            return;
         }
         else{
             if(Tabla[indice].getEstacionA()!=null)
