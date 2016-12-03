@@ -42,20 +42,20 @@ public class Grafo {
         this.TablaEstaciones = TablaEstaciones;
     }
     
-     public boolean BuscarAristaOrigenDestino(Arista pArista) {
+     public Arista BuscarAristaOrigenDestino(Arista pArista) {
        
         NodoListaSimple nl = ListaAristas.getInicio();
         if(nl!=null){
         Arista a = (Arista)nl.getDato();
         if(a.getOrigen().equals(pArista.getOrigen())&&a.getDestino().equals(pArista.getDestino()))
         {
-            return true;
+            return a;
         }
         else
         {
             if(a.getOrigen().equals(pArista.getDestino())&&a.getDestino().equals(pArista.getOrigen()))
             {
-            return true;      
+            return a;      
             }
         }
         
@@ -64,22 +64,22 @@ public class Grafo {
             a = (Arista)nl.getSiguiente().getDato();
                     if(a.getOrigen().equals(pArista.getOrigen())&&a.getDestino().equals(pArista.getDestino()))
                     {
-                        return true;
+                        return a;
                     }
                     else
                     {
                         if(a.getOrigen().equals(pArista.getDestino())&&a.getDestino().equals(pArista.getOrigen()))
                         {
-                        return true;      
+                        return a;      
                         }
                     }
             nl = nl.getSiguiente();
         }
-        return false;
+        return null;
      }
      else
         {     
-            return false;
+            return null;
         }
     }
 

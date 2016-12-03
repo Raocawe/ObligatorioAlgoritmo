@@ -13,6 +13,7 @@ import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Sistema;
 import static ayed2obligatorio2016.Sistema.getListaAristaOrdenadasNombre;
+import static ayed2obligatorio2016.Sistema.getMetro;
 import clases.NodoListaConNombre;
 import clases.Servicio;
 
@@ -100,8 +101,10 @@ public class Arista implements Comparable<Arista>{
     }
     
     // </editor-fold>
-    
     // <editor-fold defaultstate="collapsed" desc=" Metodos ">
+    private String[] NombreEstaciones = new String[20];
+    private int[] RepeticionPorEstacion = new int[20];
+    
     public int CharAInt(char pC)
     {
         return (int)pC;
@@ -109,6 +112,7 @@ public class Arista implements Comparable<Arista>{
     
     private boolean buscarString(String pNombre)
     {
+        BuscarNodoPrincipalDisktra(pNombre);
         for (int i = 0;i<Estaciones.length;i++) {
             if (Estaciones[i] == null) {
                 Estaciones[i] = pNombre;
@@ -118,6 +122,36 @@ public class Arista implements Comparable<Arista>{
                 return true;
         }
         return false;
+    }
+    
+    private void  BuscarNodoPrincipalDisktra(String p)
+    {
+        for (int i = 0;i<NombreEstaciones.length;i++) {
+            if (NombreEstaciones[i] == null) {
+                NombreEstaciones[i] = p;
+                RepeticionPorEstacion[i]=0;
+                return;
+            }
+            if(NombreEstaciones[i].equals(p))
+            {
+                RepeticionPorEstacion[i]=RepeticionPorEstacion[i]++;
+                return;
+            }
+        }
+    }
+    
+    private NodoGrafo NodoPrincipal()
+    {
+        Grafo ch = getMetro();
+        int menor = 0;
+        for(int x : RepeticionPorEstacion)
+        {
+            if(x<menor)
+            {
+                menor = x;
+            }
+        }
+        return ch.getTablaEstaciones().BuscarHash(NombreEstaciones[menor]);
     }
     
     private NodoGrafo[] DescartarNull(NodoGrafo[] pNG , NodoGrafo[] retorno)
@@ -196,9 +230,9 @@ public class Arista implements Comparable<Arista>{
         arraySoloEstaciones = DescartarNull(array, arraySoloEstaciones);
         
         DijktraPorLinea d = new DijktraPorLinea();
-        d.DijktraPorLineas(arraySoloEstaciones);
+        d.DijktraPorLineas(arraySoloEstaciones,NodoPrincipal());
         
-        d.imprimir_Camino();
+        d.imprimir_Camino_PrimeraParte();
     }
     
     

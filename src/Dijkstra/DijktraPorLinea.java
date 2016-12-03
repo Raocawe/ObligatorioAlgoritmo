@@ -7,8 +7,10 @@ package Dijkstra;
 
 import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Grafo.CHash;
+import ayed2obligatorio2016.Grafo.Grafo;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
+import static ayed2obligatorio2016.Sistema.getMetro;
 
 /**
  *
@@ -19,16 +21,21 @@ public class DijktraPorLinea {
     private NodoGrafo[] Nodos;
     private NodoTablaCaminoCorto[] Tabla;
     private CHash ch;
+    private Grafo g;
+    private String[] ver;
+    private NodoGrafo inicio;
     
     public DijktraPorLinea(){
-    ch = new CHash();
+    ch = getMetro().getTablaEstaciones();
+    g = getMetro();
     }
     
-    public void DijktraPorLineas(NodoGrafo[] pN)
+    public void DijktraPorLineas(NodoGrafo[] pN,NodoGrafo n)
     {
+        inicio = n;
         Nodos = pN;
         Tabla = new NodoTablaCaminoCorto[pN.length];
-        CargarTabla(pN[0]);
+        CargarTabla(n);
         ImplementandoDijktra(getTabla());
     }
     
@@ -37,6 +44,7 @@ public class DijktraPorLinea {
         AgregarNodoInicio(pN);
         for(int i=1; i<getTabla().length ;i++)
         {
+            if(Nodos[i]!=null&&Nodos[i]!=pN)
             Agregar(Nodos[i],i);
         }
     }
@@ -136,26 +144,67 @@ public class DijktraPorLinea {
     public NodoTablaCaminoCorto[] getTabla() {
         return Tabla;
     }
-    
-    public void imprimir_Camino()
+        
+    public void imprimir_Camino_PrimeraParte()
     {
-        NodoGrafo i = ch.BuscarHash(Tabla[0].getEstacion());
-        System.out.println(i.getNombre());
+        NodoTablaCaminoCorto n = Tabla[1];
+        System.out.println(Tabla[0].getEstacion());
         System.out.println("");
-        imprimir_Camino(i,0);
+        NodoGrafo i = ch.BuscarHash(n.getEstacion());
+        imprimir_Camino(i,1);
     }
     
-    private void imprimir_Camino(NodoGrafo pNinicio,int indice)
+   /* private void imprimir_Camino(NodoGrafo pNinicio,int indice)
     {
-        if(Tabla[indice].getEstacionA()==null)
-        {
-        }
-        else{
+        if(indice<Tabla.length){
             if(Tabla[indice].getEstacionA()!=null)
             {
-                imprimir_Camino(Tabla[indice].getEstacionA(),indice++);
+                int mand = indice+1;
+                imprimir_Camino(Tabla[indice].getEstacionA(),mand);
+                Arista a = new Arista();
+                a.setDestino(pNinicio);
+                a.setOrigen(Tabla[indice].getEstacionA());
+                a = g.BuscarAristaOrigenDestino(a);
+                System.out.print(pNinicio.getNombre()+" - "+a.getDistancia()+"Km");
+                System.out.println("");
+                Nodos[indice]=null;
+            }
+        }
+    }*/
+    
+    public void imprimir_Camino(NodoGrafo pNinicio,int indice)
+    {
+        if(indice<Tabla.length){
+            if(Tabla[indice].getEstacionA()!=null)
+            {
+                imprimir_Camino(ch.BuscarHash(Tabla[indice].getEstacion()),indice+1);
                 System.out.print(pNinicio.getNombre());
             }
         }
     }
-}
+    
+    private NodoGrafo[] DescartarNull(NodoGrafo[] pNG)
+    {
+        int contErrores = 0;
+        int length = pNG.length-1;
+        for(int i=0;i<length;i++){
+            if(pNG[i]== null)
+            {
+              NodoGrafo a = pNG[length-contErrores];
+              pNG[length-contErrores] = null;
+              pNG[i] = a;
+              contErrores++;  
+            }
+        }      
+        NodoGrafo[] r = new NodoGrafo[pNG.length-contErrores];
+        
+        for(int i=0;i<r.length;i++){
+            r[i]=pNG[i];
+        } 
+ 
+        return r;
+    }
+    
+    
+ }
+
