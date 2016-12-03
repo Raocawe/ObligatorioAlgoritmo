@@ -1,26 +1,29 @@
-package ayed2obligatorio2016.Grafo;
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package clases;
 
 import ayed2obligatorio2016.Grafo.Enumerado;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
-import clases.Hash;
 
 /**
  *
- * @author Ezequiel
+ * @author cristian castro
  */
-public class CHash implements Hash{
+public class CHashSolucionNodo implements Hash{
 
-    private  NodoGrafo[] array;
+    private NodoGrafo[] array;
 
     /**
      * @return the array
      */
-    public  NodoGrafo[] getArray() {
+    public NodoGrafo[] getArray() {
         return array;
     }
     
-    public CHash()
+    public CHashSolucionNodo()
     {
         array = new NodoGrafo[100];
     }
@@ -68,13 +71,13 @@ public class CHash implements Hash{
     
     public int StringAInt(String pChar)
     {
-        char[] Charr = pChar.toCharArray();
-        int retorno=0;
-        for(int i=0; i<Charr.length;i++)
-        {
-            retorno = retorno + (int)Charr[i];
-        }
-        return retorno;
+            char[] Charr = pChar.toCharArray();
+            int retorno=0;
+            for(int i=0; i<Charr.length;i++)
+            {
+                retorno = retorno + (int)Charr[i];
+            }
+            return retorno;
     }
     
     public NodoGrafo BuscarHash(String pNombre) {
@@ -172,5 +175,6 @@ public class CHash implements Hash{
             return -1;
         }
     }
+
 
 }

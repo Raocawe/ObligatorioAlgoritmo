@@ -9,8 +9,10 @@ import ayed2obligatorio2016.Grafo.Arista;
 import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.Grafo.Grafo;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
+import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import static ayed2obligatorio2016.Sistema.getMetro;
+import clases.Hash;
 
 /**
  *
@@ -20,7 +22,7 @@ public class TablaPrecioMenor {
         
     private NodoTablaPrecioMenor[] Tabla;
     private NodoTablaPrecioMenor a;
-    private CHash ch;
+    private Hash ch;
     private Grafo m = getMetro();
     
     public TablaPrecioMenor()
@@ -74,7 +76,7 @@ public class TablaPrecioMenor {
                     IndiceActual = getCh().ObtenerIndice(v.getNombre());
                     Nodo.setConocido(true);
 
-                    NodoListaSimple nls = v.getAristas().getInicio();//Capturamos La Primera Arista
+                    NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
                     Arista a = (Arista)nls.getDato();
                     NodoGrafo aux = a.getDestino();//siquiente Estacion
 
@@ -187,7 +189,7 @@ public class TablaPrecioMenor {
     /**
      * @return the ch
      */
-    public CHash getCh() {
+    public Hash getCh() {
         return ch;
     }
 

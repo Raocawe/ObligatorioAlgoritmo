@@ -5,8 +5,10 @@
  */
 package clases;
 
+import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.ArbolBinario.NodoBinario;
 import ayed2obligatorio2016.Grafo.Arista;
+import ayed2obligatorio2016.Grafo.CHash;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import static ayed2obligatorio2016.Sistema.getListaAristaOrdenadasNombre;
 
@@ -17,12 +19,12 @@ import static ayed2obligatorio2016.Sistema.getListaAristaOrdenadasNombre;
 public class NodoListaConNombre implements Comparable<NodoListaConNombre>{
     
     private char nombre;
-    private ListaSimpleGeneric<Arista> ListaArista;
+    private CHashSolucionNodo HashEstacionLinea;
     private int CantidadEnLista;
 
     public NodoListaConNombre()
     {   
-        ListaArista = new ListaSimpleGeneric<Arista>();
+        HashEstacionLinea = new CHashSolucionNodo();
         CantidadEnLista = 0;
     }
     
@@ -44,71 +46,6 @@ public class NodoListaConNombre implements Comparable<NodoListaConNombre>{
     {
         return (int)pC;
     }
-
-    /*public NodoListaConNombre buscar(NodoListaConNombre pI)
-    {
-        NodoListaConNombre aux = (NodoListaConNombre)getListaAristaOrdenadasNombre().getRaiz();
-        if(aux!=null){
-            
-            if(aux.getNombre()==pI.getNombre())
-            {
-                return pI;
-            }
-            else
-            {
-                NodoBinario n = new NodoBinario(dato);
-                NodoBinario r = (NodoBinario)getRaiz();
-                return Buscar(n, r);
-            }
-            
-        }
-        if(aux.getNombre()==pI.getNombre())
-        {
-            return pI;
-        }
-        return null;
-        
-         if(dato !=null)
-        {
-            if(raiz!=null){
-                if(this.getRaiz().equals(dato))
-                {
-                    return getRaiz();
-                }
-                else{
-                    NodoBinario n = new NodoBinario(dato);
-                    NodoBinario r = (NodoBinario)getRaiz();
-                    return Buscar(n, r);
-                }
-            }
-            else
-            {return null;}
-        }
-        else
-        {return null;}
-    }
-    
-    private NodoListaConNombre Buscar(NodoBinario buscado, NodoBinario recorrido)
-    {
-        Arista s = new Arista();
-        if(recorrido == null){
-            return null;
-        }  
-        buscado.getElemento();
-        else if(buscado.getNombre()==recorrido.getNombre()){
-            return recorrido;
-        }
-        else
-        {
-            if(CharAint(buscado.nombre)<CharAint(recorrido.nombre)) 
-            {
-                return Buscar(buscado, recorrido.getHijoDerecho());
-            }
-            else 
-                return Buscar(buscado, recorrido.getHijoIzquierdo());
-        }
-    }
-    */
     
     public char getNombre() {
         return nombre;
@@ -116,11 +53,11 @@ public class NodoListaConNombre implements Comparable<NodoListaConNombre>{
     public void setNombre(char nombre) {
         this.nombre = nombre;
     }
-    public ListaSimpleGeneric<Arista> getListaArista() {
-        return ListaArista;
+    public CHashSolucionNodo getHashEstacionLinea() {
+        return HashEstacionLinea;
     }
-    public void setListaArista(ListaSimpleGeneric<Arista> ListaArista) {
-        this.ListaArista = ListaArista;
+    public void setHashEstacionLinea(CHashSolucionNodo HashEstacionLinea) {
+        this.HashEstacionLinea = HashEstacionLinea;
     }
     public int getCantidadEnLista() {
         return CantidadEnLista;

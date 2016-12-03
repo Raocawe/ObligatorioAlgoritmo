@@ -7,6 +7,7 @@ package ayed2obligatorio2016.Grafo;
 
 import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.ArbolBinario.NodoBinario;
+import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.Sistema;
 import static ayed2obligatorio2016.Sistema.getListaClienteOrdenadosNombre;
@@ -21,7 +22,7 @@ public class NodoGrafo <E extends Comparable<E>>{
 
     private ArbolBinario<Servicio> Servicios;
     private String nombre;
-    private ListaSimpleGeneric<Arista> Aristas;
+    private ListaDobleEnc<Arista> Aristas;
     private Enumerado estado;
     
 
@@ -29,7 +30,7 @@ public class NodoGrafo <E extends Comparable<E>>{
     {
         Servicios = new ArbolBinario<Servicio>();
         nombre = "";
-        Aristas = new ListaSimpleGeneric<Arista>();
+        Aristas = new ListaDobleEnc<Arista>();
         estado = Enumerado.V;
     }
     /**
@@ -63,14 +64,14 @@ public class NodoGrafo <E extends Comparable<E>>{
     /**
      * @return the Aristas
      */
-    public ListaSimpleGeneric<Arista> getAristas() {
+    public ListaDobleEnc<Arista> getAristas() {
         return Aristas;
     }
 
     /**
      * @param Aristas the Aristas to set
      */
-    public void setAristas(ListaSimpleGeneric<Arista> Aristas) {
+    public void setAristas(ListaDobleEnc<Arista> Aristas) {
         this.Aristas = Aristas;
     }
 

@@ -5,15 +5,19 @@
  */
 package ayed2obligatorio2016.Grafo;
 
-import Dijkstra.DijktraPorLinea;
 import Dijkstra.TablaCaminoCorto;
 import ayed2obligatorio2016.ArbolBinario.ArbolBinario;
 import ayed2obligatorio2016.ArbolBinario.NodoBinario;
 import ayed2obligatorio2016.Grafo.NodoGrafo;
+import ayed2obligatorio2016.ListaDoble.ListaDobleEnc;
+import ayed2obligatorio2016.ListaDoble.NodoLista;
+import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
 import ayed2obligatorio2016.Sistema;
 import static ayed2obligatorio2016.Sistema.getListaAristaOrdenadasNombre;
 import static ayed2obligatorio2016.Sistema.getMetro;
+import clases.CHashSolucionNodo;
+import clases.Hash;
 import clases.NodoListaConNombre;
 import clases.Servicio;
 
@@ -101,65 +105,11 @@ public class Arista implements Comparable<Arista>{
     }
     
     // </editor-fold>
-    // <editor-fold defaultstate="collapsed" desc=" Metodos ">
-    private String[] NombreEstaciones = new String[20];
-    private int[] RepeticionPorEstacion = new int[20];
     
+    // <editor-fold defaultstate="collapsed" desc=" Metodos ">    
     public int CharAInt(char pC)
     {
         return (int)pC;
-    }
-    
-    private boolean buscarString(String pNombre)
-    {
-        BuscarNodoPrincipalDisktra(pNombre);
-        for (int i = 0;i<Estaciones.length;i++) {
-            if (Estaciones[i] == null) {
-                Estaciones[i] = pNombre;
-                return false;
-            }
-            if(Estaciones[i].equals(pNombre))
-                return true;
-        }
-        return false;
-    }
-    
-    private void  BuscarNodoPrincipalDisktra(String p)
-    {
-        for (int i = 0;i<NombreEstaciones.length;i++) {
-            if (NombreEstaciones[i] == null) {
-                NombreEstaciones[i] = p;
-                RepeticionPorEstacion[i]=0;
-                return;
-            }
-            if(NombreEstaciones[i].equals(p))
-            {
-                RepeticionPorEstacion[i]=RepeticionPorEstacion[i]++;
-                return;
-            }
-        }
-    }
-    
-    private NodoGrafo NodoPrincipal()
-    {
-        Grafo ch = getMetro();
-        int menor = 0;
-        for(int x : RepeticionPorEstacion)
-        {
-            if(x<menor)
-            {
-                menor = x;
-            }
-        }
-        return ch.getTablaEstaciones().BuscarHash(NombreEstaciones[menor]);
-    }
-    
-    private NodoGrafo[] DescartarNull(NodoGrafo[] pNG , NodoGrafo[] retorno)
-    {
-        for(int i=0;i<retorno.length;i++){
-            retorno[i]=pNG[i];
-        }      
-        return retorno;
     }
     
     public int compareTo(Arista o) {
@@ -173,18 +123,40 @@ public class Arista implements Comparable<Arista>{
         else
             return 0; 
     }
+    
+    private String[] Estaciones = new String[100];
+    private int[] EstacionesI = new int[100];
+    
+    private void bus(String p)
+    {
+        for(int i=0;i<Estaciones.length;i++)
+        {
+            if(Estaciones[i]==null)
+            {
+                Estaciones[i] = p;
+                EstacionesI[i]=1;
+                return;
+            }
+            if(Estaciones[i].equals(p))
+            {
+                EstacionesI[i]=EstacionesI[i]+1;
+                return;
+            }
+        }
+    }
     // </editor-fold>
     
     private void Recorrido_En_Orden(NodoBinario raiz)
     {
         if(raiz != null)
         {
-            NodoListaConNombre a = (NodoListaConNombre)raiz.getElemento();
-
+            
             Recorrido_En_Orden(raiz.getHijoIzquierdo());
             
-            ImprimirLineas(a);
-                    
+            NodoListaConNombre a = (NodoListaConNombre)raiz.getElemento();
+            
+            ImprimirLineas(a.getHashEstacionLinea(),a.getNombre());
+            
             Recorrido_En_Orden(raiz.getHijoDerecho());
         }
     }
@@ -201,39 +173,46 @@ public class Arista implements Comparable<Arista>{
         Recorrido_En_Orden(s1); 
     } 
     
-    public String[] Estaciones = new String[100];
-    
-    public void ImprimirLineas(NodoListaConNombre pN)
-    {
+    public void ImprimirLineas(CHashSolucionNodo pN,char nom)
+    {        
         
-        NodoGrafo[] array = new NodoGrafo[20];
-        // <editor-fold defaultstate="collapsed" desc=" CargarArray ">
-        int contador = 0;
-        NodoListaSimple s = pN.getListaArista().getInicio();
-        while(s!=null)
-        {
-            Arista a = (Arista)s.getDato();
-            if(!buscarString(a.getOrigen().getNombre()))
-            {
-                array[contador] = a.getOrigen();
-                contador++;
-            }
-            if(!buscarString(a.getDestino().getNombre()))
-            {
-                array[contador] = a.getDestino();
-                contador++;
-            }
-            s = s.getSiguiente();
-        }
-        NodoGrafo[] arraySoloEstaciones = new NodoGrafo[contador];
-        // </editor-fold>
-        arraySoloEstaciones = DescartarNull(array, arraySoloEstaciones);
+        CHashSolucionNodo ch = pN;
+        TablaCaminoCorto d = new TablaCaminoCorto(pN,nom);
+        NodoGrafo s = BuscarGrafoInicio(pN);
+        d.DijktraLineas(s);
+        d.AImprimir();//Captura La estacion opuesta la estacion Inicio del Disjktra para imprimir luego
         
-        DijktraPorLinea d = new DijktraPorLinea();
-        d.DijktraPorLineas(arraySoloEstaciones,NodoPrincipal());
+        System.out.println("Linea: "+nom);
+        System.out.println(s.getNombre());
         
-        d.imprimir_Camino_PrimeraParte();
+        d.imprimir_Camino(d.AImprimir);
     }
     
-    
+    private NodoGrafo BuscarGrafoInicio(Hash s)
+    {
+        NodoGrafo[] r = s.getArray();
+        for(int i = 0;i<r.length;i++)
+        {
+            if(r[i]!=null){
+                NodoLista q = (NodoLista)r[i].getAristas().getInicio();
+                while(q!=null)
+                {
+                    Arista a = (Arista)q.getDato();
+                    bus(a.getDestino().getNombre());
+                    bus(a.getOrigen().getNombre());
+                    q= q.getSiguiente();
+                } 
+            }
+        } 
+        int menor = 0;
+        for(int i = 0;i<EstacionesI.length;i++)
+        {
+            if(EstacionesI[i]<menor)
+            {
+                menor = EstacionesI[i];
+            }
+        }
+        return s.BuscarHash(Estaciones[menor]);
+    }
+       
 }

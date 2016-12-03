@@ -49,6 +49,7 @@ public class Main {
         tituloPrueba("PRUEBA 1: REGISTRAR TRAMOS Y CLIENTES");
         crearTramosLineaA(p, s);
         crearClientes(p, s);
+        crearTramosLineaB(p, s);
         s.listarClientes();
         s.listarLineas();
         s.destruirMetro();

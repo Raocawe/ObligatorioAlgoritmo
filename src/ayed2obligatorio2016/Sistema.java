@@ -128,7 +128,8 @@ public class Sistema implements IMetro {
     }
 
     // <editor-fold defaultstate="collapsed" desc=" Prontas ">
-    public TipoRet listarClientes() {        Cliente c = new Cliente();
+    public TipoRet listarClientes() {        
+        Cliente c = new Cliente();
         c.ListadoClientes();
         return TipoRet.OK;
     }
@@ -154,10 +155,10 @@ public class Sistema implements IMetro {
     }
     
     public TipoRet altaTramo(char linea, String origen, String destino, float distancia, float tarifa) {
-        Viaje v = new Viaje();
         Arista a = new Arista();
-        
         CHash ha = Metro.getTablaEstaciones();
+        
+        
         NodoGrafo dest = ha.BuscarHash(destino);
         NodoGrafo orig = ha.BuscarHash(origen);
         // <editor-fold defaultstate="collapsed" desc=" Agregar Estaciones">
@@ -196,25 +197,38 @@ public class Sistema implements IMetro {
                         dest.getAristas().insertarInicio(a);
                         orig.getAristas().insertarInicio(a);
                         Metro.getListaAristas().insertarInicio(a);
-                        
-                        // <editor-fold defaultstate="collapsed" desc="Checkea Para Agregar Arista Al Arbol">
+                                                
                         NodoListaConNombre nlcn = new NodoListaConNombre();
                         nlcn.setNombre(a.getNombre());
                         NodoBinario s = (NodoBinario) ListaAristaOrdenadasNombre.Buscar(nlcn);
+                        
+                        
                         if(s!=null){
                             nlcn = (NodoListaConNombre)s.getElemento();
-                            nlcn.getListaArista().insertarInicio(a);
+                            if(nlcn.getHashEstacionLinea().BuscarHash(origen)==null)
+                            {
+                            nlcn.getHashEstacionLinea().insertarEstacion(orig);
                             nlcn.setCantidadEnLista(nlcn.getCantidadEnLista()+1);
+                            }
+                            if(nlcn.getHashEstacionLinea().BuscarHash(destino)==null)
+                            {
+                            nlcn.getHashEstacionLinea().insertarEstacion(dest);
+                            nlcn.setCantidadEnLista(nlcn.getCantidadEnLista()+1);
+                            }
                         }
                         else
                         {
                             NodoListaConNombre newAux = new NodoListaConNombre();
                             newAux.setNombre(a.getNombre());
+                            newAux.getHashEstacionLinea().insertarEstacion(orig);
                             newAux.setCantidadEnLista(1);
-                            newAux.getListaArista().insertarInicio(a);
+                            if(newAux.getHashEstacionLinea().BuscarHash(destino)==null)
+                            {
+                            newAux.getHashEstacionLinea().insertarEstacion(dest);
+                            newAux.setCantidadEnLista(2);
+                            }
                             ListaAristaOrdenadasNombre.insertar(newAux);
-                        }
-                        // </editor-fold>
+                        }                       
                         
                         return TipoRet.OK;
                     }
@@ -233,6 +247,22 @@ public class Sistema implements IMetro {
              return TipoRet.ERROR_2;
          }
     }
+    
+    public int contador(CHash c)
+    {
+        NodoGrafo[] s = c.getArray();
+        int contador = 0;
+        for(int i = 0;i<100;i++)
+        {
+            if(s[i]!=null)
+            {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    
+    
     
     public TipoRet altaCliente(int cedula, String nombre) {
           
