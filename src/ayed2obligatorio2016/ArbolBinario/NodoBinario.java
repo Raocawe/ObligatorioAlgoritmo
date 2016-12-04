@@ -1,6 +1,7 @@
 package ayed2obligatorio2016.ArbolBinario;
 
 import ayed2obligatorio2016.Grafo.Arista;
+import clases.Cliente;
 
 /**
  */
@@ -74,6 +75,5 @@ public class NodoBinario<E extends Comparable<E>> implements Elemento<E>
     {
         return getElemento().toString();
     }
-
 
 }

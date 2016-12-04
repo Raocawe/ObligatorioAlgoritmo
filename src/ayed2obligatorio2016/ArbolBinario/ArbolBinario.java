@@ -14,7 +14,7 @@ public class ArbolBinario<E extends Comparable<E>>
     {
         this.cantidad=0;
     }
-
+    
     public int getCantidad()
     {
         return cantidad;
@@ -197,48 +197,64 @@ public class ArbolBinario<E extends Comparable<E>>
         }
     }
 
-    public ArrayList<Elemento<E>> recorridoPosOrden()
-    {
-        ArrayList<Elemento<E>> elementos=new ArrayList<Elemento<E>>();
-        if(!estaVacia())
-        {
-            recorridoPosOrden(getRaiz(), elementos);
-        }
+            public boolean eliminar(E dato){
+            NodoBinario Dato = new NodoBinario(dato);
+            
+            if(Dato.elemento.compareTo(raiz.getElemento())==0)
+            {
+                raiz = null;
+            }   
+            if(borrar(raiz, dato)==null){
+                return false;
+            }
+            else return true;
+            }
+            
+          private NodoBinario<E> borrar(NodoBinario<E> raizz, E Dato) {
+          
+           if(raizz==null){
+           return null;
+          }
 
-        return elementos;
-    }
+          NodoBinario root = new NodoBinario(raizz.getElemento());
+          NodoBinario dato = new NodoBinario(Dato);
+          
+          if(dato.elemento.compareTo(root.getElemento())==0){
+          
+           
+           if(root!=null && root.getHijoDerecho()!=null){
 
-    private void recorridoPosOrden(Elemento<E> raiz, ArrayList<Elemento<E>> elementos)
-    {
-        for(Elemento<E>elemento:obtenerHijos(raiz))
-        {
-            recorridoPosOrden(elemento,elementos);
-        }
-        elementos.add(raiz);
-                                            for(int i=0;i<elementos.size();i++)
-                                            {
-                                            Elemento<E> s = elementos.get(i);
-                                            NodoBinario s1 = (NodoBinario)s;
-                                            Arista s2 = (Arista)s1.getElemento();
-                                            System.out.println(s2.getNombre());
-                                            }
-    }
 
-   /* public Elemento<E> Buscar(Elemento<E> e)
-    {
-        if(validar(e)!=null)
-        {
-            NodoBinario r = (NodoBinario)e.getElemento();
-            ArbolBinario l = Sistema.getListaAristaOrdenadasNombre();
-            return BuscarRe(r);  
-        }
-        return null;
-    }
-    
-    private Elemento<E> BuscarRe(NodoBinario a)
-    {
-        
-    }*/
+            Elemento<E> min= getMinDer(root.getHijoDerecho());
+            root.setElemento(min.getElemento());
+            root.setHijoDerecho(borrar(root.getHijoDerecho(), min.getElemento()));
+            
+           }else if(root.getHijoIzquierdo()==null){
+            return root.getHijoDerecho();
+           }else{
+            return root.getHijoIzquierdo();
+           }
+
+          }else if(dato.elemento.compareTo(root.getElemento())>0)
+           root.setHijoDerecho(borrar(root.getHijoDerecho(), Dato));
+          else{
+           root.setHijoIzquierdo(borrar(root.getHijoIzquierdo(), Dato));
+          }
+
+          return root;
+         }
+
+         public Elemento<E> getMinDer(Elemento<E> nodoo){
+             
+          NodoBinario nodo = (NodoBinario)nodoo.getElemento();
+          if(nodo.getHijoIzquierdo()==null){
+           return nodo;
+          }else{
+           Elemento<E> n = getMinDer(nodo.getHijoIzquierdo());
+           return n;
+          }
+         }
+
     
     public Elemento<E> Buscar(E dato)
     {

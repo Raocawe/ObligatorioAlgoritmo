@@ -102,7 +102,6 @@ public class Cliente implements Comparable<Cliente>{
     public void ImprimirTodos()
     {
         Viaje v;
-        
         System.out.println("Cliente: "+ this.cedula +" - "+ this.nombre);
         if(Viajes.IsEmpty())
         {
@@ -159,7 +158,7 @@ public class Cliente implements Comparable<Cliente>{
         if(!pC.getViajes().IsEmpty())
         System.out.println(pC.getNombre()+" - "+pC.getViajes().Top().getOrigen()+" - "+pC.getViajes().Top().getDestino());
         else{
-        System.out.println(pC.getNombre()+" Sin Viajes Registrados");    
+        System.out.println(pC.getNombre()+" Sin Viajes Registrados.\n");    
         
     }
     System.out.println("");
@@ -169,6 +168,11 @@ public class Cliente implements Comparable<Cliente>{
     {
         ArbolBinario<Cliente> s = getListaClienteOrdenadosNombre();
         NodoBinario s1 = (NodoBinario)s.getRaiz();
+        if(s1==null)
+        {
+            System.out.println("No hay Clientes en el Metro.\n"); 
+        }
+        else
         Recorrido_En_Orden(s1); 
     }
     

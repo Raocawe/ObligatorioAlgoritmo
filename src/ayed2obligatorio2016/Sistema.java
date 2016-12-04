@@ -29,6 +29,7 @@ import java.time.LocalDateTime;
  *
  * @author Daniel
  */
+
 public class Sistema implements IMetro {
     
     private static ListaSimpleGeneric<Viaje> ListaViaje;
@@ -118,16 +119,17 @@ public class Sistema implements IMetro {
             }
             else
             {
+                System.out.println("No existen conexiones entre "+ origen +" y "+ destino);
                 return TipoRet.ERROR_1;
             }
         }
         else
         {
+            System.out.println("No existen conexiones entre "+ origen +" y "+ destino);
             return TipoRet.ERROR_2;
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc=" Prontas ">
     public TipoRet listarClientes() {        
         Cliente c = new Cliente();
         c.ListadoClientes();
@@ -148,9 +150,11 @@ public class Sistema implements IMetro {
             }
             else
             {
+                System.out.println("No existen lineas entre "+ origen +" y "+ destino);
                 return TipoRet.ERROR_2;
             }
         }
+        System.out.println("No existen lineas entre "+ origen +" y "+ destino);
         return TipoRet.ERROR_1;
     }
     
@@ -248,22 +252,6 @@ public class Sistema implements IMetro {
          }
     }
     
-    public int contador(CHash c)
-    {
-        NodoGrafo[] s = c.getArray();
-        int contador = 0;
-        for(int i = 0;i<100;i++)
-        {
-            if(s[i]!=null)
-            {
-                contador++;
-            }
-        }
-        return contador;
-    }
-    
-    
-    
     public TipoRet altaCliente(int cedula, String nombre) {
           
        Cliente unCliente = new Cliente();
@@ -297,10 +285,11 @@ public class Sistema implements IMetro {
         
         if(unCliente.CorrobarCanDigitos(cedula))
         {
-            if(unCliente.BuscarCliente(cedula) != null)
+            unCliente = unCliente.BuscarCliente(cedula);
+            if(unCliente != null)
             {
                 ListaCliente.RemoveNodo(unCliente);
-                
+                ListaClienteOrdenadosNombre.eliminar(unCliente);
                 return TipoRet.OK;
             }
             else
@@ -407,6 +396,5 @@ public class Sistema implements IMetro {
            return TipoRet.ERROR_3;
        }
     }
-    // </editor-fold >
     
 }
