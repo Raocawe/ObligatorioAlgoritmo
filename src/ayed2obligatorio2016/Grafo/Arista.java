@@ -124,8 +124,9 @@ public class Arista implements Comparable<Arista>{
             return 0; 
     }
     
-    private String[] Estaciones = new String[100];
-    private int[] EstacionesI = new int[100];
+    private String[] Estaciones;
+    private int[] EstacionesI ;
+    private int NodoinicioRecorrido;
     
     private void bus(String p)
     {
@@ -176,20 +177,22 @@ public class Arista implements Comparable<Arista>{
     public void ImprimirLineas(CHashSolucionNodo pN,char nom)
     {        
         
+        Estaciones = new String[100];
+        EstacionesI = new int[100];
         CHashSolucionNodo ch = pN;
         TablaCaminoCorto d = new TablaCaminoCorto(pN,nom);
-        NodoGrafo s = BuscarGrafoInicio(pN);
+        NodoGrafo s = BuscarGrafoInicio(pN,nom);
         d.DijktraLineas(s);
-        d.AImprimir();//Captura La estacion opuesta la estacion Inicio del Disjktra para imprimir luego
         
         System.out.println("Linea: "+nom);
         System.out.println(s.getNombre());
         
-        d.imprimir_Camino(d.AImprimir);
+        s = BuscarNodoFin(pN);//Captura La estacion opuesta la estacion Inicio del Disjktra para imprimir luego(fin del recorrido de la linea)
+        d.imprimir_Camino(s);
         System.out.println("\n");
     }
     
-    private NodoGrafo BuscarGrafoInicio(Hash s)
+    private NodoGrafo BuscarGrafoInicio(Hash s,char nom)
     {
         NodoGrafo[] r = s.getArray();
         for(int i = 0;i<r.length;i++)
@@ -199,13 +202,21 @@ public class Arista implements Comparable<Arista>{
                 while(q!=null)
                 {
                     Arista a = (Arista)q.getDato();
-                    bus(a.getDestino().getNombre());
-                    bus(a.getOrigen().getNombre());
+                    if(a.getNombre()==nom){
+                        bus(a.getDestino().getNombre());
+                        bus(a.getOrigen().getNombre());
+                    }
                     q= q.getSiguiente();
                 } 
             }
-        } 
+        }
+        return BuscarNodoInicio(s);
+    }
+       
+    private NodoGrafo BuscarNodoInicio(Hash  s)
+    {
         int menor = EstacionesI[0];
+        int indice = 0;
         for(int i = 1;i<EstacionesI.length;i++)
         {
             if(EstacionesI[i]==0)
@@ -215,9 +226,31 @@ public class Arista implements Comparable<Arista>{
             if(EstacionesI[i]<menor)
             {
                 menor = EstacionesI[i];
+                indice = i;
             }
         }
-        return s.BuscarHash(Estaciones[menor]);
+        NodoinicioRecorrido = indice;
+        return s.BuscarHash(Estaciones[indice]);
     }
-       
+    
+    private NodoGrafo BuscarNodoFin(Hash  s)
+    {
+        int menor = Integer.MAX_VALUE;
+        int indice = 0;
+        for(int i = 1;i<EstacionesI.length;i++)
+        {
+            if(EstacionesI[i]==0)
+            {
+                break;
+            }
+            if(i !=NodoinicioRecorrido){
+                if(EstacionesI[i]<menor)
+                {
+                    menor = EstacionesI[i];
+                    indice = i;
+                }
+            }
+        }
+        return s.BuscarHash(Estaciones[indice]);
+    }
 }

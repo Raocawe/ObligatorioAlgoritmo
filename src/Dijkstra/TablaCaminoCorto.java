@@ -20,7 +20,8 @@ public class TablaCaminoCorto {
     
     private NodoTablaCaminoCorto[] Tabla;
     private Hash ch;
-    public NodoGrafo AImprimir;
+    public Grafo m = getMetro();
+
     private char linea;
     
     public TablaCaminoCorto()
@@ -39,20 +40,15 @@ public class TablaCaminoCorto {
     public void AgregarNodoInicio(NodoGrafo pN)
     {
         int i = ch.ObtenerIndice(pN.getNombre());
-        NodoTablaCaminoCorto a = AgregarInicio(pN.getNombre());
-        getTabla()[i]=a;
-    }
-    
-    private NodoTablaCaminoCorto AgregarInicio(String pN)
-    {
         NodoTablaCaminoCorto a;
         a = new NodoTablaCaminoCorto();
         a.setConocido(false);
         a.setDistancia(0);
-        a.setEstacion(pN);
+        a.setEstacion(pN.getNombre());
         a.setEstacionA(null);
-        return a;
-    }
+     
+        Tabla[i]=a;
+    }    
     
     public void Agregar(NodoGrafo pN,int pIndice)
     {
@@ -67,9 +63,7 @@ public class TablaCaminoCorto {
     public NodoTablaCaminoCorto[] getTabla() {
         return Tabla;
     }
-    
-    public Grafo m = getMetro();
-    
+
     public void Dijktra(NodoGrafo pN)
     {
         CargarTabla(pN);
@@ -97,23 +91,18 @@ public class TablaCaminoCorto {
                     NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
                     Arista a = (Arista)nls.getDato();//Arista
                     NodoLista ar;
-                    while(!ComprobarSiEsDeEstaLinea(a))
-                    {
-                        if(nls.getSiguiente()!=null){
-                            ar= nls.getSiguiente();
-                            a = (Arista)ar.getDato();
-                        }
-                        else{break;}
-                    }
                     
+                    while(a.getNombre()!=linea)
+                    {
+                     nls = nls.getSiguiente();
+                     a = (Arista)nls.getDato();
+                    }
                     
                     NodoGrafo aux = a.getDestino();//siquiente Estacion
                     if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
-                    {
-                        aux = a.getOrigen();
-                    }
+                    {aux = a.getOrigen();}
                     
-                    while(aux!=null){
+                    while(aux!=null){//Recorre la la lista de aristas
                         int indi = ch.ObtenerIndice(aux.getNombre());
                         if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
                         {
@@ -125,12 +114,14 @@ public class TablaCaminoCorto {
                         if(nls!=null)
                         {
                             Arista au = (Arista)nls.getDato();
-                            
-                            while(!ComprobarSiEsDeEstaLinea(au))
+                            while(au.getNombre()!=linea)
                             {
-                                if(nls.getSiguiente()!=null)
-                                au = (Arista)nls.getSiguiente().getDato();
-                                else{break;}
+                                if(nls.getSiguiente()!=null){
+                                nls = nls.getSiguiente();
+                                au = (Arista)nls.getDato();
+                                }
+                                else{aux = null;
+                                    break;}
                             }
 
                             while(au==a){
@@ -140,10 +131,18 @@ public class TablaCaminoCorto {
                                 aux = null;
                                 break;}
                                 else{au = (Arista)nls.getDato();
-                                while(!ComprobarSiEsDeEstaLinea(au))
+                                while(a.getNombre()!=linea)
                                 {
-                                    if(nls.getSiguiente()!=null)
-                                    au = (Arista)nls.getSiguiente().getDato();
+                                    if(nls.getSiguiente()!=null){
+                                        nls = nls.getSiguiente();
+                                        au = (Arista)nls.getDato();
+                                    }
+                                    else
+                                    {
+                                        aux = null;
+                                        break;
+                                    }
+                                
                                 }
                                 }
                             }
@@ -293,22 +292,6 @@ public class TablaCaminoCorto {
         {
             imprimir_Camino(Tabla[indice].getEstacionA());
             System.out.print(pNinicio.getNombre()+" - "+Tabla[indice].getDistancia()+" Km\n");
-        }
-    }
-    
-    public void AImprimir()
-    {
-        float mayor = 0;
-        for(int i = 0; i<Tabla.length;i++)
-        {
-            if(Tabla[i]!=null)
-            {
-                if(Tabla[i].getDistancia()>mayor&&Tabla[i].getDistancia()!=Integer.MAX_VALUE)
-                {
-                    mayor=Tabla[i].getDistancia();
-                    AImprimir = ch.BuscarHash(Tabla[i].getEstacion());
-                }
-            }
         }
     }
 }
