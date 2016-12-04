@@ -50,6 +50,8 @@ public class Main {
         crearTramosLineaA(p, s);
         crearClientes(p, s);
         crearTramosLineaB(p, s);
+        crearTramosLineaC(p,s);
+        crearTramosLineaH(p,s);
         s.listarClientes();
         s.listarLineas();
         s.destruirMetro();

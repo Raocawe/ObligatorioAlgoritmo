@@ -90,7 +90,6 @@ public class TablaCaminoCorto {
 
                     NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
                     Arista a = (Arista)nls.getDato();//Arista
-                    NodoLista ar;
                     
                     while(a.getNombre()!=linea)
                     {
@@ -104,61 +103,64 @@ public class TablaCaminoCorto {
                     
                     while(aux!=null){//Recorre la la lista de aristas
                         int indi = ch.ObtenerIndice(aux.getNombre());
-                        if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
-                        {
-                            float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
-                            Tabla[indi].setDistancia(floataux);
-                            Tabla[indi].setEstacionA(v);
-                        }
-                        nls = aux.getAristas().getInicio();
-                        if(nls!=null)
-                        {
-                            Arista au = (Arista)nls.getDato();
-                            while(au.getNombre()!=linea)
+                        if(indi>0){//
+                            if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
                             {
-                                if(nls.getSiguiente()!=null){
-                                nls = nls.getSiguiente();
-                                au = (Arista)nls.getDato();
-                                }
-                                else{aux = null;
-                                    break;}
+                                float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
+                                Tabla[indi].setDistancia(floataux);
+                                Tabla[indi].setEstacionA(v);
                             }
-
-                            while(au==a){
-                                
-                                nls = nls.getSiguiente();
-                                if(nls==null){
-                                aux = null;
-                                break;}
-                                else{au = (Arista)nls.getDato();
-                                while(a.getNombre()!=linea)
+                            nls = aux.getAristas().getInicio();
+                            if(nls!=null)
+                            {
+                                Arista au = (Arista)nls.getDato();
+                                while(au.getNombre()!=linea)
                                 {
                                     if(nls.getSiguiente()!=null){
-                                        nls = nls.getSiguiente();
-                                        au = (Arista)nls.getDato();
+                                    nls = nls.getSiguiente();
+                                    au = (Arista)nls.getDato();
                                     }
-                                    else
+                                    else{aux = null;
+                                        break;}
+                                }
+
+                                while(au==a){
+
+                                    nls = nls.getSiguiente();
+                                    if(nls==null){
+                                    aux = null;
+                                    break;}
+                                    else{au = (Arista)nls.getDato();
+                                    while(a.getNombre()!=linea)
                                     {
-                                        aux = null;
-                                        break;
+                                        if(nls.getSiguiente()!=null){
+                                            nls = nls.getSiguiente();
+                                            au = (Arista)nls.getDato();
+                                        }
+                                        else
+                                        {
+                                            aux = null;
+                                            break;
+                                        }
+
                                     }
-                                
+                                    }
                                 }
-                                }
+                                if(aux !=null){
+                                    a = au;
+                                    v = aux;
+                                        if(aux.getNombre().equals(a.getDestino().getNombre()))
+                                            aux = a.getOrigen();
+                                        else{
+                                            aux = a.getDestino();}
+                                } 
                             }
-                            if(aux !=null){
-                                a = au;
-                                v = aux;
-                                    if(aux.getNombre().equals(a.getDestino().getNombre()))
-                                        aux = a.getOrigen();
-                                    else{
-                                        aux = a.getDestino();}
-                            } 
+                            else
+                            {
+                                aux = null;
+                            }
                         }
-                        else
-                        {
-                            aux = null;
-                        }
+                        else{aux=null;}
                     }
                 }
             }
