@@ -96,12 +96,16 @@ public class TablaCaminoCorto {
 
                     NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
                     Arista a = (Arista)nls.getDato();//Arista
-                    
+                    NodoLista ar;
                     while(!ComprobarSiEsDeEstaLinea(a))
                     {
-                        if(nls.getSiguiente()!=null)
-                        a = (Arista)nls.getSiguiente().getDato();
+                        if(nls.getSiguiente()!=null){
+                            ar= nls.getSiguiente();
+                            a = (Arista)ar.getDato();
+                        }
+                        else{break;}
                     }
+                    
                     
                     NodoGrafo aux = a.getDestino();//siquiente Estacion
                     if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
@@ -126,6 +130,7 @@ public class TablaCaminoCorto {
                             {
                                 if(nls.getSiguiente()!=null)
                                 au = (Arista)nls.getSiguiente().getDato();
+                                else{break;}
                             }
 
                             while(au==a){

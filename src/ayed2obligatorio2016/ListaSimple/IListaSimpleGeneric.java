@@ -7,7 +7,6 @@ package ayed2obligatorio2016.ListaSimple;
 
 /**
  *
- * @author Alen
  */
 public interface IListaSimpleGeneric <T> {
     

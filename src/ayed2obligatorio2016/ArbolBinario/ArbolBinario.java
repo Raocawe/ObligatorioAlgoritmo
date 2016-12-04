@@ -273,11 +273,11 @@ public class ArbolBinario<E extends Comparable<E>>
         else
         {
             int i = buscado.elemento.compareTo(recorrido.getElemento());
-            if(i<0) 
+            if(i>0) 
             {
                 return Buscar(buscado, recorrido.getHijoDerecho());
             }
-            else if(i>0)
+            else if(i<0)
                 return Buscar(buscado, recorrido.getHijoIzquierdo());
             else
                 return recorrido;

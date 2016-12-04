@@ -7,7 +7,6 @@ package ayed2obligatorio2016.ListaDoble;
 
 /**
  *
- * @author Maxi
  */
 public interface IListaDobleEnc <T> {
     public void insertarInicio(T n);

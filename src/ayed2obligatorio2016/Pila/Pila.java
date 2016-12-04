@@ -5,10 +5,7 @@
  */
 package ayed2obligatorio2016.Pila;
 
-/**
- *
- * @author Maxi
- */
+
 public class Pila<T> implements IPila<T> {
     private NodoPila<T> top;
     

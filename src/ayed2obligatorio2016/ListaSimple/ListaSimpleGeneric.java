@@ -6,7 +6,6 @@
 package ayed2obligatorio2016.ListaSimple;
 /**
  *
- * @author Alen
  */
 public class ListaSimpleGeneric <T> implements IListaSimpleGeneric <T>{
     

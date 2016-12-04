@@ -7,7 +7,6 @@ package ayed2obligatorio2016.Pila;
 
 /**
  *
- * @author Maxi
  */
 public interface IPila <T> {
     public void Empty();

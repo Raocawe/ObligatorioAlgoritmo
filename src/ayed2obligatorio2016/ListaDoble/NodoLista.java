@@ -7,7 +7,6 @@ package ayed2obligatorio2016.ListaDoble;
 
 /**
  *
- * @author Maxi
  * @param <T>
  */
 public class NodoLista <T> {

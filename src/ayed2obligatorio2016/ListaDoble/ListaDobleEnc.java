@@ -8,7 +8,6 @@ package ayed2obligatorio2016.ListaDoble;
 
 /**
  *
- * @author Maxi
  */
 public class ListaDobleEnc <T> implements IListaDobleEnc <T> {
     private NodoLista<T> inicio;

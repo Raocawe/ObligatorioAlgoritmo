@@ -186,6 +186,7 @@ public class Arista implements Comparable<Arista>{
         System.out.println(s.getNombre());
         
         d.imprimir_Camino(d.AImprimir);
+        System.out.println("\n");
     }
     
     private NodoGrafo BuscarGrafoInicio(Hash s)
@@ -204,9 +205,13 @@ public class Arista implements Comparable<Arista>{
                 } 
             }
         } 
-        int menor = 0;
-        for(int i = 0;i<EstacionesI.length;i++)
+        int menor = EstacionesI[0];
+        for(int i = 1;i<EstacionesI.length;i++)
         {
+            if(EstacionesI[i]==0)
+            {
+                break;
+            }
             if(EstacionesI[i]<menor)
             {
                 menor = EstacionesI[i];
