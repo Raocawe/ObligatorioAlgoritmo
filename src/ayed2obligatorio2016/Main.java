@@ -110,7 +110,7 @@ public class Main {
         crearTramosLineaC(p, s);
         crearTramosLineaH(p, s);
         s.caminoMasCorto("Constitucion", "Once");
-        s.precioBoleto("Constitucion", "Once");
+        s.precioBoleto("Corrientes", "Uruguay");
         s.destruirMetro();
         finPrueba(" Fin PRUEBA 5");
     }

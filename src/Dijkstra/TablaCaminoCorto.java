@@ -273,16 +273,36 @@ public class TablaCaminoCorto {
     
     public void imprimir_Camino(NodoGrafo pNinicio, NodoGrafo pNfin)
     {
+        float distanciaTotal = 0;
+        // <editor-fold desc=" CapturarDistancia ">
+        int indice = ch.ObtenerIndice(pNinicio.getNombre());
+        
+        while(!Tabla[indice].equals(pNfin))
+        {
+            distanciaTotal += Tabla[indice].getDistancia();
+            if(Tabla[indice].getEstacionA()!=null){
+            indice = ch.ObtenerIndice(Tabla[indice].getEstacionA().getNombre());}
+            else break;
+        }
+        
+        // </editor-fold>
+        System.out.println("Viaje más corto entre "+ pNfin.getNombre() + " y "+ pNinicio.getNombre() + " : "+ distanciaTotal + " Km");
+        imprimir_Caminos(pNinicio,pNfin);
+    }
+    
+    private void imprimir_Caminos(NodoGrafo pNinicio, NodoGrafo pNfin)
+    {
         int indice = ch.ObtenerIndice(pNinicio.getNombre());
         if(Tabla[indice].getEstacionA()!=null&&Tabla[indice].getEstacionA().equals(pNfin))
-        {
-            return;
+        { 
+            System.out.print(Tabla[indice].getEstacionA().getNombre()+"\n");
+            System.out.print(Tabla[indice].getEstacion()+"\n");
         }
         else{
             if(Tabla[indice].getEstacionA()!=null)
             {
-                imprimir_Camino(Tabla[indice].getEstacionA(),pNfin);
-                System.out.print(pNinicio.getNombre());
+                imprimir_Caminos(Tabla[indice].getEstacionA(),pNfin);
+                System.out.print(pNinicio.getNombre()+"\n");
             }
         }
     }

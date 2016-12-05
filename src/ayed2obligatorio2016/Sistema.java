@@ -100,8 +100,15 @@ public class Sistema implements IMetro {
     }
 
     public TipoRet listarLineas() {
-        Arista a = new Arista();
-        a.ListadoAristas();
+        if(Metro.getListaAristas().getInicio()==null)
+        {
+            System.out.println("No hay Líneas en el Metro.\n");
+        }
+        else
+        {
+          Arista a = new Arista();
+          a.ListadoAristas();  
+        }
         return TipoRet.OK;
     }
 
@@ -114,7 +121,7 @@ public class Sistema implements IMetro {
             if(ori!=null)
             {
                 t.Dijktra(ori);
-                t.imprimir_Camino(ori,des);
+                t.imprimir_Precio_Menor(des,ori);
                 return TipoRet.OK;
             }
             else
@@ -145,7 +152,7 @@ public class Sistema implements IMetro {
             {
                 TablaCaminoCorto t = new TablaCaminoCorto();
                 t.Dijktra(ori);
-                t.imprimir_Camino(ori,des);
+                t.imprimir_Camino(des,ori);
                 return TipoRet.OK;
             }
             else
@@ -355,7 +362,7 @@ public class Sistema implements IMetro {
         Metro = new Grafo();
         ListaViaje = new ListaSimpleGeneric<Viaje>();
         ListaCliente = new ListaDobleEnc<Cliente>();
-                ListaAristaOrdenadasNombre = new ArbolBinario<NodoListaConNombre>();
+        ListaAristaOrdenadasNombre = new ArbolBinario<NodoListaConNombre>();
         ListaClienteOrdenadosNombre = new ArbolBinario<Cliente>();
         return TipoRet.OK;
     }
