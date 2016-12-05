@@ -85,6 +85,7 @@ public class TablaPrecioMenor {
                         aux = a.getOrigen();
                     }
                     
+                   
                     while(aux!=null){
                         int indi = ch.ObtenerIndice(aux.getNombre());
                         if(!Tabla[indi].isConocido()&&((Tabla[IndiceActual].getPrecio()+a.getTarifa())<Tabla[indi].getPrecio()))
@@ -92,6 +93,10 @@ public class TablaPrecioMenor {
                             float floataux = Tabla[IndiceActual].getPrecio()+a.getTarifa();
                             Tabla[indi].setPrecio(floataux);
                             Tabla[indi].setEstacionA(v);
+                        }
+                        if(Tabla[indi].isConocido())
+                        {
+                            break;
                         }
                         nls = aux.getAristas().getInicio();
                         if(nls!=null)
