@@ -114,15 +114,6 @@ public class TablaCaminoCorto {
                             if(nls!=null)
                             {
                                 Arista au = (Arista)nls.getDato();
-                                while(au.getNombre()!=linea)
-                                {
-                                    if(nls.getSiguiente()!=null){
-                                    nls = nls.getSiguiente();
-                                    au = (Arista)nls.getDato();
-                                    }
-                                    else{aux = null;
-                                        break;}
-                                }
 
                                 while(au==a){
 
@@ -178,6 +169,7 @@ public class TablaCaminoCorto {
                     if(v!=null){
                     IndiceActual = ch.ObtenerIndice(v.getNombre());
                     Tabla[IndiceActual].setConocido(true);
+                    MarcarAdyacentes(Tabla[IndiceActual],IndiceActual);
 
                     NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
                     Arista a = (Arista)nls.getDato();//Arista                    
@@ -209,6 +201,7 @@ public class TablaCaminoCorto {
                                 else
                                     au = (Arista)nls.getDato();
                             }
+                            
                             if(aux !=null){
                                 a = au;
                                 v = aux;
@@ -228,9 +221,24 @@ public class TablaCaminoCorto {
         }
     }
     
-    private boolean ComprobarSiEsDeEstaLinea(Arista p)
+    private void MarcarAdyacentes(NodoTablaCaminoCorto pNodo,int pIndice)
     {
-        return p.getNombre()==linea;
+        NodoGrafo f = ch.BuscarHash(pNodo.getEstacion());
+        NodoLista nls = f.getAristas().getInicio();
+        
+        while(nls!=null){
+            Arista a = (Arista)nls.getDato();//Arista  
+            NodoGrafo aux = a.getDestino();//siquiente Estacion
+            if(aux.getNombre().equals(f.getNombre()))//Aux Siguiente estacion
+            {aux = a.getOrigen();}
+            int IndiceAdy = ch.ObtenerIndice(aux.getNombre());
+            if(!Tabla[IndiceAdy].getConocido()&&((Tabla[pIndice].getDistancia()+a.getDistancia())<Tabla[IndiceAdy].getDistancia()))
+            {
+                 Tabla[IndiceAdy].setDistancia(pNodo.getDistancia()+a.getDistancia());
+                 Tabla[IndiceAdy].setEstacionA(f);
+            }
+            nls = nls.getSiguiente();
+        }
     }
     
     private NodoGrafo NodoTablaConDistanciaMasCortaDesconocido()

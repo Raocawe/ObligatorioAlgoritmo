@@ -156,7 +156,7 @@ public class Arista implements Comparable<Arista>{
             
             NodoListaConNombre a = (NodoListaConNombre)raiz.getElemento();
             
-            ImprimirLineas(a.getHashEstacionLinea(),a.getNombre());
+            ImprimirLineas(a);
             
             Recorrido_En_Orden(raiz.getHijoDerecho());
         }
@@ -174,20 +174,18 @@ public class Arista implements Comparable<Arista>{
         Recorrido_En_Orden(s1); 
     } 
     
-    public void ImprimirLineas(CHashSolucionNodo pN,char nom)
+    public void ImprimirLineas(NodoListaConNombre NlCn)
     {        
-        
-        Estaciones = new String[100];
-        EstacionesI = new int[100];
-        CHashSolucionNodo ch = pN;
-        TablaCaminoCorto d = new TablaCaminoCorto(pN,nom);
-        NodoGrafo s = BuscarGrafoInicio(pN,nom);
+        Estaciones = new String[NlCn.getCantidadEnLista()];
+        EstacionesI = new int[NlCn.getCantidadEnLista()];
+        TablaCaminoCorto d = new TablaCaminoCorto(NlCn.getHashEstacionLinea(),NlCn.getNombre());
+        NodoGrafo s = BuscarGrafoInicio(NlCn.getHashEstacionLinea(),NlCn.getNombre());
         d.DijktraLineas(s);
         
-        System.out.println("Linea: "+nom);
+        System.out.println("Linea: "+NlCn.getNombre());
         System.out.println(s.getNombre());
         
-        s = BuscarNodoFin(pN);//Captura La estacion opuesta la estacion Inicio del Disjktra para imprimir luego(fin del recorrido de la linea)
+        s = BuscarNodoFin(NlCn.getHashEstacionLinea());//Captura La estacion opuesta la estacion Inicio del Disjktra para imprimir luego(fin del recorrido de la linea)
         d.imprimir_Camino(s);
         System.out.println("\n");
     }
@@ -219,10 +217,6 @@ public class Arista implements Comparable<Arista>{
         int indice = 0;
         for(int i = 1;i<EstacionesI.length;i++)
         {
-            if(EstacionesI[i]==0)
-            {
-                break;
-            }
             if(EstacionesI[i]<menor)
             {
                 menor = EstacionesI[i];
@@ -239,10 +233,6 @@ public class Arista implements Comparable<Arista>{
         int indice = 0;
         for(int i = 1;i<EstacionesI.length;i++)
         {
-            if(EstacionesI[i]==0)
-            {
-                break;
-            }
             if(i !=NodoinicioRecorrido){
                 if(EstacionesI[i]<menor)
                 {

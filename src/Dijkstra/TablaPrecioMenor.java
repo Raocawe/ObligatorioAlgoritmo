@@ -62,75 +62,92 @@ public class TablaPrecioMenor {
     public void Dijktra(NodoGrafo pN)
     {
         CargarTabla(pN);
-        ImplementandoDijktra(Tabla);
+        ImplementandoDijktra();
     }
 
-    private void ImplementandoDijktra(NodoTablaPrecioMenor[] r)
+    private void ImplementandoDijktra()//A partir del incio toma los demas precios
     {
         int IndiceActual;
         NodoGrafo v, w;
-        for (int i = 0;i<Tabla.length;i++) {
-            if(Tabla[i]!=null)
+        for(int i=0; i<Tabla.length;i++){
+            
+            if(Tabla[i]!=null){
+            v = NodoTablaConMenorPrecioDesconocido();//funcion clave
+            IndiceActual = ch.ObtenerIndice(v.getNombre());
+            Tabla[IndiceActual].setConocido(true);
+            MarcarAdyacentes(Tabla[IndiceActual],IndiceActual);//funcion clave
+
+            NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
+            // <editor-fold desc="Guardamos Todas Las Aristas Adyacentes al Nodo Inicio">
+            
+            NodoLista Lista = nls;
+            w = v;
+            
+            // </editor-fold>
+            while(nls!=null){   
+
+                Arista a = (Arista)nls.getDato();//Arista  
+                NodoGrafo aux = a.getDestino();//siquiente Estacion
+                if(aux.getNombre().equals(w.getNombre()))//Aux Siguiente estacion
                 {
-                    v = NodoTablaConMenorPrecioDesconocido();
-                    if(v!=null){
-                    IndiceActual = ch.ObtenerIndice(v.getNombre());
-                    Tabla[IndiceActual].setConocido(true);
-
-                    NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
-                    Arista a = (Arista)nls.getDato();//Arista                    
-                    NodoGrafo aux = a.getDestino();//siquiente Estacion
-                    if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
+                    aux = a.getOrigen();
+                }
+                v = w;
+                
+                while(aux!=null){
+                    int indi = ch.ObtenerIndice(aux.getNombre());
+                    if(!Tabla[indi].isConocido()&&((Tabla[IndiceActual].getPrecio()+a.getTarifa())<Tabla[indi].getPrecio()))
                     {
-                        aux = a.getOrigen();
+                        float floataux = Tabla[IndiceActual].getPrecio()+a.getTarifa();
+                        Tabla[indi].setPrecio(floataux);
+                        Tabla[indi].setEstacionA(v);
                     }
-                    
-                   
-                    while(aux!=null){
-                        int indi = ch.ObtenerIndice(aux.getNombre());
-                        if(!Tabla[indi].isConocido()&&((Tabla[IndiceActual].getPrecio()+a.getTarifa())<Tabla[indi].getPrecio()))
-                        {
-                            float floataux = Tabla[IndiceActual].getPrecio()+a.getTarifa();
-                            Tabla[indi].setPrecio(floataux);
-                            Tabla[indi].setEstacionA(v);
-                        }
-                        if(Tabla[indi].isConocido())
-                        {
-                            break;
-                        }
-                        nls = aux.getAristas().getInicio();
-                        if(nls!=null)
-                        {
-                            Arista au = (Arista)nls.getDato();
-
-                            while(au==a){
-                                
-                                nls = nls.getSiguiente();
-                                if(nls==null){
-                                aux = null;
-                                break;}
-                                else
-                                    au = (Arista)nls.getDato();
-                            }
-                            if(aux !=null){
-                                a = au;
-                                v = aux;
-                                    if(aux.getNombre().equals(a.getDestino().getNombre()))
-                                        aux = a.getOrigen();
-                                    else{
-                                        aux = a.getDestino();}
-                            } 
-                        }
-                        else
-                        {
-                            aux = null;
-                        }
+                    if(Tabla[indi].isConocido())
+                    {
+                        break;
+                    }
+                    nls = nls.getSiguiente();
+                    if(nls!=null)
+                    {
+                        v = aux;
+                        if(aux.getNombre().equals(a.getDestino().getNombre()))
+                            aux = a.getOrigen();
+                        else{
+                            aux = a.getDestino();}
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
+            Lista = Lista.getSiguiente();    
+            nls = Lista;
+            }
+        
             }
         }
     }
     
+    private void MarcarAdyacentes(NodoTablaPrecioMenor pNodo,int pIndice)
+    {
+        NodoGrafo f = ch.BuscarHash(pNodo.getEstacion());
+        NodoLista nls = f.getAristas().getInicio();
+        
+        while(nls!=null){
+            Arista a = (Arista)nls.getDato();//Arista  
+            NodoGrafo aux = a.getDestino();//siquiente Estacion
+            if(aux.getNombre().equals(f.getNombre()))//Aux Siguiente estacion
+            {aux = a.getOrigen();}
+            int IndiceAdy = ch.ObtenerIndice(aux.getNombre());
+            if(!Tabla[IndiceAdy].isConocido()&&((Tabla[pIndice].getPrecio()+a.getTarifa())<Tabla[IndiceAdy].getPrecio()))
+            {
+                 Tabla[IndiceAdy].setPrecio(pNodo.getPrecio()+a.getTarifa());
+                 Tabla[IndiceAdy].setEstacionA(f);
+            }
+            nls = nls.getSiguiente();
+        }
+    }
+        
     private NodoGrafo NodoTablaConMenorPrecioDesconocido()
     {
         float MenorPrecio = Integer.MAX_VALUE;
@@ -138,7 +155,7 @@ public class TablaPrecioMenor {
         
         for (NodoTablaPrecioMenor Tabla1 : Tabla) {
             if (Tabla1 != null) {
-                if(!Tabla1.isConocido()&&Tabla1.getPrecio()<MenorPrecio)
+                if(!Tabla1.isConocido()&&Tabla1.getPrecio()<=MenorPrecio)
                 {
                     MenorPrecio = Tabla1.getPrecio();
                     aux = Tabla1;
@@ -154,8 +171,8 @@ public class TablaPrecioMenor {
     
     private  void CargarTabla(NodoGrafo pN)
     {
-        NodoGrafo[] nga = getCh().getArray();
-        for(int i=0; i<getTabla().length ;i++)
+        NodoGrafo[] nga = ch.getArray();
+        for(int i=0; i<Tabla.length ;i++)
         {
             if(nga[i]!=null)
             {
@@ -171,23 +188,10 @@ public class TablaPrecioMenor {
     
     public void imprimir_Precio_Menor(NodoGrafo pNinicio, NodoGrafo pNfin)
     {
-        float PrecioTotal = 0;
-        // <editor-fold desc=" CapturarDistancia ">
         int indice = ch.ObtenerIndice(pNinicio.getNombre());
-        
-        while(!Tabla[indice].equals(pNfin))
-        {
-            PrecioTotal += Tabla[indice].getPrecio();
-            if(Tabla[indice].getEstacionA()!=null){
-            indice = ch.ObtenerIndice(Tabla[indice].getEstacionA().getNombre());}
-            else break;
-        }
-        
-        // </editor-fold>
-        System.out.println("Precio del boleto de "+ pNfin.getNombre() + " y "+ pNinicio.getNombre() + " : $ "+ PrecioTotal);
+        float PrecioTotal = Tabla[indice].getPrecio();
+        System.out.println("\nPrecio del boleto de "+ pNfin.getNombre() + " y "+ pNinicio.getNombre() + " : $ "+ PrecioTotal);
     }
-    
-    
 
     public NodoTablaPrecioMenor[] getTabla() {
         return Tabla;
