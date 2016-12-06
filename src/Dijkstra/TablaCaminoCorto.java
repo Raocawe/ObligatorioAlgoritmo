@@ -160,55 +160,58 @@ public class TablaCaminoCorto {
                 
                 while(a.getNombre()!=linea)// RRRRRRRRRRRRRREVISAR
                 {nls = nls.getSiguiente();
-                a = (Arista)nls.getDato();
-                if(a==null)break;
-                }
+                if(nls!=null){
+                a = (Arista)nls.getDato();}
+                else
+                    break;}
                 
-                NodoGrafo aux = a.getDestino();//siquiente Estacion
-                if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
-                {
-                    aux = a.getOrigen();
-                }
+                if(nls!=null){
+                    NodoGrafo aux = a.getDestino();//siquiente Estacion
+                    if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
+                    {
+                        aux = a.getOrigen();
+                    }
                 
-                while(aux!=null){
-                    int indi = ch.ObtenerIndice(aux.getNombre());
-                    if(indi>0){
-                    if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
-                    {
-                        float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
-                        Tabla[indi].setDistancia(floataux);
-                        Tabla[indi].setEstacionA(v);
-                    }
-                    if(Tabla[indi].getConocido())
-                    {
-                        break;
-                    }
-                    nls = nls.getSiguiente();
-                    if(nls!=null)
-                    {
-                        while(a.getNombre()!=linea)
+                    while(aux!=null){
+                        int indi = ch.ObtenerIndice(aux.getNombre());
+                        if(indi>0){
+                        if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
                         {
-                            if(nls.getSiguiente()!=null){
-                                a = (Arista)nls.getSiguiente().getDato();
-                            }
-                            else
+                            float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
+                            Tabla[indi].setDistancia(floataux);
+                            Tabla[indi].setEstacionA(v);
+                        }
+                        if(Tabla[indi].getConocido())
+                        {
+                            break;
+                        }
+                        nls = nls.getSiguiente();
+                        if(nls!=null)
+                        {
+                            while(a.getNombre()!=linea)
                             {
-                                aux = null;
-                                break;
-                            }
+                                if(nls.getSiguiente()!=null){
+                                    a = (Arista)nls.getSiguiente().getDato();
+                                }
+                                else
+                                {
+                                    aux = null;
+                                    break;
+                                }
 
-                        }                        
-                        v = aux;
-                        if(aux.getNombre().equals(a.getDestino().getNombre()))
-                            aux = a.getOrigen();
-                        else{
-                            aux = a.getDestino();}
+                            }                        
+                            v = aux;
+                            if(aux.getNombre().equals(a.getDestino().getNombre()))
+                                aux = a.getOrigen();
+                            else{
+                                aux = a.getDestino();}
+                        }
+                        else
+                        {
+                            break;
+                        }
+                            } 
                     }
-                    else
-                    {
-                        break;
-                    }
-                }
                 }
                 Lista = Lista.getSiguiente();    
                 nls = Lista;
