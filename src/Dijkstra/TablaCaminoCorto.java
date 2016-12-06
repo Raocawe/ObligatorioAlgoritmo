@@ -12,6 +12,7 @@ import ayed2obligatorio2016.Grafo.NodoGrafo;
 import ayed2obligatorio2016.ListaDoble.NodoLista;
 import ayed2obligatorio2016.ListaSimple.ListaSimpleGeneric;
 import ayed2obligatorio2016.ListaSimple.NodoListaSimple;
+import ayed2obligatorio2016.Pila.Pila;
 import static ayed2obligatorio2016.Sistema.getMetro;
 import clases.CHashSolucionNodo;
 import clases.Hash;
@@ -316,6 +317,8 @@ public class TablaCaminoCorto {
         }
     }
 
+    private Pila<NodoTablaCaminoCorto> Estacionesimpresas;
+    
     public void imprimir_Camino(NodoGrafo pNinicio)
     {
         int indice = ch.ObtenerIndice(pNinicio.getNombre());
@@ -325,4 +328,5 @@ public class TablaCaminoCorto {
             System.out.print(pNinicio.getNombre()+" - "+Tabla[indice].getDistancia()+" Km\n");
         }
     }
+
 }
