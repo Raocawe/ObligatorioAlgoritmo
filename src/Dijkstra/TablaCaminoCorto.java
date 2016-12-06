@@ -67,155 +67,151 @@ public class TablaCaminoCorto {
     public void Dijktra(NodoGrafo pN)
     {
         CargarTabla(pN);
-        ImplementandoDijktra(Tabla);
+        ImplementandoDijktra();
     }
     
     public void DijktraLineas(NodoGrafo pN)
     {
         CargarTabla(pN);
-        ImplementandoDijktraLineas(Tabla);
+        ImplementandoDijktraLineas();
     }
-
-    private void ImplementandoDijktraLineas(NodoTablaCaminoCorto[] r)
+    
+    private void ImplementandoDijktra()//A partir del incio toma los demas precios
     {
         int IndiceActual;
         NodoGrafo v, w;
-        for (int i = 0;i<Tabla.length;i++) {
-            if(Tabla[i]!=null)
+        for(int i=0; i<Tabla.length;i++){
+            
+            if(Tabla[i]!=null){
+            v = NodoTablaConDistanciaMasCortaDesconocido();//funcion clave
+            IndiceActual = ch.ObtenerIndice(v.getNombre());
+            Tabla[IndiceActual].setConocido(true);
+            MarcarAdyacentes(Tabla[IndiceActual],IndiceActual);//funcion clave
+            NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
+            // <editor-fold desc="Guardamos Todas Las Aristas Adyacentes al Nodo Inicio">
+            
+            NodoLista Lista = nls;
+            
+            // </editor-fold>
+            while(nls!=null){   
+
+                Arista a = (Arista)nls.getDato();//Arista  
+                NodoGrafo aux = a.getDestino();//siquiente Estacion
+                if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
                 {
-                    v = NodoTablaConDistanciaMasCortaDesconocido();
-                    if(v!=null){
-                    IndiceActual = ch.ObtenerIndice(v.getNombre());
-                    Tabla[IndiceActual].setConocido(true);
-
-                    NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
-                    Arista a = (Arista)nls.getDato();//Arista
-                    
-                    while(a.getNombre()!=linea)
+                    aux = a.getOrigen();
+                }
+                
+                while(aux!=null){
+                    int indi = ch.ObtenerIndice(aux.getNombre());
+                    if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
                     {
-                     nls = nls.getSiguiente();
-                     a = (Arista)nls.getDato();
+                        float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
+                        Tabla[indi].setDistancia(floataux);
+                        Tabla[indi].setEstacionA(v);
                     }
-                    
-                    NodoGrafo aux = a.getDestino();//siquiente Estacion
-                    if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
-                    {aux = a.getOrigen();}
-                    
-                    while(aux!=null){//Recorre la la lista de aristas
-                        int indi = ch.ObtenerIndice(aux.getNombre());
-                        if(indi>0){//
-                            if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
-                            {
-                                float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
-                                Tabla[indi].setDistancia(floataux);
-                                Tabla[indi].setEstacionA(v);
-                            }
-                            nls = aux.getAristas().getInicio();
-                            if(nls!=null)
-                            {
-                                Arista au = (Arista)nls.getDato();
-
-                                while(au==a){
-
-                                    nls = nls.getSiguiente();
-                                    if(nls==null){
-                                    aux = null;
-                                    break;}
-                                    else{au = (Arista)nls.getDato();
-                                    while(a.getNombre()!=linea)
-                                    {
-                                        if(nls.getSiguiente()!=null){
-                                            nls = nls.getSiguiente();
-                                            au = (Arista)nls.getDato();
-                                        }
-                                        else
-                                        {
-                                            aux = null;
-                                            break;
-                                        }
-
-                                    }
-                                    }
-                                }
-                                if(aux !=null){
-                                    a = au;
-                                    v = aux;
-                                        if(aux.getNombre().equals(a.getDestino().getNombre()))
-                                            aux = a.getOrigen();
-                                        else{
-                                            aux = a.getDestino();}
-                                } 
-                            }
-                            else
-                            {
-                                aux = null;
-                            }
-                        }
-                        else{aux=null;}
+                    if(Tabla[indi].getConocido())
+                    {
+                        break;
+                    }
+                    nls = nls.getSiguiente();
+                    if(nls!=null)
+                    {
+                        v = aux;
+                        if(aux.getNombre().equals(a.getDestino().getNombre()))
+                            aux = a.getOrigen();
+                        else{
+                            aux = a.getDestino();}
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
+            Lista = Lista.getSiguiente();    
+            nls = Lista;
+            }
+        
             }
         }
     }
     
-    private void ImplementandoDijktra(NodoTablaCaminoCorto[] r)
+    private void ImplementandoDijktraLineas()//A partir del incio toma los demas precios
     {
         int IndiceActual;
         NodoGrafo v, w;
-        for (int i = 0;i<Tabla.length;i++) {
-            if(Tabla[i]!=null)
+        for(int i=0; i<Tabla.length;i++){
+            
+            if(Tabla[i]!=null){
+            v = NodoTablaConDistanciaMasCortaDesconocido();//funcion clave
+            IndiceActual = ch.ObtenerIndice(v.getNombre());
+            Tabla[IndiceActual].setConocido(true);
+            MarcarAdyacentes(Tabla[IndiceActual],IndiceActual);//funcion clave
+
+            NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
+            
+            // <editor-fold desc="Guardamos Todas Las Aristas Adyacentes al Nodo Inicio">
+            NodoLista Lista = nls;            
+            // </editor-fold>
+            
+            while(nls!=null){   
+
+                Arista a = (Arista)nls.getDato();//Arista  
+                
+                while(a.getNombre()!=linea)// RRRRRRRRRRRRRREVISAR
+                {nls = nls.getSiguiente();
+                a = (Arista)nls.getDato();
+                if(a==null)break;
+                }
+                
+                NodoGrafo aux = a.getDestino();//siquiente Estacion
+                if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
                 {
-                    v = NodoTablaConDistanciaMasCortaDesconocido();
-                    if(v!=null){
-                    IndiceActual = ch.ObtenerIndice(v.getNombre());
-                    Tabla[IndiceActual].setConocido(true);
-                    MarcarAdyacentes(Tabla[IndiceActual],IndiceActual);
-
-                    NodoLista nls = v.getAristas().getInicio();//Capturamos La Primera Arista
-                    Arista a = (Arista)nls.getDato();//Arista                    
-                    NodoGrafo aux = a.getDestino();//siquiente Estacion
-                    if(aux.getNombre().equals(v.getNombre()))//Aux Siguiente estacion
+                    aux = a.getOrigen();
+                }
+                
+                while(aux!=null){
+                    int indi = ch.ObtenerIndice(aux.getNombre());
+                    if(indi>0){
+                    if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
                     {
-                        aux = a.getOrigen();
+                        float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
+                        Tabla[indi].setDistancia(floataux);
+                        Tabla[indi].setEstacionA(v);
                     }
-                    
-                    while(aux!=null){
-                        int indi = ch.ObtenerIndice(aux.getNombre());
-                        if(!Tabla[indi].getConocido()&&((Tabla[IndiceActual].getDistancia()+a.getDistancia())<Tabla[indi].getDistancia()))
+                    if(Tabla[indi].getConocido())
+                    {
+                        break;
+                    }
+                    nls = nls.getSiguiente();
+                    if(nls!=null)
+                    {
+                        while(a.getNombre()!=linea)
                         {
-                            float floataux = Tabla[IndiceActual].getDistancia()+a.getDistancia();
-                            Tabla[indi].setDistancia(floataux);
-                            Tabla[indi].setEstacionA(v);
-                        }
-                        nls = aux.getAristas().getInicio();
-                        if(nls!=null)
-                        {
-                            Arista au = (Arista)nls.getDato();
-
-                            while(au==a){
-                                
-                                nls = nls.getSiguiente();
-                                if(nls==null){
-                                aux = null;
-                                break;}
-                                else
-                                    au = (Arista)nls.getDato();
+                            if(nls.getSiguiente()!=null){
+                                a = (Arista)nls.getSiguiente().getDato();
                             }
-                            
-                            if(aux !=null){
-                                a = au;
-                                v = aux;
-                                    if(aux.getNombre().equals(a.getDestino().getNombre()))
-                                        aux = a.getOrigen();
-                                    else{
-                                        aux = a.getDestino();}
-                            } 
-                        }
-                        else
-                        {
-                            aux = null;
-                        }
+                            else
+                            {
+                                aux = null;
+                                break;
+                            }
+
+                        }                        
+                        v = aux;
+                        if(aux.getNombre().equals(a.getDestino().getNombre()))
+                            aux = a.getOrigen();
+                        else{
+                            aux = a.getDestino();}
                     }
+                    else
+                    {
+                        break;
+                    }
+                }
+                }
+                Lista = Lista.getSiguiente();    
+                nls = Lista;
                 }
             }
         }
@@ -232,10 +228,12 @@ public class TablaCaminoCorto {
             if(aux.getNombre().equals(f.getNombre()))//Aux Siguiente estacion
             {aux = a.getOrigen();}
             int IndiceAdy = ch.ObtenerIndice(aux.getNombre());
-            if(!Tabla[IndiceAdy].getConocido()&&((Tabla[pIndice].getDistancia()+a.getDistancia())<Tabla[IndiceAdy].getDistancia()))
-            {
-                 Tabla[IndiceAdy].setDistancia(pNodo.getDistancia()+a.getDistancia());
-                 Tabla[IndiceAdy].setEstacionA(f);
+            if(IndiceAdy>0){
+                if(!Tabla[IndiceAdy].getConocido()&&((Tabla[pIndice].getDistancia()+a.getDistancia())<Tabla[IndiceAdy].getDistancia()))
+                {
+                     Tabla[IndiceAdy].setDistancia(a.getDistancia());
+                     Tabla[IndiceAdy].setEstacionA(f);
+                }
             }
             nls = nls.getSiguiente();
         }
